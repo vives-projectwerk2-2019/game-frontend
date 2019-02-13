@@ -15,13 +15,11 @@
     };
 
     var game = new Phaser.Game(config);
+    var text;
 
     function preload ()
     {
-
-        this.load.image('sky', 'assets/skies/space3.png');
-        this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-        this.load.image('red', 'assets/particles/red.png');
+	this.load.image('logo', 'assets/hello.png');
     }
 
     function create ()
