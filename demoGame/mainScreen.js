@@ -30,7 +30,7 @@ class main extends Phaser.Scene {
 
         this.setupFullScreen(this.background);
 
-        this.map = new HexMap('tile', 'selectedTile', this, 5, 5, 180, 40,35);
+        this.map = new HexMap('tile', 'selectedTile', this, 22, 26, 60, 40,35);
         this.tank = new Tank('tank', this, this.map, 4, 4, 60);
         this.map.selectTile(4,4);
     }
