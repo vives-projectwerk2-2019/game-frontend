@@ -1,5 +1,3 @@
-/*jshint esversion: 6 */
-
 class HexMap {
     constructor(tileTexture, selectedTileTexture, scene, width, length, tileSize, xOffset, yOffset){
         this.tileTexture = tileTexture;
