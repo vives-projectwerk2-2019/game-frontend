@@ -8,7 +8,7 @@ class startScreen extends Phaser.Scene {
 
     create(){
         this.key_2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
-        this.text1 = this.add.text(0,0,"Welcome to scene 1, press 2 to go to scene 2 and 3 to go to scene 3", { font:"12px Impact"});
+        this.text1 = this.add.text(2,2,"Press 2 to start the game", { font:"36px Impact"});
     }
 
     update(delta) {
