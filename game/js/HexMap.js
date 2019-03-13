@@ -40,7 +40,7 @@ class HexMap {
          });
      }
 
-    generateMap() {
+     generateMap() {
         let tileWidth = Math.sqrt(3) / 2 * this.tileSize;
         let tileHeight = 2 * (this.tileSize/3);
         let map = [];
@@ -50,16 +50,14 @@ class HexMap {
             for (let yIndex = 0; yIndex < this.length; yIndex++) {
                 let xSpacing = tileWidth * xIndex;
                 let ySpacing = tileHeight * 0.75 * yIndex;
-
                 if (yIndex%2 == 0) {
-                    map[xIndex][yIndex] = new Tile(this.tileTexture, this.scene, xSpacing + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
+                    map[xIndex][yIndex] = new Tile(this.tileGroup[this.jsonMap[xIndex][yIndex]], this.scene, xSpacing + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
                 } else {
-                    map[xIndex][yIndex] = new Tile(this.tileTexture, this.scene, (xSpacing + tileWidth / 2) + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
+                    map[xIndex][yIndex] = new Tile(this.tileGroup[this.jsonMap[xIndex][yIndex]], this.scene, (xSpacing + tileWidth / 2) + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
                 }
             }
         }
-
-        return map;
+        this.map = map;
     }
 
     cubeToOddr(cubePosition){
