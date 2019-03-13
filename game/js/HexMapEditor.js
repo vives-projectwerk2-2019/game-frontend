@@ -58,4 +58,9 @@ class HexMapEditor extends HexMap {
             this.saveMap();
         },this);
     }
+    //will save the map to local storage
+    saveMap(){
+        localStorage.setItem("map", JSON.stringify(this.jsonMap));
+        console.log("saved sucsesfully");
+    }
 }
