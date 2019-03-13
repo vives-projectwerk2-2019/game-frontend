@@ -17,6 +17,11 @@ class Editor extends Phaser.Scene {
     create() {
         this.background = this.add.image(1200/2, 800/2, 'background');
         this.setupKeyBinds();
+        let scene = this;
+        this.map.loaded.then(function() {
+            scene.map.generateEditor(1, 1, "selectSprite", 30);
+            scene.map.assignCursorMovementBinds();
+        });
     }
 
     setupKeyBinds() {
