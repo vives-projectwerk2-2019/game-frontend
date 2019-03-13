@@ -18,4 +18,8 @@ class HexMapEditor extends HexMap {
     getIdFromTextureName(textureName){     //takes a string textureName and returns its index
         return this.tileGroup.indexOf(textureName);
     }
+    
+    getNameFromTextureId(textureId){
+        return this.tileGroup.findIndex(texture => texture.value === textureID);
+    }
 }
