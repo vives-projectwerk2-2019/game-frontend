@@ -32,19 +32,21 @@ class Main extends Phaser.Scene {
     create() {
         this.setupKeyBinds();
         this.background = this.add.image(1200/2, 800/2, 'background');
+        let scene = this;
+        this.map.loaded.then( function(){
+                scene.map.generateMap();
+                this.setupFullScreen(this.background);
 
-        this.setupFullScreen(this.background);
-
-        this.map = new HexMap('tile', 'selectedTile', this, 22, 26, 60, 40,35);
-        this.tankblack = new Tank('tankblack', this, this.map, 1, 1, 45);
-        this.tankblue = new Tank('tankblue', this, this.map, 20, 1, 45);
-        this.tankcyan = new Tank('tankcyan', this, this.map, 20, 20, 45);
-        this.tankgreen = new Tank('tankgreen', this, this.map, 1, 10, 45);
-        this.tankgrey = new Tank('tankgrey', this, this.map, 1, 20, 45);
-        this.tankpurple = new Tank('tankpurple', this, this.map, 10, 20, 45);
-        this.tankbred = new Tank('tankred', this, this.map, 10, 1, 45);
-        this.tankyellow = new Tank('tankyellow', this, this.map, 20, 10, 45);
-        this.map.selectTile(1,1);
+                scene.tankblack = new Tank('tankblack', scene, scene.map, 1, 1, 45);
+                scene.tankblue = new Tank('tankblue', scene, scene.map, 20, 1, 45);
+                scene.tankcyan = new Tank('tankcyan', scene, scene.map, 20, 20, 45);
+                scene.tankgreen = new Tank('tankgreen', scene, scene.map, 1, 10, 45);
+                scene.tankgrey = new Tank('tankgrey',scene, scene.map, 1, 20, 45);
+                scene.tankpurple = new Tank('tankpurple', scene, scene.map, 10, 20, 45);
+                scene.tankbred = new Tank('tankred', scene, scene.map, 10, 1, 45);
+                scene.tankyellow = new Tank('tankyellow', scene, scene.map, 20, 10, 45);
+            } 
+        );
     }
 
 /*     update(delta){
