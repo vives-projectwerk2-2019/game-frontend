@@ -14,6 +14,15 @@ class HexMap {
         this.loaded = this.loadMap(file, this);       //holds a promise to be able to call functions that require the map to be loaded
     }
 
+    loadTiles(tileList, hexMap) {
+        let tileGroup = [];
+        tileList.forEach(element => {
+            hexMap.scene.load.image(element.name, element.link);
+            tileGroup.push(element.name);
+        });
+        return tileGroup;
+    }
+
     generateMap() {
         let tileWidth = Math.sqrt(3) / 2 * this.tileSize;
         let tileHeight = 2 * (this.tileSize/3);
