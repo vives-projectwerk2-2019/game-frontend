@@ -24,6 +24,12 @@ class Editor extends Phaser.Scene {
         });
     }
 
+    update(delta) {
+        if(this.key_1.isDown){
+            this.scene.start("Main");
+        }
+    }
+
     setupKeyBinds() {
         this.key_Z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         this.key_Q = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
@@ -31,6 +37,6 @@ class Editor extends Phaser.Scene {
         this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.key_A = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.key_E = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-        
+        this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
     }
 }

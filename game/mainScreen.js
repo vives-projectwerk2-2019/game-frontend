@@ -49,20 +49,11 @@ class Main extends Phaser.Scene {
         );
     }
 
-/*     update(delta){
-        if(this.key_Z.isDown){
-            this.tank.forward();
+    update(delta) {
+        if(this.key_1.isDown){
+            this.scene.start("Editor");
         }
-        if(this.key_S.isDown){
-            this.tank.backward();
-        }
-        if(this.key_Q.isDown){
-            this.tank.turnLeft();
-        }
-        if(this.key_D.isDown){
-            this.tank.turnRight();
-        }
-    } */
+    }
 
     setupFullScreen (object){
         var fullscreenFunc = null;  //function for fullscreen
@@ -87,6 +78,7 @@ class Main extends Phaser.Scene {
         this.key_Q = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.key_S = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
 
         //controls tankblue
         this.input.keyboard.on('keyup_Z', function(event){
