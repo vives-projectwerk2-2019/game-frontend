@@ -1,14 +1,17 @@
+/*jshint esversion: 6 */
+
 class HexMap {
-    constructor(tileTexture, selectedTileTexture, scene, width, length, tileSize, xOffset, yOffset){
-        this.tileTexture = tileTexture;
-        this.selectedTileTexture = selectedTileTexture;
-        this.width = width;
-        this.length = length;
+    constructor(scene, tileSize, xOffset, yOffset, file){
         this.tileSize = tileSize;
         this.scene = scene;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
-        this.map = this.generateMap();
+        this.tileGroup = null;  //holds the names of each tile specified in the json file, the index of each element corresponds to the numbers in the map of the json file
+        this.jsonMap = null;
+        this.map = null;
+        this.width = null;
+        this.length = null;
+        this.loaded = this.loadMap(file, this);       //holds a promise to be able to call functions that require the map to be loaded
     }
 
     generateMap() {
