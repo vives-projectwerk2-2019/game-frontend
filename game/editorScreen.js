@@ -6,6 +6,8 @@ class Editor extends Phaser.Scene {
 
     preload() {
         this.load.image('background', 'assets/background.jpg');
+        this.load.image('selectSprite', 'assets/tankgreen.png');
+        this.map = new HexMapEditor(this, 60, 40,35, "MapConfiguration.json");
     }
 
     init () {
