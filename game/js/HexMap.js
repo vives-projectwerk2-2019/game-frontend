@@ -23,6 +23,23 @@ class HexMap {
         return tileGroup;
     }
 
+    loadMap(file, hexMap) {
+        return fetch(file)
+         .then(response => response.json())
+         .then(function(json){
+             hexMap.tileGroup = hexMap.loadTiles(json.tiles, hexMap);
+             hexMap.width = json.size.width;
+             hexMap.length = json.size.length;
+             hexMap.jsonMap = JSON.parse( localStorage.getItem("map") );
+             if (!hexMap.jsonMap) {
+                 hexMap.jsonMap = hexMap.generateDefaultMap();
+             } else if (hexMap.width != hexMap.jsonMap.length || hexMap.length != hexMap.jsonMap[hexMap.jsonMap.length - 1].length) {
+                 hexMap.jsonMap = hexMap.generateDefaultMap();
+             }
+             
+         });
+     }
+
     generateMap() {
         let tileWidth = Math.sqrt(3) / 2 * this.tileSize;
         let tileHeight = 2 * (this.tileSize/3);
