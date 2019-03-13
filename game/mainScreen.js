@@ -35,7 +35,7 @@ class Main extends Phaser.Scene {
         let scene = this;
         this.map.loaded.then( function(){
                 scene.map.generateMap();
-                this.setupFullScreen(this.background);
+                scene.setupFullScreen(scene.background);
 
                 scene.tankblack = new Tank('tankblack', scene, scene.map, 1, 1, 45);
                 scene.tankblue = new Tank('tankblue', scene, scene.map, 20, 1, 45);
