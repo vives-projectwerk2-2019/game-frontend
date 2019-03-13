@@ -10,4 +10,8 @@ class TileSelector extends HexMover {
     getTileTextureName(){       //returns a string with the name of the texture on the current tile
         return this.currentTile.body.texture.key;
     }
+
+    changeSelectedTileTexture(texture){     //expects a string texture, will change the currently selected tile to this texture
+        this.currentTile.setTexture(texture);
+    }
 }
