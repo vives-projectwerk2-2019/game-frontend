@@ -1,7 +1,7 @@
 
 class Main extends Phaser.Scene {
     constructor() {
-        super({key:"main"});
+        super({key:"Main"});
     }
 
     preload() {
@@ -13,9 +13,8 @@ class Main extends Phaser.Scene {
         this.load.image('tankpurple','assets/tankpurple.png');
         this.load.image('tankred','assets/tankred.png');
         this.load.image('tankyellow','assets/tankyellow.png');
-        this.load.image('tile','assets/Tiles/tileAutumn_tile.png');
-        this.load.image('selectedTile','assets/Tiles/tileDirt_tile.png');
         this.load.image('background', 'assets/background.jpg');
+        this.map = new HexMap(this, 60, 40,35, "MapConfiguration.json");
     }
 
     init () {
