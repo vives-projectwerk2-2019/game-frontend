@@ -8,4 +8,10 @@ class HexMapEditor extends HexMap {
         super(scene, tileSize, xOffset, yOffset, file);
         this.cursor = null;
     }
+    //sets up the map and cursor, expects a starting position x and y, string cursorTexture and number cursorSize
+    //to be called after the preload!!
+    generateEditor(startPositionX, startPositionY, cursorTexture, cursorSize){
+        this.generateMap();
+        this.cursor = new TileSelector(cursorTexture, this.scene, this, startPositionX, startPositionY, cursorSize);
+    }
 }
