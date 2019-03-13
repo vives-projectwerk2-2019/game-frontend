@@ -36,4 +36,26 @@ class HexMapEditor extends HexMap {
             this.cursor.changeSelectedTileTexture(this.tileGroup[0]);
         }
     }
+
+    //called to set the keybinds for the cursor
+    assignCursorMovementBinds() {
+        this.scene.input.keyboard.on('keyup_Z', function(event){
+            this.cursor.forward();
+        },this);
+        this.scene.input.keyboard.on('keyup_S', function(event){
+            this.cursor.backward();
+        },this);
+        this.scene.input.keyboard.on('keyup_Q', function(event){
+            this.cursor.turnLeft();
+        },this);
+        this.scene.input.keyboard.on('keyup_D', function(event){
+            this.cursor.turnRight();
+        },this);
+        this.scene.input.keyboard.on('keyup_A', function(event){
+            this.toggleCurrentTileTexture();
+        },this);
+        this.scene.input.keyboard.on('keyup_E', function(event){
+            this.saveMap();
+        },this);
+    }
 }
