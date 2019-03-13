@@ -89,4 +89,15 @@ class HexMap {
             return null;
         }
     }
+
+    //will return a jsonMap with the width and length specified in the constructor
+    generateDefaultMap(){
+        let hexMap = this;
+        let map = Array.apply(null, {length: hexMap.width}).map(Number.call, Number);
+        map.forEach(function(element) {
+            map[element] = Array.apply(null, {length: hexMap.length}).map(Number.call, function(){return 0;});
+        });
+        console.log(map);
+        return map;
+    }
 }
