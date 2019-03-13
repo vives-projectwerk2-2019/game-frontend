@@ -1,0 +1,29 @@
+
+class Editor extends Phaser.Scene {
+    constructor() {
+        super({key:"Editor"});
+    }
+
+    preload() {
+        this.load.image('background', 'assets/background.jpg');
+    }
+
+    init () {
+        var canvas = this.sys.game.canvas;
+    }
+
+    create() {
+        this.background = this.add.image(1200/2, 800/2, 'background');
+        this.setupKeyBinds();
+    }
+
+    setupKeyBinds() {
+        this.key_Z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+        this.key_Q = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+        this.key_S = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.key_A = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.key_E = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        
+    }
+}
