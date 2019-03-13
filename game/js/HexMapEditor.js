@@ -14,4 +14,8 @@ class HexMapEditor extends HexMap {
         this.generateMap();
         this.cursor = new TileSelector(cursorTexture, this.scene, this, startPositionX, startPositionY, cursorSize);
     }
+
+    getIdFromTextureName(textureName){     //takes a string textureName and returns its index
+        return this.tileGroup.indexOf(textureName);
+    }
 }
