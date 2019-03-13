@@ -6,4 +6,8 @@ class TileSelector extends HexMover {
     constructor(texture, scene, map, x, y, size) {
         super(texture, scene, map, x, y, size);
     }
+
+    getTileTextureName(){       //returns a string with the name of the texture on the current tile
+        return this.currentTile.body.texture.key;
+    }
 }
