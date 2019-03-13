@@ -18,8 +18,22 @@ class HexMapEditor extends HexMap {
     getIdFromTextureName(textureName){     //takes a string textureName and returns its index
         return this.tileGroup.indexOf(textureName);
     }
-    
+
     getNameFromTextureId(textureId){
         return this.tileGroup.findIndex(texture => texture.value === textureID);
+    }
+
+    toggleCurrentTileTexture(){
+        let currentId = this.getIdFromTextureName(this.cursor.getTileTextureName());
+        if (currentId < this.tileGroup.length) {
+            let position = this.cursor.currentPosition;
+            console.log(this.jsonMap);
+            console.log(this.cursor.currentPosition)
+            this.jsonMap[position.x][position.y] = currentId + 1;
+            this.cursor.changeSelectedTileTexture(this.tileGroup[currentId + 1]);
+        } else {
+            this.jsonMap[position.x][position.y] = 0;
+            this.cursor.changeSelectedTileTexture(this.tileGroup[0]);
+        }
     }
 }
