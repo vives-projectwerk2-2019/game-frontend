@@ -1,17 +1,46 @@
+/*jshint esversion: 6 */
+
 class HexMap {
-    constructor(tileTexture, selectedTileTexture, scene, width, length, tileSize, xOffset, yOffset){
-        this.tileTexture = tileTexture;
-        this.selectedTileTexture = selectedTileTexture;
-        this.width = width;
-        this.length = length;
+    constructor(scene, tileSize, xOffset, yOffset, file){
         this.tileSize = tileSize;
         this.scene = scene;
         this.xOffset = xOffset;
         this.yOffset = yOffset;
-        this.map = this.generateMap();
+        this.tileGroup = null;  //holds the names of each tile specified in the json file, the index of each element corresponds to the numbers in the map of the json file
+        this.jsonMap = null;
+        this.map = null;
+        this.width = null;
+        this.length = null;
+        this.loaded = this.loadMap(file, this);       //holds a promise to be able to call functions that require the map to be loaded
     }
 
-    generateMap() {
+    loadTiles(tileList, hexMap) {
+        let tileGroup = [];
+        tileList.forEach(element => {
+            hexMap.scene.load.image(element.name, element.link);
+            tileGroup.push(element.name);
+        });
+        return tileGroup;
+    }
+
+    loadMap(file, hexMap) {
+        return fetch(file)
+         .then(response => response.json())
+         .then(function(json){
+             hexMap.tileGroup = hexMap.loadTiles(json.tiles, hexMap);
+             hexMap.width = json.size.width;
+             hexMap.length = json.size.length;
+             hexMap.jsonMap = JSON.parse( localStorage.getItem("map") );
+             if (!hexMap.jsonMap) {
+                 hexMap.jsonMap = hexMap.generateDefaultMap();
+             } else if (hexMap.width != hexMap.jsonMap.length || hexMap.length != hexMap.jsonMap[hexMap.jsonMap.length - 1].length) {
+                 hexMap.jsonMap = hexMap.generateDefaultMap();
+             }
+             
+         });
+     }
+
+     generateMap() {
         let tileWidth = Math.sqrt(3) / 2 * this.tileSize;
         let tileHeight = 2 * (this.tileSize/3);
         let map = [];
@@ -21,16 +50,14 @@ class HexMap {
             for (let yIndex = 0; yIndex < this.length; yIndex++) {
                 let xSpacing = tileWidth * xIndex;
                 let ySpacing = tileHeight * 0.75 * yIndex;
-
                 if (yIndex%2 == 0) {
-                    map[xIndex][yIndex] = new Tile(this.tileTexture, this.scene, xSpacing + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
+                    map[xIndex][yIndex] = new Tile(this.tileGroup[this.jsonMap[xIndex][yIndex]], this.scene, xSpacing + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
                 } else {
-                    map[xIndex][yIndex] = new Tile(this.tileTexture, this.scene, (xSpacing + tileWidth / 2) + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
+                    map[xIndex][yIndex] = new Tile(this.tileGroup[this.jsonMap[xIndex][yIndex]], this.scene, (xSpacing + tileWidth / 2) + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
                 }
             }
         }
-
-        return map;
+        this.map = map;
     }
 
     cubeToOddr(cubePosition){
@@ -61,5 +88,16 @@ class HexMap {
             console.log("out of bounds");
             return null;
         }
+    }
+
+    //will return a jsonMap with the width and length specified in the constructor
+    generateDefaultMap(){
+        let hexMap = this;
+        let map = Array.apply(null, {length: hexMap.width}).map(Number.call, Number);
+        map.forEach(function(element) {
+            map[element] = Array.apply(null, {length: hexMap.length}).map(Number.call, function(){return 0;});
+        });
+        console.log(map);
+        return map;
     }
 }

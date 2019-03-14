@@ -1,5 +1,3 @@
-/*jshint esversion: 6 */
-
 class Tile {
     constructor(texture, scene, x, y, cubePosition, size){
         this.position = {x: x, y: y};

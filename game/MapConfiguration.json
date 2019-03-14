@@ -1,0 +1,12 @@
+{
+    "tiles": [
+        {"name": "dirt", "link": "assets/Tiles/tileDirt_tile.png"},
+        {"name": "water", "link": "assets/Tiles/tileWater_tile.png"},
+        {"name": "Stone", "link": "assets/Tiles/tileStone_tile.png"},
+        {"name": "grass", "link": "assets/Tiles/tileGrass_tile.png"}
+    ],
+    "size": {
+        "width": 21,
+        "length": 21
+    }
+}

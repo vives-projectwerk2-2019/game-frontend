@@ -1,10 +1,11 @@
 
-class main extends Phaser.Scene {
+class Main extends Phaser.Scene {
     constructor() {
-        super({key:"main"});
+        super({key:"Main"});
     }
 
     preload() {
+<<<<<<< HEAD
         //Tanks
         this.load.image('tankblack','assets/tanks/tankblack.png');
         this.load.image('tankblue','assets/tanks/tankblue.png');
@@ -27,6 +28,18 @@ class main extends Phaser.Scene {
         this.load.spritesheet('northwestbullet', 'assets/animations/northwestbullet.png', { frameWidth: 32, frameHeight: 32, endFrame: 4 });
         this.load.spritesheet('southeastbullet', 'assets/animations/southeastbullet.png', { frameWidth: 32, frameHeight: 32, endFrame: 4 });
         this.load.spritesheet('southwestbullet', 'assets/animations/southwestbullet.png', { frameWidth: 32, frameHeight: 32, endFrame: 4 });
+=======
+        this.load.image('tankblack','assets/tankblack.png');
+        this.load.image('tankblue','assets/tankblue.png');
+        this.load.image('tankcyan','assets/tankcyan.png');
+        this.load.image('tankgreen','assets/tankgreen.png');
+        this.load.image('tankgrey','assets/tankgrey.png');
+        this.load.image('tankpurple','assets/tankpurple.png');
+        this.load.image('tankred','assets/tankred.png');
+        this.load.image('tankyellow','assets/tankyellow.png');
+        this.load.image('background', 'assets/background.jpg');
+        this.map = new HexMap(this, 60, 40,35, "MapConfiguration.json");
+>>>>>>> b7a0b356ba6c4b68fa513188360600d49dc1cb89
     }
 
     init () {
@@ -44,6 +57,7 @@ class main extends Phaser.Scene {
     create() {
         this.setupKeyBinds();
         this.background = this.add.image(1200/2, 800/2, 'background');
+<<<<<<< HEAD
         this.setupFullScreen(this.background);
 
         this.map = new HexMap('tile', 'selectedTile', this, 22, 26, 60, 40,35);
@@ -86,22 +100,30 @@ class main extends Phaser.Scene {
         this.map.selectTile(1,1);
 
 
+=======
+        let scene = this;
+        this.map.loaded.then( function(){
+                scene.map.generateMap();
+                scene.setupFullScreen(scene.background);
+
+                scene.tankblack = new Tank('tankblack', scene, scene.map, 1, 1, 45);
+                scene.tankblue = new Tank('tankblue', scene, scene.map, 20, 1, 45);
+                scene.tankcyan = new Tank('tankcyan', scene, scene.map, 20, 20, 45);
+                scene.tankgreen = new Tank('tankgreen', scene, scene.map, 1, 10, 45);
+                scene.tankgrey = new Tank('tankgrey',scene, scene.map, 1, 20, 45);
+                scene.tankpurple = new Tank('tankpurple', scene, scene.map, 10, 20, 45);
+                scene.tankbred = new Tank('tankred', scene, scene.map, 10, 1, 45);
+                scene.tankyellow = new Tank('tankyellow', scene, scene.map, 20, 10, 45);
+            } 
+        );
+>>>>>>> b7a0b356ba6c4b68fa513188360600d49dc1cb89
     }
 
-/*     update(delta){
-        if(this.key_Z.isDown){
-            this.tank.forward();
+    update(delta) {
+        if(this.key_1.isDown){
+            this.scene.start("Editor");
         }
-        if(this.key_S.isDown){
-            this.tank.backward();
-        }
-        if(this.key_Q.isDown){
-            this.tank.turnLeft();
-        }
-        if(this.key_D.isDown){
-            this.tank.turnRight();
-        }
-    } */
+    }
 
     setupFullScreen (object){
         var fullscreenFunc = null;  //function for fullscreen
@@ -126,6 +148,7 @@ class main extends Phaser.Scene {
         this.key_Q = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.key_S = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
 
         //controls tankblack
         this.input.keyboard.on('keyup_Z', function(event){

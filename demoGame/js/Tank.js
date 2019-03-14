@@ -1,5 +1,3 @@
-/*jshint esversion: 6 */
-
 class Tank {
     constructor(tankTexture, scene, map, x, y, size) {
         this.map = map;
@@ -70,6 +68,7 @@ class Tank {
             this.currentRotation = 6;
         }
         this.updateCurrentRotation();
+        console.log(this.currentRotation)
     }
 
     turnRight(){
@@ -79,6 +78,7 @@ class Tank {
             this.currentRotation = 1;
         }
         this.updateCurrentRotation();
+        console.log(this.currentRotation)
     }
 
     setPosition(x, y){
