@@ -10,6 +10,7 @@ var tankTileEnum  = {
 	DIRT: Symbol('SWAMP'),
 	STONE: Symbol('MOUNTAIN'),
 	WATER: Symbol('WATER'),
+	OTHER_TANK: Symbol('OTHER_TANK'),
 	//LAVA: Symbol('LAVA'),
 	//MAGIC: Symbol('MAGIC')
 };
@@ -25,7 +26,7 @@ class TankTerrain {
 	{
 		let tankState = UNBLOCKED;
 
-		if(this.nextTile == STONE || this.nextTile == WATER)
+		if(this.nextTile == MOUNTAIN || this.nextTile == WATER)
 			tankState = BLOCKED;
 
 		return tankState;
