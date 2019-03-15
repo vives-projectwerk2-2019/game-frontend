@@ -77,7 +77,7 @@ class loadScreen extends Phaser.Scene{
         });
         
         this.load.image('logo', 'assets/icon.png');
-        for (var i = 0; i < 500; i++) {
+        for (var i = 0; i < 100; i++) {
             this.load.image('logo'+i, 'assets/icon.png');
         }
     }
