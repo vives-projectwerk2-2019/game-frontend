@@ -214,7 +214,7 @@ class Main extends Phaser.Scene {
         this.hitpointsText = this.add.text(
           10,
           146,
-          "Hitpoints: " + this.tankblue,
+          "Hitpoints: " + this.tankblue.health,
           {
             font: "16px Arial",
             fill: "#000000"
