@@ -5,16 +5,26 @@ class Main extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('tankblack','assets/tankblack.png');
-        this.load.image('tankblue','assets/tankblue.png');
-        this.load.image('tankcyan','assets/tankcyan.png');
-        this.load.image('tankgreen','assets/tankgreen.png');
-        this.load.image('tankgrey','assets/tankgrey.png');
-        this.load.image('tankpurple','assets/tankpurple.png');
-        this.load.image('tankred','assets/tankred.png');
-        this.load.image('tankyellow','assets/tankyellow.png');
-        this.load.image('background', 'assets/background.jpg');
+        //tanks
+        this.load.image('tankblack','assets/tanks/tankblack.png');
+        this.load.image('tankblue','assets/tanks/tankblue.png');
+        this.load.image('tankcyan','assets/tanks/tankcyan.png');
+        this.load.image('tankgreen','assets/tanks/tankgreen.png');
+        this.load.image('tankgrey','assets/tanks/tankgrey.png');
+        this.load.image('tankpurple','assets/tanks/tankpurple.png');
+        this.load.image('tankred','assets/tanks/tankred.png');
+        this.load.image('tankyellow','assets/tanks/tankyellow.png');
+        this.load.image('background', 'assets/tanks/background.jpg');
         this.map = new HexMap(this, 60, 40,35, "MapConfiguration.json");
+
+        //Animations
+        this.load.spritesheet('explosion', 'assets/animations/explosion.png', { frameWidth: 64, frameHeight: 64, endFrame: 9 });
+        this.load.spritesheet('eastbullet', 'assets/animations/eastbullet.png', { frameWidth: 32, frameHeight: 32, endFrame: 4 });
+        this.load.spritesheet('westbullet', 'assets/animations/westbullet.png', { frameWidth: 32, frameHeight: 32, endFrame: 4 });
+        this.load.spritesheet('northeastbullet', 'assets/animations/northeastbullet.png', { frameWidth: 32, frameHeight: 32, endFrame: 4 });
+        this.load.spritesheet('northwestbullet', 'assets/animations/northwestbullet.png', { frameWidth: 32, frameHeight: 32, endFrame: 4 });
+        this.load.spritesheet('southeastbullet', 'assets/animations/southeastbullet.png', { frameWidth: 32, frameHeight: 32, endFrame: 4 });
+        this.load.spritesheet('southwestbullet', 'assets/animations/southwestbullet.png', { frameWidth: 32, frameHeight: 32, endFrame: 4 });
     }
 
     init () {
@@ -41,6 +51,19 @@ class Main extends Phaser.Scene {
                 scene.tankblue = new Tank('tankblue', scene, scene.map, 2, 2, 45);
             } 
         );
+        //scoreboard
+        this.nameText = this.add.text(10, 10, 'Name: Chickmagnet73', { font: '16px Arial', fill: '#000000' });
+        this.scoreText = this.add.text(10, 48, 'Score: 0', { font: '16px Arial', fill: '#000000' });
+        this.hitpointsText = this.add.text(10, 86, 'Hitpoints: 100', { font: '16px Arial', fill: '#000000' });
+
+        //explosion
+        var explosion = {
+            key: 'explode',
+            frames: this.anims.generateFrameNumbers('explosion', { frames: [ 0, 1, 2, 3, 4 ] }),
+            frameRate: 5,
+            repeat: -1
+        };
+        this.anims.create(explosion);
     }
 
     update(delta) {
@@ -73,6 +96,11 @@ class Main extends Phaser.Scene {
         this.key_S = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        
+        //activation key explosion
+        this.input.keyboard.on('keyup_P', function(event){
+            this.add.sprite(300, 300, 'explosion').play('explode');
+        },this);       
 
         //controls tankblue
         this.input.keyboard.on('keyup_Z', function(event){
