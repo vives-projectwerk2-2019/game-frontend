@@ -116,8 +116,8 @@ class Main extends Phaser.Scene {
         scene.selectTankColor(),
         scene,
         scene.map,
-        1,
-        1,
+        4,
+        4,
         45
       );
       scene.tankblue = new Tank(
@@ -136,20 +136,21 @@ class Main extends Phaser.Scene {
         3,
         45
       );
+      //scoreboard
+      scene.nameText = scene.add.text(10, 10, "Name: test", {
+        font: "16px Arial",
+        fill: "#000000"
+      });
+      scene.scoreText = scene.add.text(10, 48, "Score: 0", {
+        font: "16px Arial",
+        fill: "#000000"
+      });
+      scene.hitpointsText = scene.add.text(10, 86, "Hitpoints: " + scene.tankblue.health, {
+        font: "16px Arial",
+        fill: "#000000"
+      });
     });
-    //scoreboard
-    this.nameText = this.add.text(10, 10, "Name: test", {
-      font: "16px Arial",
-      fill: "#000000"
-    });
-    this.scoreText = this.add.text(10, 48, "Score: 0", {
-      font: "16px Arial",
-      fill: "#000000"
-    });
-    this.hitpointsText = this.add.text(10, 86, "Hitpoints: " + this.tankblue, {
-      font: "16px Arial",
-      fill: "#000000"
-    });
+
 
     //explosion
     var explosion = {

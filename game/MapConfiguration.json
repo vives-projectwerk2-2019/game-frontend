@@ -2,7 +2,8 @@
     "tiles": [
         {"name": "water", "link": "assets/Tiles/waterTile.png"},
         {"name": "grass", "link": "assets/Tiles/grassTile.png"},
-        {"name": "mountain", "link": "assets/Tiles/mountainTile.png"}
+        {"name": "mountain", "link": "assets/Tiles/mountainTile.png"},
+        {"name": "swamp", "link": "assets/Tiles/swampTile.png"}
     ],
     "size": {
         "width": 22,
