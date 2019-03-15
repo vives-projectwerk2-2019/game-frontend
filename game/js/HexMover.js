@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-//baseclass for all objects that need to manouver over the hex grid
+
 class HexMover {
     constructor(texture, scene, map, x, y, size) {
         this.map = map;
@@ -10,56 +10,56 @@ class HexMover {
         this.updateCurrentRotation();
     }
 
-   //movement
-   forward(){
-    let newCubeLocation = {};
+    //movement
+    forward(){
+        let newCubeLocation = {};
 
-    if (this.currentRotation == 1) {
-        //y ==, z-1,x+1
-        newCubeLocation = { x: this.currentTile.cubePosition.x + 1, y: this.currentTile.cubePosition.y, z: this.currentTile.cubePosition.z - 1};
-    } else if (this.currentRotation == 2) {
-        //y - 1, z ==; x + 1
-        newCubeLocation = { x: this.currentTile.cubePosition.x + 1, y: this.currentTile.cubePosition.y - 1, z: this.currentTile.cubePosition.z};
-    } else if (this.currentRotation == 3) {
-        //y - 1, z + 1, x ==
-        newCubeLocation = { x: this.currentTile.cubePosition.x, y: this.currentTile.cubePosition.y + 1, z: this.currentTile.cubePosition.z + 1};
-    } else if (this.currentRotation == 4) {
-        //y ==, z + 1, x - 1
-        newCubeLocation = { x: this.currentTile.cubePosition.x - 1, y: this.currentTile.cubePosition.y, z: this.currentTile.cubePosition.z + 1};
-    } else if (this.currentRotation == 5) {
-        //y +1, z ==, x -1
-        newCubeLocation = { x: this.currentTile.cubePosition.x - 1, y: this.currentTile.cubePosition.y + 1, z: this.currentTile.cubePosition.z};
-    } else if (this.currentRotation == 6) {
-        //y + 1, z - 1, x ==
-        newCubeLocation = { x: this.currentTile.cubePosition.x, y: this.currentTile.cubePosition.y + 1, z: this.currentTile.cubePosition.z - 1};
+        if (this.currentRotation == 1) {
+            //y ==, z-1,x+1
+            newCubeLocation = { x: this.currentTile.cubePosition.x + 1, y: this.currentTile.cubePosition.y, z: this.currentTile.cubePosition.z - 1};
+        } else if (this.currentRotation == 2) {
+            //y - 1, z ==; x + 1
+            newCubeLocation = { x: this.currentTile.cubePosition.x + 1, y: this.currentTile.cubePosition.y - 1, z: this.currentTile.cubePosition.z};
+        } else if (this.currentRotation == 3) {
+            //y - 1, z + 1, x ==
+            newCubeLocation = { x: this.currentTile.cubePosition.x, y: this.currentTile.cubePosition.y + 1, z: this.currentTile.cubePosition.z + 1};
+        } else if (this.currentRotation == 4) {
+            //y ==, z + 1, x - 1
+            newCubeLocation = { x: this.currentTile.cubePosition.x - 1, y: this.currentTile.cubePosition.y, z: this.currentTile.cubePosition.z + 1};
+        } else if (this.currentRotation == 5) {
+            //y +1, z ==, x -1
+            newCubeLocation = { x: this.currentTile.cubePosition.x - 1, y: this.currentTile.cubePosition.y + 1, z: this.currentTile.cubePosition.z};
+        } else if (this.currentRotation == 6) {
+            //y + 1, z - 1, x ==
+            newCubeLocation = { x: this.currentTile.cubePosition.x, y: this.currentTile.cubePosition.y + 1, z: this.currentTile.cubePosition.z - 1};
+        }
+        let newPosition = this.map.cubeToOddr(newCubeLocation);
+        this.setPosition(newPosition.x, newPosition.y);
     }
-    let newPosition = this.map.cubeToOddr(newCubeLocation);
-    this.setPosition(newPosition.x, newPosition.y);
-}
 
-backward(){
-    let newCubeLocation = {};
+    backward(){
+        let newCubeLocation = {};
 
-    if (this.currentRotation == 1) {
-        //y ==, z-1,x+1
-        newCubeLocation = { x: this.currentTile.cubePosition.x - 1, y: this.currentTile.cubePosition.y, z: this.currentTile.cubePosition.z + 1};
-    } else if (this.currentRotation == 2) {
-        //y - 1, z ==; x + 1
-        newCubeLocation = { x: this.currentTile.cubePosition.x - 1, y: this.currentTile.cubePosition.y + 1, z: this.currentTile.cubePosition.z};
-    } else if (this.currentRotation == 3) {
-        //y - 1, z + 1, x ==
-        newCubeLocation = { x: this.currentTile.cubePosition.x, y: this.currentTile.cubePosition.y - 1, z: this.currentTile.cubePosition.z - 1};
-    } else if (this.currentRotation == 4) {
-        //y ==, z + 1, x - 1
-        newCubeLocation = { x: this.currentTile.cubePosition.x + 1, y: this.currentTile.cubePosition.y, z: this.currentTile.cubePosition.z - 1};
-    } else if (this.currentRotation == 5) {
-        //y +1, z ==, x -1
-        newCubeLocation = { x: this.currentTile.cubePosition.x + 1, y: this.currentTile.cubePosition.y - 1, z: this.currentTile.cubePosition.z};
-    } else if (this.currentRotation == 6) {
-        //y + 1, z - 1, x ==
-        newCubeLocation = { x: this.currentTile.cubePosition.x, y: this.currentTile.cubePosition.y - 1, z: this.currentTile.cubePosition.z + 1};
-    }
-    let newPosition = this.map.cubeToOddr(newCubeLocation);
+        if (this.currentRotation == 1) {
+            //y ==, z-1,x+1
+            newCubeLocation = { x: this.currentTile.cubePosition.x - 1, y: this.currentTile.cubePosition.y, z: this.currentTile.cubePosition.z + 1};
+        } else if (this.currentRotation == 2) {
+            //y - 1, z ==; x + 1
+            newCubeLocation = { x: this.currentTile.cubePosition.x - 1, y: this.currentTile.cubePosition.y + 1, z: this.currentTile.cubePosition.z};
+        } else if (this.currentRotation == 3) {
+            //y - 1, z + 1, x ==
+            newCubeLocation = { x: this.currentTile.cubePosition.x, y: this.currentTile.cubePosition.y - 1, z: this.currentTile.cubePosition.z - 1};
+        } else if (this.currentRotation == 4) {
+            //y ==, z + 1, x - 1
+            newCubeLocation = { x: this.currentTile.cubePosition.x + 1, y: this.currentTile.cubePosition.y, z: this.currentTile.cubePosition.z - 1};
+        } else if (this.currentRotation == 5) {
+            //y +1, z ==, x -1
+            newCubeLocation = { x: this.currentTile.cubePosition.x + 1, y: this.currentTile.cubePosition.y - 1, z: this.currentTile.cubePosition.z};
+        } else if (this.currentRotation == 6) {
+            //y + 1, z - 1, x ==
+            newCubeLocation = { x: this.currentTile.cubePosition.x, y: this.currentTile.cubePosition.y - 1, z: this.currentTile.cubePosition.z + 1};
+        }
+        let newPosition = this.map.cubeToOddr(newCubeLocation);
         this.setPosition(newPosition.x, newPosition.y);
     }
 

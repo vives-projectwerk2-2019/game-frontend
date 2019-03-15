@@ -1,12 +1,11 @@
 {
     "tiles": [
-        {"name": "dirt", "link": "assets/Tiles/tileDirt_tile.png"},
-        {"name": "water", "link": "assets/Tiles/tileWater_tile.png"},
-        {"name": "Stone", "link": "assets/Tiles/tileStone_tile.png"},
-        {"name": "grass", "link": "assets/Tiles/tileGrass_tile.png"}
+        {"name": "water", "link": "assets/Tiles/waterTile.png"},
+        {"name": "grass", "link": "assets/Tiles/grassTile.png"},
+        {"name": "mountain", "link": "assets/Tiles/mountainTile.png"}
     ],
     "size": {
-        "width": 21,
-        "length": 21
+        "width": 22,
+        "length": 17
     }
 }

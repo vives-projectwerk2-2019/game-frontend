@@ -25,10 +25,8 @@ class HexMapEditor extends HexMap {
 
     toggleCurrentTileTexture(){
         let currentId = this.getIdFromTextureName(this.cursor.getTileTextureName());
-        if (currentId < this.tileGroup.length) {
-            let position = this.cursor.currentPosition;
-            console.log(this.jsonMap);
-            console.log(this.cursor.currentPosition)
+        let position = this.cursor.currentPosition;
+        if (currentId < this.tileGroup.length - 1) {
             this.jsonMap[position.x][position.y] = currentId + 1;
             this.cursor.changeSelectedTileTexture(this.tileGroup[currentId + 1]);
         } else {
@@ -58,9 +56,10 @@ class HexMapEditor extends HexMap {
             this.saveMap();
         },this);
     }
-    //will save the map to local storage
+
     saveMap(){
         localStorage.setItem("map", JSON.stringify(this.jsonMap));
         console.log("saved sucsesfully");
     }
+
 }

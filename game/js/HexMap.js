@@ -24,41 +24,49 @@ class HexMap {
     }
 
     loadMap(file, hexMap) {
-        return fetch(file)
-         .then(response => response.json())
-         .then(function(json){
-             hexMap.tileGroup = hexMap.loadTiles(json.tiles, hexMap);
-             hexMap.width = json.size.width;
-             hexMap.length = json.size.length;
-             hexMap.jsonMap = JSON.parse( localStorage.getItem("map") );
-             if (!hexMap.jsonMap) {
-                 hexMap.jsonMap = hexMap.generateDefaultMap();
-             } else if (hexMap.width != hexMap.jsonMap.length || hexMap.length != hexMap.jsonMap[hexMap.jsonMap.length - 1].length) {
-                 hexMap.jsonMap = hexMap.generateDefaultMap();
-             }
-             
-         });
-     }
+       return fetch(file)
+        .then(response => response.json())
+        .then(function(json){
+            hexMap.tileGroup = hexMap.loadTiles(json.tiles, hexMap);
+            hexMap.width = json.size.width;
+            hexMap.length = json.size.length;
+            hexMap.jsonMap = JSON.parse( localStorage.getItem("map") );
+            if (!hexMap.jsonMap) {
+                hexMap.jsonMap = hexMap.generateDefaultMap();
+            } else if (hexMap.width != hexMap.jsonMap.length || hexMap.length != hexMap.jsonMap[hexMap.jsonMap.length - 1].length) {
+                hexMap.jsonMap = hexMap.generateDefaultMap();
+            }
+            
+        });
+    }
 
-     generateMap() {
-        let tileWidth = Math.sqrt(3) / 2 * this.tileSize;
-        let tileHeight = 2 * (this.tileSize/3);
+    generateMap() {
+        let tileWidth = Math.sqrt(3) * (this.tileSize / 2);
+        let tileHeight = ( 2 * (this.tileSize / 2) );
         let map = [];
 
         for (let xIndex = 0; xIndex < this.width; xIndex++) {
             map[xIndex] = [];
             for (let yIndex = 0; yIndex < this.length; yIndex++) {
-                let xSpacing = tileWidth * xIndex;
                 let ySpacing = tileHeight * 0.75 * yIndex;
                 if (yIndex%2 == 0) {
+                    let xSpacing = (tileWidth * xIndex);
                     map[xIndex][yIndex] = new Tile(this.tileGroup[this.jsonMap[xIndex][yIndex]], this.scene, xSpacing + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
+                    //for fast troulbeshooting
+                    //this.scene.add.text(xSpacing + this.xOffset, ySpacing + this.yOffset, 'x:' + xIndex + ' y:' + yIndex, { fontFamily: '"Roboto Condensed"' }).setOrigin( 0.5,0.5);
                 } else {
-                    map[xIndex][yIndex] = new Tile(this.tileGroup[this.jsonMap[xIndex][yIndex]], this.scene, (xSpacing + tileWidth / 2) + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
+                    let xSpacing = (tileWidth * xIndex) + (tileWidth /2);
+                    map[xIndex][yIndex] = new Tile(this.tileGroup[this.jsonMap[xIndex][yIndex]], this.scene, xSpacing + this.xOffset, ySpacing + this.yOffset, this.oddrToCube(xIndex, yIndex), this.tileSize);
+                    //for fast troulbeshooting
+                    //this.scene.add.text(xSpacing + this.xOffset, ySpacing + this.yOffset, 'x:' + xIndex + ' y:' + yIndex, { fontFamily: '"Roboto Condensed"' }).setOrigin(0.5 , 0.5);
                 }
             }
         }
+
         this.map = map;
     }
+
+    
 
     cubeToOddr(cubePosition){
         var collum = cubePosition.x + (cubePosition.z - (cubePosition.z&1)) / 2;
@@ -73,14 +81,6 @@ class HexMap {
         return {x: x, y: y, z: z};
     }
 
-    selectTile(x,y) {
-        this.map[x][y].setTexture(this.selectedTileTexture);
-    }
-
-    unselectTile(x,y) {
-        this.map[x][y].setTexture(this.tileTexture);
-    }
-
     getTile(position) {
         if (position.x < this.width && position.y < this.length && position.x >= 0 && position.y >= 0){
             return this.map[position.x][position.y];
@@ -89,7 +89,6 @@ class HexMap {
             return null;
         }
     }
-
     //will return a jsonMap with the width and length specified in the constructor
     generateDefaultMap(){
         let hexMap = this;

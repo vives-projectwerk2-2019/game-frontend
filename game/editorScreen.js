@@ -38,5 +38,6 @@ class Editor extends Phaser.Scene {
         this.key_A = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.key_E = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
         this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        
     }
 }
