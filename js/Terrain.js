@@ -7,12 +7,11 @@ var tankPathEnum = {
 //enum type of terrain tiles
 var tankTileEnum  = {
 	GRASS: Symbol('GRASS'),
-	DIRT: Symbol('DIRT'),
-	AUTUMN: Symbol('AUTUMN'),
-	STONE: Symbol('STONE'),
+	DIRT: Symbol('SWAMP'),
+	STONE: Symbol('MOUNTAIN'),
 	WATER: Symbol('WATER'),
-	LAVA: Symbol('LAVA'),
-	MAGIC: Symbol('MAGIC')
+	//LAVA: Symbol('LAVA'),
+	//MAGIC: Symbol('MAGIC')
 };
 
 class TankTerrain {
