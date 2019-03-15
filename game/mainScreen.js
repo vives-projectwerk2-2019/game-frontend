@@ -112,10 +112,24 @@ class Main extends Phaser.Scene {
       scene.map.generateMap();
       //this.setupFullScreen(this.background);
 
-      scene.tankblack = new Tank("tankblack", scene, scene.map, 1, 1, 45);
-      scene.tankblue = new Tank("tankblue", scene, scene.map, 2, 2, 45);
+      scene.tankblack = new Tank(
+        scene.selectTankColor(),
+        scene,
+        scene.map,
+        1,
+        1,
+        45
+      );
+      scene.tankblue = new Tank(
+        scene.selectTankColor(),
+        scene,
+        scene.map,
+        2,
+        2,
+        45
+      );
       scene.tankyeet = new Tank(
-        this.selectTankColor(),
+        scene.selectTankColor(),
         scene,
         scene.map,
         3,
