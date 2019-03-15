@@ -124,7 +124,7 @@ class Main extends Phaser.Scene {
       );
     });
     //scoreboard
-    this.nameText = this.add.text(10, 10, "Name: Chickmagnet73", {
+    this.nameText = this.add.text(10, 10, "Name: test", {
       font: "16px Arial",
       fill: "#000000"
     });
