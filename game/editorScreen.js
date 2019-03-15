@@ -27,6 +27,7 @@ class Editor extends Phaser.Scene {
     update(delta) {
         if(this.key_1.isDown){
             this.scene.start("Main");
+            count = [0, 0, 0, 0, 0, 0, 0, 0];
         }
     }
 
