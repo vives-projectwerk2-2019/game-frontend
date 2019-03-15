@@ -11,7 +11,7 @@ var colors = [
 ];
 class Main extends Phaser.Scene {
   constructor() {
-    super({ key: "Main" });
+    super({ key: "main" });
   }
   selectTankColor() {
     console.log("yeet");
