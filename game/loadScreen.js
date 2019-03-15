@@ -76,9 +76,9 @@ class loadScreen extends Phaser.Scene{
             assetText.destroy();
         });
         
-        this.load.image('logo', 'zenvalogo.png');
+        this.load.image('logo', 'assets/icon.png');
         for (var i = 0; i < 500; i++) {
-            this.load.image('logo'+i, 'zenvalogo.png');
+            this.load.image('logo'+i, 'assets/icon.png');
         }
     }
 
