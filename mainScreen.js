@@ -291,12 +291,55 @@ class Main extends Phaser.Scene {
       this
     );
   }
-  test(receivedMessage) {
+  moveTank(receivedMessage) {
     var dataInput = receivedMessage;
 
-    if (dataInput.Player.movement == "left") {
-      console.log("move left");
-      this.tankblack.turnLeft();
+    switch (dataInput.Player.movement) {
+      case "left":
+        console.log("move left");
+        this.tankblack.turnLeft();
+        
+        break;
+      case "right":
+        console.log("move right");
+        //this.tankblack.turnRight();
+        break;
+      case "forward":
+        console.log("move forward");
+        //this.tankblack.forward();
+        break;
+      case "backward":
+        console.log("move backward");
+        //this.tankblack.backward();
+        break;
+      default:
+        console.log("idle");
+        break;
+    }
+  }
+  tankAction(receivedMessage) {
+    var dataInput = receivedMessage;
+
+    switch (dataInput.Player.action) {
+      case "A":
+        console.log("A");
+        //this.tankblack.turnLeft();
+        break;
+      case "B":
+        console.log("B");
+        //this.tankblack.turnRight();
+        break;
+      case "X":
+        console.log("X");
+        //this.tankblack.forward();
+        break;
+      case "Y":
+        console.log("Y");
+        //this.tankblack.backward();
+        break;
+      default:
+        console.log("no key pressed");
+        break;
     }
   }
 }

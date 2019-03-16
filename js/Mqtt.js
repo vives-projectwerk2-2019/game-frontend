@@ -36,6 +36,7 @@ function onConnectionLost(responseObject) {
 function onMessageArrived(message) {
   receivedMessage = JSON.parse(message.payloadString);
   let main = new Main();
-  main.test(receivedMessage);  
+  main.moveTank(receivedMessage); 
+  main.tankAction(receivedMessage);
   console.log(receivedMessage);
 }
