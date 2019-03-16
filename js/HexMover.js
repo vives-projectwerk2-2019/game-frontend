@@ -133,7 +133,7 @@ class HexMover {
       this.currentRotation = 6;
     }
     this.updateCurrentRotation();
-    console.log(this.currentRotation);
+    //console.log(this.currentRotation);
   }
 
   turnRight() {
@@ -143,7 +143,7 @@ class HexMover {
       this.currentRotation = 1;
     }
     this.updateCurrentRotation();
-    console.log(this.currentRotation);
+    //console.log(this.currentRotation);
   }
 
   setPosition(x, y) {

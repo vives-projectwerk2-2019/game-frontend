@@ -121,6 +121,7 @@ class Main extends Phaser.Scene {
         4,
         45
       );
+      //scene.tankblack.setAddons();
       scene.tankblue = new Tank(
         scene.selectTankColor(),
         scene,
@@ -294,6 +295,7 @@ class Main extends Phaser.Scene {
   moveTank(receivedMessage) {
     var dataInput = receivedMessage;
 
+    console.log(this);
     switch (dataInput.Player.movement) {
       case "left":
         console.log("move left");
@@ -319,23 +321,23 @@ class Main extends Phaser.Scene {
   }
   tankAction(receivedMessage) {
     var dataInput = receivedMessage;
-
+    
     switch (dataInput.Player.action) {
       case "A":
         console.log("A");
-        //this.tankblack.turnLeft();
+
         break;
       case "B":
         console.log("B");
-        //this.tankblack.turnRight();
+
         break;
       case "X":
         console.log("X");
-        //this.tankblack.forward();
+
         break;
       case "Y":
         console.log("Y");
-        //this.tankblack.backward();
+
         break;
       default:
         console.log("no key pressed");

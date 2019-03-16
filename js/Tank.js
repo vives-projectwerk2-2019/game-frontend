@@ -1,3 +1,4 @@
+let i = 0;
 class Tank extends HexMover {
   constructor(texture, scene, map, x, y, size, username, addons, dev_id) {
     super(texture, scene, map, x, y, size, username, addons, dev_id);
@@ -7,9 +8,10 @@ class Tank extends HexMover {
   }
 
   setAddons() {
-    for (i = 0; i < this.tank.addons.length; i++) {
+    for (i = 0; i < Tank.addons.length; i++) {
       if (dataInput.Controller.addons[i] !== null) {
-        this.tank.addons[i] = dataInput.Controller.addons[i];
+        Tank.addons[i] = dataInput.Controller.addons[i];
+        
       }
     }
   }
