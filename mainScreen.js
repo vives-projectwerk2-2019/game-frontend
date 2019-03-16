@@ -158,10 +158,10 @@ class Main extends Phaser.Scene {
     var explosion = {
       key: "explode",
       frames: this.anims.generateFrameNumbers("explosion", {
-        frames: [0, 1, 2, 3, 4]
+        frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
       }),
       frameRate: 5,
-      repeat: -1
+      repeat: 0
     };
     this.anims.create(explosion);
   
