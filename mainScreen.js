@@ -138,6 +138,7 @@ class Main extends Phaser.Scene {
         3,
         45
       );
+      scene.mqtt = new Mqtt(scene);
       //scoreboard
       scene.nameText = scene.add.text(10, 10, "Name: test", {
         font: "16px Arial",
