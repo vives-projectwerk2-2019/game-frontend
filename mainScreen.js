@@ -305,15 +305,15 @@ class Main extends Phaser.Scene {
         break;
       case "right":
         console.log("move right");
-        //this.tankblack.turnRight();
+        this.tankblack.turnRight();
         break;
       case "forward":
         console.log("move forward");
-        //this.tankblack.forward();
+        this.tankblack.forward();
         break;
       case "backward":
         console.log("move backward");
-        //this.tankblack.backward();
+        this.tankblack.backward();
         break;
       default:
         console.log("idle");
