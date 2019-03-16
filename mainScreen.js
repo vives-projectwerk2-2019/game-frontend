@@ -1,4 +1,5 @@
 count = [0, 0, 0, 0, 0, 0, 0, 0];
+test = [0];
 var colors = [
   "tankblack",
   "tankblue",
@@ -13,8 +14,9 @@ class Main extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
   }
+
   selectTankColor() {
-    console.log("yeet");
+    
     for (let i = 0; i < 8; i++) {
       const element = count[i];
       if (element == 0) {
@@ -52,11 +54,11 @@ class Main extends Phaser.Scene {
       frameHeight: 32,
       endFrame: 4
     });
-    this.load.spritesheet(
-      "northeastbullet",
-      "assets/animations/northeastbullet.png",
-      { frameWidth: 32, frameHeight: 32, endFrame: 4 }
-    );
+    // this.load.spritesheet(
+    //   "northeastbullet",
+    //   "assets/animations/northeastbullet.png",
+    //   { frameWidth: 32, frameHeight: 32, endFrame: 4 }
+    // );
     this.load.spritesheet(
       "northwestbullet",
       "assets/animations/northwestbullet.png",
@@ -91,7 +93,6 @@ class Main extends Phaser.Scene {
     }
   }
   init() {
-    var dataInput = receivedMessage;
 
     var canvas = this.sys.game.canvas;
     // var fullscreen = this.sys.game.device.fullscreen;
@@ -162,6 +163,7 @@ class Main extends Phaser.Scene {
       repeat: -1
     };
     this.anims.create(explosion);
+  
   }
 
   update(delta) {
@@ -199,6 +201,9 @@ class Main extends Phaser.Scene {
     this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
 
+    
+    
+    
     //activation key explosion
     this.input.keyboard.on(
       "keyup_P",
@@ -224,6 +229,8 @@ class Main extends Phaser.Scene {
       },
       this
     );
+    
+
     //controls tankblue
     this.input.keyboard.on(
       "keyup_Z",
@@ -283,5 +290,13 @@ class Main extends Phaser.Scene {
       },
       this
     );
+  }
+  test(receivedMessage) {
+    var dataInput = receivedMessage;
+
+    if (dataInput.Player.movement == "left") {
+      console.log("move left");
+      this.tankblack.turnLeft();
+    }
   }
 }

@@ -2,7 +2,7 @@ const client = new Paho.MQTT.Client("mqtt.labict.be", 1884, "");
 var receivedMessage = {
   Player: {
     username: "",
-    movement: 0,
+    movement: "forward",
     dev_id: "",
     action: 0,
     joined: true
@@ -32,8 +32,10 @@ function onConnectionLost(responseObject) {
   }
 }
 
-// called when a message arrives
+// called when a message arrives 
 function onMessageArrived(message) {
   receivedMessage = JSON.parse(message.payloadString);
+  let main = new Main();
+  main.test(receivedMessage);  
   console.log(receivedMessage);
 }
