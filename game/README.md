@@ -19,3 +19,8 @@ move forward:   arrow_ley UP
 move backwards: arrow_ley DOWN
 strafe right:   arrow_ley LEFT
 strafe left:    arrow_ley RIGHT
+
+
+##Docker
+open docker
+docker compose up
