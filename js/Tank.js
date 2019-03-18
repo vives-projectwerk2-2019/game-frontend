@@ -7,13 +7,14 @@ class Tank extends HexMover {
     console.log(this.health);
   }
 
-  setAddons() {
-    for (i = 0; i < Tank.addons.length; i++) {
+  setAddons(dataInput) {
+    this.dataInput = dataInput;
+    for (i = 0; i < this.addons.length; i++) {
       if (dataInput.Controller.addons[i] !== null) {
-        Tank.addons[i] = dataInput.Controller.addons[i];
-        
+        this.addons[i] = dataInput.Controller.addons[i];
       }
     }
+    console.log(this.addons);
   }
 
   addTankHealth(toAddHealth) {
@@ -103,11 +104,6 @@ class Tank extends HexMover {
       case "ram":
         if (use && tank.addonUses[i] < 1) {
           addWeapon("ram", 3, 0);
-        }
-        break;
-      case "ram":
-        if (use && tank.addonUses[i] < 99) {
-          addWeapon("gatling gun", 4, 20);
         }
         break;
       default:
