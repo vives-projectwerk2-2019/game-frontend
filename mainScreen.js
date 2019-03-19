@@ -1,4 +1,7 @@
 count = [0, 0, 0, 0, 0, 0, 0, 0];
+spawnTilesOccupiedX = [0, 0, 0, 0, 0, 0, 0, 0];
+spawnTilesOccupiedY = [0, 0, 0, 0, 0, 0, 0, 0];
+var spawnTiles = [];
 test = [0];
 var colors = [
   "tankblack",
@@ -24,6 +27,40 @@ class Main extends Phaser.Scene {
       if (element == 0) {
         count[i]++;
         return colors[i];
+      }
+    }
+  }
+
+  setSpawnTiles() {
+    
+    for (let x = 0; x < this.map.jsonMap.length; x++) {
+      const element = this.map.jsonMap[x];
+      for (let y = 0; y < element.length; y++) {
+        const tileValue = element[y];
+        if (tileValue == 4) {
+          spawnTiles.push([x, y]);
+        }
+      }
+    }
+  }
+  spawnTileX() {
+    //console.log(spawnTiles);
+    for (let i = 0; i < spawnTiles.length; i++) {
+      const element = spawnTiles[i];
+      if (!spawnTilesOccupiedX[i]) {
+        spawnTilesOccupiedX[i]++;
+        //console.log(element);
+        return element[0];
+      }
+    }
+  }
+  spawnTileY() {
+    for (let i = 0; i < spawnTiles.length; i++) {
+      const element = spawnTiles[i];
+      if (!spawnTilesOccupiedY[i]) {
+        spawnTilesOccupiedY[i]++;
+        //console.log(element);
+        return element[1];
       }
     }
   }
@@ -78,112 +115,7 @@ class Main extends Phaser.Scene {
       { frameWidth: 32, frameHeight: 32, endFrame: 4 }
     );
   }
-
-  dealDamage(damageDealer, firedWeapon, allTanks) {
-    this.firedWeapon = firedWeapon;
-    this.allTanks = allTanks;
-    for (let index = 0; index < allTanks.length; index++) {
-      var damageTaker = allTanks[index];
-      switch (damageDealer.currentRotation) {
-        case 1:
-          if (
-            damageDealer.currentTile.cubePosition.y ==
-              damageTaker.currentTile.cubePosition.y &&
-            damageDealer.currentTile.cubePosition.x <
-              damageTaker.currentTile.cubePosition.x
-          ) {
-            this.takeDamage(damageDealer, firedWeapon, damageTaker);
-          }
-
-          break;
-        case 2:
-          if (
-            damageDealer.currentTile.cubePosition.z ==
-              damageTaker.currentTile.cubePosition.z &&
-            damageDealer.currentTile.cubePosition.x <
-              damageTaker.currentTile.cubePosition.x
-          ) {
-            this.takeDamage(damageDealer, firedWeapon, damageTaker);
-          }
-          break;
-        case 3:
-          if (
-            damageDealer.currentTile.cubePosition.x ==
-              damageTaker.currentTile.cubePosition.x &&
-            damageDealer.currentTile.cubePosition.y >
-              damageTaker.currentTile.cubePosition.y
-          ) {
-            this.takeDamage(damageDealer, firedWeapon, damageTaker);
-          }
-          break;
-        case 4:
-          if (
-            damageDealer.currentTile.cubePosition.y ==
-              damageTaker.currentTile.cubePosition.y &&
-            damageDealer.currentTile.cubePosition.x >
-              damageTaker.currentTile.cubePosition.x
-          ) {
-            this.takeDamage(damageDealer, firedWeapon, damageTaker);
-          }
-          break;
-        case 5:
-          if (
-            damageDealer.currentTile.cubePosition.z ==
-              damageTaker.currentTile.cubePosition.z &&
-            damageDealer.currentTile.cubePosition.x >
-              damageTaker.currentTile.cubePosition.x
-          ) {
-            this.takeDamage(damageDealer, firedWeapon, damageTaker);
-          }
-          break;
-        case 6:
-          if (
-            damageDealer.currentTile.cubePosition.x ==
-              damageTaker.currentTile.cubePosition.x &&
-            damageDealer.currentTile.cubePosition.y <
-              damageTaker.currentTile.cubePosition.y
-          ) {
-            this.takeDamage(damageDealer, firedWeapon, damageTaker);
-          }
-          break;
-
-        default:
-          console.log(
-            "unknown rotation value: " + damageDealer.currentRotation
-          );
-          break;
-      }
-    }
-  }
-  takeDamage(damageDealer, firedWeapon, damageTaker) {
-    var weapon = firedWeapon;
-    this.damageTaker = damageTaker;
-    for (let i = 0; i < damageDealer.weapons.weaponName.length; i++) {
-      if (
-        weapon == damageDealer.weapons.weaponName[i] &&
-        damageDealer.addonUses[i] < 1
-      ) {
-        damageTaker.health =
-          damageTaker.health - damageDealer.weapons.weaponDamage[i];
-        if (damageDealer.weapons.weaponName[i] != "gatling gun") {
-          damageDealer.addonUses[i]++;
-        }
-      }
-      if (damageTaker.health <= 0) {
-        console.log(damageTaker.username + " tank died");
-
-        this.add
-          .sprite(
-            damageTaker.currentTile.position.x,
-            damageTaker.currentTile.position.y,
-            "explosion"
-          )
-          .play("explode");
-        damageTaker.sprite.setTexture("destroyedTank");
-        damageTaker = null;
-      }
-    }
-  }
+  
   init() {
     var canvas = this.sys.game.canvas;
     // var fullscreen = this.sys.game.device.fullscreen;
@@ -203,13 +135,13 @@ class Main extends Phaser.Scene {
     this.map.loaded.then(() => {
       scene.map.generateMap();
       //this.setupFullScreen(this.background);
-
+      this.setSpawnTiles();
       scene.tankblack = new Tank(
         scene.selectTankColor(),
         scene,
         scene.map,
-        4,
-        4,
+        this.spawnTileX(),
+        this.spawnTileY(),
         45,
         "black"
       );
@@ -218,8 +150,8 @@ class Main extends Phaser.Scene {
         scene.selectTankColor(),
         scene,
         scene.map,
-        2,
-        2,
+        this.spawnTileX(),
+        this.spawnTileY(),
         45,
         "blue"
       );
@@ -227,8 +159,53 @@ class Main extends Phaser.Scene {
         scene.selectTankColor(),
         scene,
         scene.map,
-        3,
-        3,
+        this.spawnTileX(),
+        this.spawnTileY(),
+        45,
+        "yeet"
+      );
+      scene.tankyeeet = new Tank(
+        scene.selectTankColor(),
+        scene,
+        scene.map,
+        this.spawnTileX(),
+        this.spawnTileY(),
+        45,
+        "yeet"
+      );
+      scene.tankyeeeet = new Tank(
+        scene.selectTankColor(),
+        scene,
+        scene.map,
+        this.spawnTileX(),
+        this.spawnTileY(),
+        45,
+        "yeet"
+      );
+      scene.tankyeeeeet = new Tank(
+        scene.selectTankColor(),
+        scene,
+        scene.map,
+        this.spawnTileX(),
+        this.spawnTileY(),
+        45,
+        "yeet"
+      );
+      scene.tankyeeeeeet = new Tank(
+        scene.selectTankColor(),
+        scene,
+        scene.map,
+        this.spawnTileX(),
+        this.spawnTileY(),
+        45,
+        "yeet"
+      );
+      scene.tankyeeeeeeet = new Tank(
+        scene.selectTankColor(),
+        scene,
+        scene.map,
+        this.spawnTileX(),
+        this.spawnTileY(),
         45,
         "yeet"
       );
@@ -463,6 +440,111 @@ class Main extends Phaser.Scene {
       default:
         //console.log("no key pressed");
         break;
+    }
+  }
+  dealDamage(damageDealer, firedWeapon, allTanks) {
+    this.firedWeapon = firedWeapon;
+    this.allTanks = allTanks;
+    for (let index = 0; index < allTanks.length; index++) {
+      var damageTaker = allTanks[index];
+      switch (damageDealer.currentRotation) {
+        case 1:
+          if (
+            damageDealer.currentTile.cubePosition.y ==
+            damageTaker.currentTile.cubePosition.y &&
+            damageDealer.currentTile.cubePosition.x <
+            damageTaker.currentTile.cubePosition.x
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+
+          break;
+        case 2:
+          if (
+            damageDealer.currentTile.cubePosition.z ==
+            damageTaker.currentTile.cubePosition.z &&
+            damageDealer.currentTile.cubePosition.x <
+            damageTaker.currentTile.cubePosition.x
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+        case 3:
+          if (
+            damageDealer.currentTile.cubePosition.x ==
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.y >
+            damageTaker.currentTile.cubePosition.y
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+        case 4:
+          if (
+            damageDealer.currentTile.cubePosition.y ==
+            damageTaker.currentTile.cubePosition.y &&
+            damageDealer.currentTile.cubePosition.x >
+            damageTaker.currentTile.cubePosition.x
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+        case 5:
+          if (
+            damageDealer.currentTile.cubePosition.z ==
+            damageTaker.currentTile.cubePosition.z &&
+            damageDealer.currentTile.cubePosition.x >
+            damageTaker.currentTile.cubePosition.x
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+        case 6:
+          if (
+            damageDealer.currentTile.cubePosition.x ==
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.y <
+            damageTaker.currentTile.cubePosition.y
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+
+        default:
+          console.log(
+            "unknown rotation value: " + damageDealer.currentRotation
+          );
+          break;
+      }
+    }
+  }
+  takeDamage(damageDealer, firedWeapon, damageTaker) {
+    var weapon = firedWeapon;
+    this.damageTaker = damageTaker;
+    for (let i = 0; i < damageDealer.weapons.weaponName.length; i++) {
+      if (
+        weapon == damageDealer.weapons.weaponName[i] &&
+        damageDealer.addonUses[i] < 1
+      ) {
+        damageTaker.health =
+          damageTaker.health - damageDealer.weapons.weaponDamage[i];
+        if (damageDealer.weapons.weaponName[i] != "gatling gun") {
+          damageDealer.addonUses[i]++;
+        }
+      }
+      if (damageTaker.health <= 0) {
+        console.log(damageTaker.username + " tank died");
+
+        this.add
+          .sprite(
+            damageTaker.currentTile.position.x,
+            damageTaker.currentTile.position.y,
+            "explosion"
+          )
+          .play("explode");
+        damageTaker.sprite.setTexture("destroyedTank");
+        damageTaker = null;
+      }
     }
   }
 }
