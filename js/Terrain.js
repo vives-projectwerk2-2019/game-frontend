@@ -1,36 +1,31 @@
 //enum state of the next tile based on the tank direction if the path is blocked or not 
 var tankPathEnum = {
-	UNBLOCKED: Symbol('UNBLOCKED'), 
-	BLOCKED: Symbol('BLOCKED')
+	UNBLOCKED: 0, 
+	BLOCKED: 1
 }; 
 
 //enum type of terrain tiles
+//the tile id's should match the ones from the json
 var tankTileEnum  = {
-	GRASS: Symbol('GRASS'),
-	DIRT: Symbol('SWAMP'),
-	STONE: Symbol('MOUNTAIN'),
-	WATER: Symbol('WATER'),
-	OTHER_TANK: Symbol('OTHER_TANK'),
-	//LAVA: Symbol('LAVA'),
-	//MAGIC: Symbol('MAGIC')
+	WATER: 0,
+	GRASS: 1,
+	MOUNTAIN: 2,
+	SWAMP: 3,
+	OTHER_TANK: 4,
 };
 
 class TankTerrain {
 
-	constructor(nextTile) {
-		this.nextTile = nextTile;
-	};
-
 	//looks if the path of the tank is blocked 
-	setTankPathState()
+	setTankPathState(nextTile)
 	{
-		let tankState = UNBLOCKED;
+		let tankState = tankPathEnum.UNBLOCKED;
 
-		if(this.nextTile == MOUNTAIN || this.nextTile == WATER)
-			tankState = BLOCKED;
+		if(nextTile == tankTileEnum.MOUNTAIN || nextTile == tankTileEnum.WATER) {
+			tankState = tankPathEnum.BLOCKED;
+		}
 
 		return tankState;
 	}
 	
-
 };
