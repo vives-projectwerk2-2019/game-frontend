@@ -34,7 +34,7 @@ class Mqtt {
       onSuccess: function() {
         // Once a connection has been made, make a subscription and send a message.
         console.log("onConnect");
-        mqtt.client.subscribe("game");
+        mqtt.client.subscribe("game yeet");
         let message = new Paho.MQTT.Message("Hello");
         message.destinationName = "World";
         mqtt.client.send(message);
