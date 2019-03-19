@@ -38,7 +38,7 @@ class Main extends Phaser.Scene {
     this.load.image("tankred", "assets/tanks/tankred.png");
     this.load.image("tankyellow", "assets/tanks/tankyellow.png");
     this.load.image("background", "assets/tanks/background.jpg");
-    this.load.image("destroyedTank", "tank.png");
+    this.load.image("destroyedTank", "assets/tanks/destroyedTank.png");
     this.map = new HexMap(this, 60, 40, 35, "MapConfiguration.json");
 
     //Animations
@@ -171,7 +171,16 @@ class Main extends Phaser.Scene {
       }
       if (damageTaker.health <= 0) {
         console.log(damageTaker.username + " tank died");
-        damageTaker.texture = null;
+
+        this.add
+          .sprite(
+            damageTaker.currentTile.position.x,
+            damageTaker.currentTile.position.y,
+            "explosion"
+          )
+          .play("explode");
+        damageTaker.sprite.setTexture("destroyedTank");
+        damageTaker = null;
       }
     }
   }
@@ -224,29 +233,12 @@ class Main extends Phaser.Scene {
         "yeet"
       );
       allTanks = [scene.tankblack, scene.tankblue, scene.tankyeet];
-      console.log(allTanks);
+      //console.log(allTanks);
       scene.mqtt = new Mqtt(scene);
       //scoreboard
-      scene.nameText = scene.add.text(10, 10, "Name: test", {
-        font: "16px Arial",
-        fill: "#000000"
-      });
-      scene.scoreText = scene.add.text(10, 48, "Score: 0", {
-        font: "16px Arial",
-        fill: "#000000"
-      });
-      scene.hitpointsText = scene.add.text(
-        10,
-        86,
-        "Hitpoints: " + scene.tankblue.health,
-        {
-          font: "16px Arial",
-          fill: "#000000"
-        }
-      );
 
       //Timer
-      console.log(this);
+      //console.log(this);
       text = this.add
         .text(600, 32, "", { font: "16px Arial", fill: "#000000" })
         .setOrigin(0.5, 0.5);
