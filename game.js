@@ -1,7 +1,7 @@
 var config = {
     type:Phaser.AUTO,
-    width : 1200,
-    height : 800,
+    width : window.innerWidth,
+    height : window.innerHeight,
     parent: 'play',
     physics: {
         default: 'arcade',
