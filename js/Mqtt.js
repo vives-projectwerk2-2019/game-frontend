@@ -2,7 +2,6 @@
 class Mqtt {
   constructor(scene) {
     this.scene = scene;
-    let mqtt = this;
     this.client = new Paho.MQTT.Client("mqtt.labict.be", 1884, "");
 
     this.receivedMessage = {
@@ -17,27 +16,27 @@ class Mqtt {
     };
 
     // set callback handlers
-    this.client.onConnectionLost = function(responseObject) {
+    this.client.onConnectionLost = (responseObject) => {
       if (responseObject.errorCode !== 0) {
         console.log("onConnectionLost:" + responseObject.errorMessage);
       }
     };
     console.log(this);
-    this.client.onMessageArrived = function(message) {
+    this.client.onMessageArrived = (message) => {
       let receivedMessage = JSON.parse(message.payloadString);
-      mqtt.scene.moveTank(receivedMessage);
-      mqtt.scene.tankAction(receivedMessage);
+      this.scene.moveTank(receivedMessage);
+      this.scene.tankAction(receivedMessage);
       console.log(receivedMessage);
     };
     // connect the client
     this.client.connect({
-      onSuccess: function() {
+      onSuccess: () => {
         // Once a connection has been made, make a subscription and send a message.
         console.log("onConnect");
-        mqtt.client.subscribe("game");
+        this.client.subscribe("game");
         let message = new Paho.MQTT.Message("Hello");
         message.destinationName = "World";
-        mqtt.client.send(message);
+        this.client.send(message);
       }
     });
   }
