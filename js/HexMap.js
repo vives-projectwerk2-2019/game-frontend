@@ -30,7 +30,7 @@ class HexMap {
         hexMap.tileGroup = hexMap.loadTiles(json.tiles, hexMap);
         hexMap.width = json.size.width;
         hexMap.length = json.size.length;
-        hexMap.jsonMap = JSON.parse(localStorage.getItem("map"));
+        hexMap.jsonMap = json.map;
         if (!hexMap.jsonMap) {
           hexMap.jsonMap = hexMap.generateDefaultMap();
         } else if (
