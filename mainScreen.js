@@ -38,6 +38,7 @@ class Main extends Phaser.Scene {
     this.load.image("tankred", "assets/tanks/tankred.png");
     this.load.image("tankyellow", "assets/tanks/tankyellow.png");
     this.load.image("background", "assets/tanks/background.jpg");
+    this.load.image("destroyedTank", "tank.png");
     this.map = new HexMap(this, 60, 40, 35, "MapConfiguration.json");
 
     //Animations
@@ -95,8 +96,8 @@ class Main extends Phaser.Scene {
         }
 
         if (damageTaker.health <= 0) {
-          console.log("tank died");
-          damageTaker.destroy();
+          damageTaker.texture = "tankyellow";
+          console.log(damageTaker.username + " tank died");
         }
       }
     }
@@ -127,7 +128,8 @@ class Main extends Phaser.Scene {
         scene.map,
         4,
         4,
-        45
+        45,
+        "black"
       );
       //scene.tankblack.setAddons();
       scene.tankblue = new Tank(
@@ -136,7 +138,8 @@ class Main extends Phaser.Scene {
         scene.map,
         2,
         2,
-        45
+        45,
+        "blue"
       );
       scene.tankyeet = new Tank(
         scene.selectTankColor(),
@@ -144,7 +147,8 @@ class Main extends Phaser.Scene {
         scene.map,
         3,
         3,
-        45
+        45,
+        "yeet"
       );
       scene.mqtt = new Mqtt(scene);
       //scoreboard
