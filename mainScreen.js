@@ -2,7 +2,7 @@ count = [0, 0, 0, 0, 0, 0, 0, 0];
 spawnTilesOccupiedX = [0, 0, 0, 0, 0, 0, 0, 0];
 spawnTilesOccupiedY = [0, 0, 0, 0, 0, 0, 0, 0];
 var spawnTiles = [];
-test = [0];
+tankValues = 0;
 var colors = [
   "tankblack",
   "tankblue",
@@ -155,62 +155,9 @@ class Main extends Phaser.Scene {
         45,
         "blue"
       );
-      scene.tankyeet = new Tank(
-        scene.selectTankColor(),
-        scene,
-        scene.map,
-        this.spawnTileX(),
-        this.spawnTileY(),
-        45,
-        "yeet"
-      );
-      scene.tankyeeet = new Tank(
-        scene.selectTankColor(),
-        scene,
-        scene.map,
-        this.spawnTileX(),
-        this.spawnTileY(),
-        45,
-        "yeet"
-      );
-      scene.tankyeeeet = new Tank(
-        scene.selectTankColor(),
-        scene,
-        scene.map,
-        this.spawnTileX(),
-        this.spawnTileY(),
-        45,
-        "yeet"
-      );
-      scene.tankyeeeeet = new Tank(
-        scene.selectTankColor(),
-        scene,
-        scene.map,
-        this.spawnTileX(),
-        this.spawnTileY(),
-        45,
-        "yeet"
-      );
-      scene.tankyeeeeeet = new Tank(
-        scene.selectTankColor(),
-        scene,
-        scene.map,
-        this.spawnTileX(),
-        this.spawnTileY(),
-        45,
-        "yeet"
-      );
-      scene.tankyeeeeeeet = new Tank(
-        scene.selectTankColor(),
-        scene,
-        scene.map,
-        this.spawnTileX(),
-        this.spawnTileY(),
-        45,
-        "yeet"
-      );
-      allTanks = [scene.tankblack, scene.tankblue, scene.tankyeet];
-      //console.log(allTanks);
+
+      allTanks = [scene.tankblack, scene.tankblue];
+      console.log(scene);
       scene.mqtt = new Mqtt(scene);
       //scoreboard
 
@@ -276,7 +223,7 @@ class Main extends Phaser.Scene {
   setupKeyBinds() {
     let receivedMessage = {
       Player: {
-        username: "",
+        username: "yeet",
         movement: "forward",
         dev_id: "",
         action: 0,
@@ -284,7 +231,7 @@ class Main extends Phaser.Scene {
       },
       Controller: { addons: ["gatling gun", null, null], dev_id: "" }
     };
-    var dataInput = receivedMessage;
+    this.dataInput = receivedMessage;
     this.key_Z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
     this.key_Q = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
     this.key_S = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -318,8 +265,21 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_R",
-      function(event) {
-        this.tankblue.printHealth();
+      function (event) {
+        let tankName = this.dataInput.Player.username + tankValues;
+        this.tankName = new Tank(
+          this.selectTankColor(),
+          this,
+          this.map,
+          this.spawnTileX(),
+          this.spawnTileY(),
+          45,
+          tankName
+        );
+        tankValues++;
+        console.log(allTanks)
+
+        allTanks.push(this.tankName);
       },
       this
     );
