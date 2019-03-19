@@ -15,7 +15,7 @@ var allTanks = [null];
 //Timer
 var text;
 var timedEvent;
-var timeRemaning;
+var timeRemaing;
 class Main extends Phaser.Scene {
     constructor() {
         super({ key: "main" });
@@ -30,7 +30,6 @@ class Main extends Phaser.Scene {
             }
         }
     }
-<<<<<<< HEAD
     preload() {
         //tanks
         this.load.image("tankblack", "assets/tanks/tankblack.png");
@@ -44,22 +43,6 @@ class Main extends Phaser.Scene {
         this.load.image("background", "assets/tanks/background.jpg");
         this.load.image("destroyedTank", "tank.png");
         this.map = new HexMap(this, 60, 40, 35, "MapConfiguration.json");
-=======
-  }
-  preload() {
-    //tanks
-    this.load.image("tankblack", "assets/tanks/tankblack.png");
-    this.load.image("tankblue", "assets/tanks/tankblue.png");
-    this.load.image("tankcyan", "assets/tanks/tankcyan.png");
-    this.load.image("tankgreen", "assets/tanks/tankgreen.png");
-    this.load.image("tankgrey", "assets/tanks/tankgrey.png");
-    this.load.image("tankpurple", "assets/tanks/tankpurple.png");
-    this.load.image("tankred", "assets/tanks/tankred.png");
-    this.load.image("tankyellow", "assets/tanks/tankyellow.png");
-    this.load.image("background", "assets/tanks/background.jpg");
-    this.load.image("destroyedTank", "assets/tanks/destroyedTank.png");
-    this.map = new HexMap(this, 60, 40, 35, "MapConfiguration.json");
->>>>>>> ba7c84cbca93446d422e7d37ab4c5e18618f490f
 
         //Animations
         this.load.spritesheet("explosion", "assets/animations/explosion.png", {
@@ -191,15 +174,6 @@ class Main extends Phaser.Scene {
                 damageTaker.texture = null;
             }
         }
-<<<<<<< HEAD
-=======
-      }
-      if (damageTaker.health <= 0) {
-        console.log(damageTaker.username + " tank died");
-        damageTaker.sprite.setTexture("destroyedTank");
-        //damageTaker = null;
-      }
->>>>>>> ba7c84cbca93446d422e7d37ab4c5e18618f490f
     }
     init() {
         var canvas = this.sys.game.canvas;
@@ -221,7 +195,6 @@ class Main extends Phaser.Scene {
             scene.map.generateMap();
             //this.setupFullScreen(this.background);
 
-<<<<<<< HEAD
             scene.tankblack = new Tank(
                 scene.selectTankColor(),
                 scene,
@@ -276,48 +249,6 @@ class Main extends Phaser.Scene {
             text = this.add.text(600, 32, "", { font: "24px Arial", fill: "#000000" }).setOrigin(0.5, 0.5);
             timedEvent = this.time.delayedCall(15000, scene.onEvent, [], this);
         });
-=======
-      scene.tankblack = new Tank(
-        scene.selectTankColor(),
-        scene,
-        scene.map,
-        4,
-        4,
-        45,
-        "black"
-      );
-      //scene.tankblack.setAddons();
-      scene.tankblue = new Tank(
-        scene.selectTankColor(),
-        scene,
-        scene.map,
-        2,
-        2,
-        45,
-        "blue"
-      );
-      scene.tankyeet = new Tank(
-        scene.selectTankColor(),
-        scene,
-        scene.map,
-        3,
-        3,
-        45,
-        "yeet"
-      );
-      allTanks = [scene.tankblack, scene.tankblue, scene.tankyeet];
-      //console.log(allTanks);
-      scene.mqtt = new Mqtt(scene);
-      //scoreboard
-
-      //Timer
-      //console.log(this);
-      text = this.add
-        .text(600, 32, "", { font: "16px Arial", fill: "#000000" })
-        .setOrigin(0.5, 0.5);
-      timedEvent = this.time.delayedCall(3000, scene.onEvent, [], this);
-    });
->>>>>>> ba7c84cbca93446d422e7d37ab4c5e18618f490f
 
         //explosion
         var explosion = {
@@ -336,8 +267,8 @@ class Main extends Phaser.Scene {
             this.scene.start("Editor");
         }
         //Timer update
-        timeRemaning = 15 - timedEvent.getElapsedSeconds().toString().substr(0, 2);
-        text.setText("Round ends in " + timeRemaning);
+        timeRemaing = 15 - timedEvent.getElapsedSeconds().toString().substr(0, 2);
+        text.setText("Round ends in " + timeRemaing);
     }
 
     onEvent() {
