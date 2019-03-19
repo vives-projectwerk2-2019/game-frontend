@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 class HexMover {
-  constructor(texture, scene, map, x, y, size, username, addons, dev_id) {
+  constructor(texture, scene, map, x, y, size, username, dev_id) {
     this.map = map;
     this.currentTile = this.map.getTile({ x: x, y: y });
     this.sprite = scene.add
@@ -17,7 +17,7 @@ class HexMover {
       weaponDamage: [4],
       weaponRange: [20]
     };
-    this.addons = addons;
+    this.addons = [null, null, null];
     this.addonUses = [0, 0, 0];
     this.health = 20;
     this.canEnterWater = false;
