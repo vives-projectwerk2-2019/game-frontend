@@ -367,33 +367,40 @@ class Main extends Phaser.Scene {
       },
       this
     );
-
     // controls tankblue
     this.input.keyboard.on(
       "keyup_O",
       function(event) {
-        this.tankblue.forward();
+        if (this.tankblue.isAlive) {
+          this.tankblue.forward();
+        }
       },
       this
     );
     this.input.keyboard.on(
       "keyup_L",
       function(event) {
-        this.tankblue.backward();
+        if (this.tankblue.isAlive) {
+          this.tankblue.backward();
+        }
       },
       this
     );
     this.input.keyboard.on(
       "keyup_K",
       function(event) {
-        this.tankblue.turnLeft();
+        if (this.tankblue.isAlive) {
+          this.tankblue.turnLeft();
+        }
       },
       this
     );
     this.input.keyboard.on(
       "keyup_M",
       function(event) {
-        this.tankblue.turnRight();
+        if (this.tankblue.isAlive) {
+          this.tankblue.turnRight();
+        }
       },
       this
     );
@@ -552,14 +559,17 @@ class Main extends Phaser.Scene {
       if (damageTaker.health <= 0) {
         console.log(damageTaker.username + " tank died");
 
-        this.add
-          .sprite(
-            damageTaker.currentTile.position.x,
-            damageTaker.currentTile.position.y,
-            "explosion"
-          )
-          .play("explode");
+        if (damageTaker.isAlive) {
+          this.add
+            .sprite(
+              damageTaker.currentTile.position.x,
+              damageTaker.currentTile.position.y,
+              "explosion"
+            )
+            .play("explode");
+        }
         damageTaker.sprite.setTexture("destroyedTank");
+        damageTaker.isAlive = false;
         damageTaker = null;
       }
     }

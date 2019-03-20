@@ -23,6 +23,7 @@ class HexMover {
     this.canEnterWater = false;
     this.tankMovementRange = 1;
     this.id = dev_id;
+    this.isAlive = true;
   }
 
   //movement
