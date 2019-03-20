@@ -85,32 +85,38 @@ class Tank extends HexMover {
       case "Flammenwerpfer":
         if (this.addonUses[i] < 1) {
           this.addWeapon("Flammenwerpfer", 8, 3);
+          return name;
         }
         break;
       case "laser":
-        //console.log("yeet");
+        console.log(this);
         if (this.addonUses[i] < 1) {
           this.addWeapon("laser", 20, 99);
+          return name;
         }
         break;
       case "mines":
         if (this.addonUses[i] < 1) {
           this.addWeapon("mines", 10, 0);
+          return name;
         }
         break;
       case "plasmaGun":
         if (this.addonUses[i] < 1) {
           this.addWeapon("plasmaGun", 6, 90);
+          return name;
         }
         break;
       case "empBomb":
         if (this.addonUses[i] < 1) {
           this.addWeapon("empBomb", 0, 0);
+          return name;
         }
         break;
       case "ram":
         if (this.addonUses[i] < 1) {
           this.addWeapon("ram", 3, 0);
+          return name;
         }
         break;
       default:

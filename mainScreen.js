@@ -306,11 +306,7 @@ class Main extends Phaser.Scene {
       "keyup_Y",
       function(event) {
         i = 1;
-        this.addonList = this.tankblack.addons;
-        console.log(this.addonList);
-
-        this.tankblack.useAddon(this.addonList[i], i);
-        this.tankblack.addonUses[i]++;
+        this.addon(i);
       },
       this
     );
@@ -318,11 +314,7 @@ class Main extends Phaser.Scene {
       "keyup_U",
       function(event) {
         i = 2;
-        this.addonList = this.tankblack.addons;
-        console.log(this.addonList[i]);
-
-        this.tankblack.useAddon(this.addonList[i], i);
-        this.tankblack.addonUses[i]++;
+        this.addon(i);
       },
       this
     );
@@ -330,11 +322,7 @@ class Main extends Phaser.Scene {
       "keyup_I",
       function(event) {
         i = 3;
-        this.addonList = this.tankblack.addons;
-        console.log(this.addonList[i]);
-
-        this.tankblack.useAddon(this.addonList[i], i);
-        this.tankblack.addonUses[i]++;
+        this.addon(i);
       },
       this
     );
@@ -405,6 +393,18 @@ class Main extends Phaser.Scene {
       this
     );
   }
+
+  addon(i) {
+    this.i = i;
+    this.addonList = this.tankblack.addons;
+    var firedWeapon = "";
+    firedWeapon = this.tankblack.useAddon(this.addonList[i], i);
+    //console.log(firedWeapon);
+    if (firedWeapon != null) {
+      this.dealDamage(this.tankblack, firedWeapon, allTanks);
+    }
+    this.tankblack.addonUses[i]++;
+  }
   moveTank(receivedMessage) {
     var dataInput = receivedMessage;
 
@@ -413,7 +413,6 @@ class Main extends Phaser.Scene {
       case "left":
         //console.log("move left");
         this.tankblack.turnLeft();
-
         break;
       case "right":
         //console.log("move right");
