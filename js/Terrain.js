@@ -11,20 +11,17 @@ var tankTileEnum  = {
 	GRASS: 1,
 	MOUNTAIN: 2,
 	SWAMP: 3,
-	OTHER_TANK: 4,
+	SPAWN_POINT: 4,
+	OTHER_TANK: 5,
 };
 
 class TankTerrain {
-	//takes in the coords of the next tile and returns the type
+	//looks for the tile type of the next tile based on coords
 	getNextTileType(newCubeLocation)
 	{
-		//tank will be blocked if next type is mountain
-		let nextTile = tankTileEnum.MOUNTAIN;
-		//let nextTile = tankTileEnum.GRASS
-		//let nextTile = tankTileEnum.WATER
-		//let nextTile = tankTileEnum.SWAMP
-
-		//tank will move to next tile if next tile is grass
+		let nextTile = tankTileEnum.GRASS;
+            	let map = JSON.parse( localStorage.getItem("map") );
+		nextTile = map[newCubeLocation.x][newCubeLocation.z];
 
 		return nextTile;
 	}
@@ -40,4 +37,5 @@ class TankTerrain {
 
 		return tankState;
 	}
+	
 };
