@@ -18,7 +18,7 @@ class HexMover {
       weaponRange: [20]
     };
     this.addons = ["gatling gun"];
-    this.addonUses = [0, 0, 0,0];
+    this.addonUses = [0, 0, 0, 0];
     this.health = 20;
     this.canEnterWater = false;
     this.tankMovementRange = 1;

@@ -21,9 +21,9 @@ class Main extends Phaser.Scene {
     super({ key: "main" });
   }
   CreateTank(receivedMessage) {
-    this.dataInput = receivedMessage; 
+    this.dataInput = receivedMessage;
 
-    if (!(this.dataInput.Player.joined)) {
+    if (!this.dataInput.Player.joined) {
       let tankName = this.dataInput.Player.username + tankValues;
       this.tankName = new Tank(
         this.selectTankColor(),
@@ -297,14 +297,14 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_T",
-      function (event) {
+      function(event) {
         this.tankblack.setAddons(this.dataInput);
       },
       this
     );
     this.input.keyboard.on(
       "keyup_Y",
-      function (event) {
+      function(event) {
         i = 1;
         this.addonList = this.tankblack.addons;
         console.log(this.addonList);
@@ -316,7 +316,7 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_U",
-      function (event) {
+      function(event) {
         i = 2;
         this.addonList = this.tankblack.addons;
         console.log(this.addonList[i]);
@@ -328,7 +328,7 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_I",
-      function (event) {
+      function(event) {
         i = 3;
         this.addonList = this.tankblack.addons;
         console.log(this.addonList[i]);
@@ -435,19 +435,19 @@ class Main extends Phaser.Scene {
       case "B":
         i = 1;
         this.addonList = this.dataInput.Controller.addons;
-        this.tankblack.useAddon(this.addonList[i],  i);
+        this.tankblack.useAddon(this.addonList[i], i);
         this.tankblack.addonUses[i]++;
         break;
       case "X":
         i = 2;
         this.addonList = this.dataInput.Controller.addons;
-        this.tankblack.useAddon(this.addonList[i],  i);
+        this.tankblack.useAddon(this.addonList[i], i);
         this.tankblack.addonUses[i]++;
         break;
       case "Y":
         i = 3;
         this.addonList = this.dataInput.Controller.addons;
-        this.tankblack.useAddon(this.addonList[i],  i);
+        this.tankblack.useAddon(this.addonList[i], i);
         this.tankblack.addonUses[i]++;
         break;
       default:
@@ -471,7 +471,6 @@ class Main extends Phaser.Scene {
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
-
           break;
         case 2:
           if (

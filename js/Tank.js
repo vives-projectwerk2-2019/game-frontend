@@ -42,7 +42,7 @@ class Tank extends HexMover {
 
     switch (name) {
       case "rocketEngine":
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addTankMovement(3);
         }
         break;
@@ -50,25 +50,25 @@ class Tank extends HexMover {
         this.canEnterWater = true;
         break;
       case "harrier":
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addTankMovement(6);
         }
         break;
       case "adamantium":
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addTankArmor(6);
           this.addTankMovement(-1);
         }
         break;
       case "gravyShield":
-        if ( this.addonUses[i] < 2) {
+        if (this.addonUses[i] < 2) {
           this.addTankArmor(1); // moet per turn
         }
         break;
       case "nanobots":
         //console.log(i);
         //console.log(this.addonUses);
-        if ( this.addonUses[i] < 3) {
+        if (this.addonUses[i] < 3) {
           this.addTankHealth(2);
         }
         console.log("hp = " + this.health);
@@ -77,39 +77,39 @@ class Tank extends HexMover {
       case "structuralStrengthening":
         //console.log("ree");
 
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addTankHealth(5);
         }
         console.log("hp = " + this.health);
         break;
       case "Flammenwerpfer":
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addWeapon("Flammenwerpfer", 8, 3);
         }
         break;
       case "laser":
         //console.log("yeet");
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addWeapon("laser", 20, 99);
         }
         break;
       case "mines":
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addWeapon("mines", 10, 0);
         }
         break;
       case "plasmaGun":
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addWeapon("plasmaGun", 6, 90);
         }
         break;
       case "empBomb":
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addWeapon("empBomb", 0, 0);
         }
         break;
       case "ram":
-        if ( this.addonUses[i] < 1) {
+        if (this.addonUses[i] < 1) {
           this.addWeapon("ram", 3, 0);
         }
         break;
