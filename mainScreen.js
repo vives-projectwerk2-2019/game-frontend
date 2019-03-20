@@ -306,7 +306,9 @@ class Main extends Phaser.Scene {
       "keyup_Y",
       function (event) {
         i = 1;
-        this.addonList = this.dataInput.Controller.addons;
+        this.addonList = this.tankblack.addons;
+        console.log(this.addonList);
+
         this.tankblack.useAddon(this.addonList[i], i);
         this.tankblack.addonUses[i]++;
       },
@@ -316,7 +318,9 @@ class Main extends Phaser.Scene {
       "keyup_U",
       function (event) {
         i = 2;
-        this.addonList = this.dataInput.Controller.addons;
+        this.addonList = this.tankblack.addons;
+        console.log(this.addonList[i]);
+
         this.tankblack.useAddon(this.addonList[i], i);
         this.tankblack.addonUses[i]++;
       },
@@ -326,7 +330,9 @@ class Main extends Phaser.Scene {
       "keyup_I",
       function (event) {
         i = 3;
-        this.addonList = this.dataInput.Controller.addons;
+        this.addonList = this.tankblack.addons;
+        console.log(this.addonList[i]);
+
         this.tankblack.useAddon(this.addonList[i], i);
         this.tankblack.addonUses[i]++;
       },
