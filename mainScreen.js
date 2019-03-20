@@ -20,6 +20,25 @@ class Main extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
   }
+  CreateTank(receivedMessage) {
+    this.dataInput = receivedMessage; 
+
+    if (!(this.dataInput.Player.joined)) {
+      let tankName = this.dataInput.Player.username + tankValues;
+      this.tankName = new Tank(
+        this.selectTankColor(),
+        this,
+        this.map,
+        this.spawnTileX(),
+        this.spawnTileY(),
+        45,
+        tankName
+      );
+      tankValues++;
+      allTanks.push(this.tankName);
+      console.log(allTanks);
+    }
+  }
 
   selectTankColor() {
     for (let i = 0; i < 8; i++) {
@@ -32,7 +51,6 @@ class Main extends Phaser.Scene {
   }
 
   setSpawnTiles() {
-    
     for (let x = 0; x < this.map.jsonMap.length; x++) {
       const element = this.map.jsonMap[x];
       for (let y = 0; y < element.length; y++) {
@@ -115,7 +133,7 @@ class Main extends Phaser.Scene {
       { frameWidth: 32, frameHeight: 32, endFrame: 4 }
     );
   }
-  
+
   init() {
     var canvas = this.sys.game.canvas;
     // var fullscreen = this.sys.game.device.fullscreen;
@@ -229,7 +247,10 @@ class Main extends Phaser.Scene {
         action: 0,
         joined: true
       },
-      Controller: { addons: ["gatling gun", null, null], dev_id: "" }
+      Controller: {
+        addons: ["laser", "nanobots", "structuralStrengthening"],
+        dev_id: ""
+      }
     };
     this.dataInput = receivedMessage;
     this.key_Z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
@@ -251,21 +272,12 @@ class Main extends Phaser.Scene {
       "keyup_E",
       function(event) {
         this.dealDamage(this.tankblack, "gatling gun", allTanks);
-        this.hitpointsText = this.add.text(
-          10,
-          146,
-          "Hitpoints: " + this.tankblue.health,
-          {
-            font: "16px Arial",
-            fill: "#000000"
-          }
-        );
       },
       this
     );
     this.input.keyboard.on(
       "keyup_R",
-      function (event) {
+      function(event) {
         let tankName = this.dataInput.Player.username + tankValues;
         this.tankName = new Tank(
           this.selectTankColor(),
@@ -277,16 +289,46 @@ class Main extends Phaser.Scene {
           tankName
         );
         tankValues++;
-        console.log(allTanks)
 
         allTanks.push(this.tankName);
+        //console.log(allTanks);
       },
       this
     );
     this.input.keyboard.on(
       "keyup_T",
-      function(event) {
-        this.tankblue.setAddons(dataInput);
+      function (event) {
+        this.tankblack.setAddons(this.dataInput);
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_Y",
+      function (event) {
+        i = 1;
+        this.addonList = this.dataInput.Controller.addons;
+        this.tankblack.useAddon(this.addonList[i], i);
+        this.tankblack.addonUses[i]++;
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_U",
+      function (event) {
+        i = 2;
+        this.addonList = this.dataInput.Controller.addons;
+        this.tankblack.useAddon(this.addonList[i], i);
+        this.tankblack.addonUses[i]++;
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_I",
+      function (event) {
+        i = 3;
+        this.addonList = this.dataInput.Controller.addons;
+        this.tankblack.useAddon(this.addonList[i], i);
+        this.tankblack.addonUses[i]++;
       },
       this
     );
@@ -382,20 +424,25 @@ class Main extends Phaser.Scene {
 
     switch (dataInput.Player.action) {
       case "A":
-        //console.log("A");
-
+        this.dealDamage(this.tankblack, "gatling gun", allTanks);
         break;
       case "B":
-        //console.log("B");
-
+        i = 1;
+        this.addonList = this.dataInput.Controller.addons;
+        this.tankblack.useAddon(this.addonList[i],  i);
+        this.tankblack.addonUses[i]++;
         break;
       case "X":
-        //console.log("X");
-
+        i = 2;
+        this.addonList = this.dataInput.Controller.addons;
+        this.tankblack.useAddon(this.addonList[i],  i);
+        this.tankblack.addonUses[i]++;
         break;
       case "Y":
-        //console.log("Y");
-
+        i = 3;
+        this.addonList = this.dataInput.Controller.addons;
+        this.tankblack.useAddon(this.addonList[i],  i);
+        this.tankblack.addonUses[i]++;
         break;
       default:
         //console.log("no key pressed");
@@ -405,15 +452,16 @@ class Main extends Phaser.Scene {
   dealDamage(damageDealer, firedWeapon, allTanks) {
     this.firedWeapon = firedWeapon;
     this.allTanks = allTanks;
+
     for (let index = 0; index < allTanks.length; index++) {
       var damageTaker = allTanks[index];
       switch (damageDealer.currentRotation) {
         case 1:
           if (
             damageDealer.currentTile.cubePosition.y ==
-            damageTaker.currentTile.cubePosition.y &&
+              damageTaker.currentTile.cubePosition.y &&
             damageDealer.currentTile.cubePosition.x <
-            damageTaker.currentTile.cubePosition.x
+              damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -422,9 +470,9 @@ class Main extends Phaser.Scene {
         case 2:
           if (
             damageDealer.currentTile.cubePosition.z ==
-            damageTaker.currentTile.cubePosition.z &&
+              damageTaker.currentTile.cubePosition.z &&
             damageDealer.currentTile.cubePosition.x <
-            damageTaker.currentTile.cubePosition.x
+              damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -432,9 +480,9 @@ class Main extends Phaser.Scene {
         case 3:
           if (
             damageDealer.currentTile.cubePosition.x ==
-            damageTaker.currentTile.cubePosition.x &&
+              damageTaker.currentTile.cubePosition.x &&
             damageDealer.currentTile.cubePosition.y >
-            damageTaker.currentTile.cubePosition.y
+              damageTaker.currentTile.cubePosition.y
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -442,9 +490,9 @@ class Main extends Phaser.Scene {
         case 4:
           if (
             damageDealer.currentTile.cubePosition.y ==
-            damageTaker.currentTile.cubePosition.y &&
+              damageTaker.currentTile.cubePosition.y &&
             damageDealer.currentTile.cubePosition.x >
-            damageTaker.currentTile.cubePosition.x
+              damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -452,9 +500,9 @@ class Main extends Phaser.Scene {
         case 5:
           if (
             damageDealer.currentTile.cubePosition.z ==
-            damageTaker.currentTile.cubePosition.z &&
+              damageTaker.currentTile.cubePosition.z &&
             damageDealer.currentTile.cubePosition.x >
-            damageTaker.currentTile.cubePosition.x
+              damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -462,9 +510,9 @@ class Main extends Phaser.Scene {
         case 6:
           if (
             damageDealer.currentTile.cubePosition.x ==
-            damageTaker.currentTile.cubePosition.x &&
+              damageTaker.currentTile.cubePosition.x &&
             damageDealer.currentTile.cubePosition.y <
-            damageTaker.currentTile.cubePosition.y
+              damageTaker.currentTile.cubePosition.y
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -481,11 +529,15 @@ class Main extends Phaser.Scene {
   takeDamage(damageDealer, firedWeapon, damageTaker) {
     var weapon = firedWeapon;
     this.damageTaker = damageTaker;
+
     for (let i = 0; i < damageDealer.weapons.weaponName.length; i++) {
+      console.log(damageDealer.addonUses[0]);
       if (
         weapon == damageDealer.weapons.weaponName[i] &&
         damageDealer.addonUses[i] < 1
       ) {
+        console.log("yeeet");
+
         damageTaker.health =
           damageTaker.health - damageDealer.weapons.weaponDamage[i];
         if (damageDealer.weapons.weaponName[i] != "gatling gun") {

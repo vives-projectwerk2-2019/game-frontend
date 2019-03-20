@@ -1,4 +1,6 @@
 let i = 0;
+addonUses = [0, 0, 0];
+
 class Tank extends HexMover {
   constructor(texture, scene, map, x, y, size, username, addons, dev_id) {
     super(texture, scene, map, x, y, size, username, addons, dev_id);
@@ -9,101 +11,106 @@ class Tank extends HexMover {
 
   setAddons(dataInput) {
     this.dataInput = dataInput;
-    for (i = 0; i < this.addons.length; i++) {
+    for (i = 0; i < 3; i++) {
       if (dataInput.Controller.addons[i] !== null) {
-        this.addons[i] = dataInput.Controller.addons[i];
+        console.log(dataInput.Controller.addons[i]);
+
+        this.addons.push(dataInput.Controller.addons[i]);
       }
     }
     console.log(this.addons);
   }
 
   addTankHealth(toAddHealth) {
-    this.tank.health = this.tank.health + toAddHealth;
+    this.health = this.health + toAddHealth;
   }
   addTankMovement(toAddMovement) {
-    this.tank.tankMovementRange = toAddMovement;
+    this.tankMovementRange = toAddMovement;
   }
   addTankArmor(toAddArmor) {
-    this.tank.armor = this.tank.armor + toAddArmor;
+    this.armor = this.armor + toAddArmor;
   }
 
   addWeapon(name, damage, range) {
-    this.tank.weapons.weaponName.push(name);
-    this.tank.weapons.weaponDamage.push(damage);
-    this.tank.weapons.weaponRange.push(range);
+    this.weapons.weaponName.push(name);
+    this.weapons.weaponDamage.push(damage);
+    this.weapons.weaponRange.push(range);
   }
 
-  useAddon(name, use, i) {
+  useAddon(name, i) {
     this.name = name;
-    this.use = use;
 
     switch (name) {
       case "rocketEngine":
-        if (use && tank.addonUses[i] < 1) {
-          addTankMovement(3);
+        if ( this.addonUses[i] < 1) {
+          this.addTankMovement(3);
         }
         break;
       case "amphibious":
-        tank.canEnterWater = true;
+        this.canEnterWater = true;
         break;
       case "harrier":
-        if (use && tank.addonUses[i] < 1) {
-          addTankMovement(6);
+        if ( this.addonUses[i] < 1) {
+          this.addTankMovement(6);
         }
         break;
       case "adamantium":
-        if (use && tank.addonUses[i] < 1) {
-          addTankArmor(6);
-          addTankMovement(-1);
+        if ( this.addonUses[i] < 1) {
+          this.addTankArmor(6);
+          this.addTankMovement(-1);
         }
         break;
       case "gravyShield":
-        if (use && tank.addonUses[i] < 2) {
-          addTankArmor(1); // moet per turn
+        if ( this.addonUses[i] < 2) {
+          this.addTankArmor(1); // moet per turn
         }
         break;
       case "nanobots":
-        if (use && tank.addonUses[i] < 3) {
-          addTankHealth(2);
+        //console.log(i);
+        //console.log(this.addonUses);
+        if ( this.addonUses[i] < 3) {
+          this.addTankHealth(2);
         }
-        console.log("hp = " + tank.health);
+        console.log("hp = " + this.health);
 
         break;
       case "structuralStrengthening":
-        if (use && tank.addonUses[i] < 1) {
-          addTankHealth(5);
-        }
-        console.log("hp = " + tank.health);
+        //console.log("ree");
 
+        if ( this.addonUses[i] < 1) {
+          this.addTankHealth(5);
+        }
+        console.log("hp = " + this.health);
         break;
       case "Flammenwerpfer":
-        if (use && tank.addonUses[i] < 1) {
-          addWeapon("Flammenwerpfer", 8, 3);
+        if ( this.addonUses[i] < 1) {
+          this.addWeapon("Flammenwerpfer", 8, 3);
         }
         break;
       case "laser":
-        if (use && tank.addonUses[i] < 1) {
-          addWeapon("laser", 3, 99);
+        //console.log("yeet");
+        if ( this.addonUses[i] < 1) {
+          this.addWeapon("laser", 20, 99);
         }
         break;
       case "mines":
-        if (use && tank.addonUses[i] < 1) {
-          addWeapon("mines", 10, 0);
+        if ( this.addonUses[i] < 1) {
+          this.addWeapon("mines", 10, 0);
         }
         break;
       case "plasmaGun":
-        if (use && tank.addonUses[i] < 1) {
-          addWeapon("plasmaGun", 6, 90);
+        if ( this.addonUses[i] < 1) {
+          this.addWeapon("plasmaGun", 6, 90);
         }
         break;
       case "empBomb":
-        if (use && tank.addonUses[i] < 1) {
-          addWeapon("empBomb", 0, 0);
+        if ( this.addonUses[i] < 1) {
+          this.addWeapon("empBomb", 0, 0);
         }
         break;
       case "ram":
-        if (use && tank.addonUses[i] < 1) {
-          addWeapon("ram", 3, 0);
+        if ( this.addonUses[i] < 1) {
+          this.addWeapon("ram", 3, 0);
         }
         break;
       default:
