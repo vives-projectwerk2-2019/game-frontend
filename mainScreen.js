@@ -189,7 +189,7 @@ class Main extends Phaser.Scene {
       //Timer
       console.log(this);
       text = this.add.text(100, 37, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" }).setOrigin(0.5, 0.5);
-      finalCountDown = this.add.text(600, 350, "", { fontSize: 72, font: "Arial", fill: "#D10000" }).setOrigin(0.5, 0.5);
+      finalCountDown = this.add.text(600, 350, "", { fontSize: 120, font: "Arial", fill: "#C90707" }).setOrigin(0.5, 0.5);
       timedEvent = this.time.delayedCall(15000, scene.onEvent, [], this);
 
       text.setStroke('#000000', 8)
@@ -199,7 +199,7 @@ class Main extends Phaser.Scene {
       rect = new Phaser.Geom.Rectangle(200, 37, 500, 20);
       graphics = this.add.graphics();
       graphics.fillRectShape(rect);
-      graphics.fillStyle(0x000000)
+      graphics.fillStyle(0x000000);
     });
 
     //explosion
@@ -224,14 +224,18 @@ class Main extends Phaser.Scene {
     if (timeRemaining <= 5) {
       finalCountDown.setText(timeRemaining)
       if (timeRemaining == 0) {
-        finalCountDown.setText(" ")
+        finalCountDown.setText(" ");
+        graphics.lineStyle(0, 0, 0);
       }
     }
 
     //Progress bar for timer
-    graphics.clear()
-    graphics.fillStyle(0xFFFFFF, 0.7)
-    graphics.fillRect(175, 29, (window.innerWidth / 25) * timeRemaining, 18);
+    graphics.clear();
+    graphics.fillStyle(0xFFFFFF, 0.7);
+    // graphics.strokeRectShape(rect);
+    graphics.fillRect(175, 29, (window.innerWidth / 18) * timeRemaining, 18);
+    graphics.lineStyle(2, 0x000000, 1);
+    graphics.strokeRect(175, 29, (window.innerWidth / 18) * timeRemaining, 18);
   }
   //Empty onEvent for Length
   onEvent() {
@@ -281,6 +285,14 @@ class Main extends Phaser.Scene {
     this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
 
+    //activation key explosion
+    this.input.keyboard.on(
+      "keyup_P",
+      function (event) {
+        this.add.sprite(300, 300, "explosion").play("explode");
+      },
+      this
+    );
     //test damage tanks
     this.input.keyboard.on(
       "keyup_E",
@@ -605,15 +617,5 @@ class Main extends Phaser.Scene {
         damageTaker = null;
       }
     }
-  }
-  setTankPosition(receivedMessage) {
-    var dataInput = receivedMessage;
-    // this.tankblack.x = dataInput.players[0].tank.position.x;
-    // this.tankblack.y = dataInput.players[0].tank.position.y;
-    this.tankblack.setPosition(
-      dataInput.players[0].tank.position.x,
-      dataInput.players[0].tank.position.y,
-      dataInput.players[0].tank.rotation
-    );
   }
 }
