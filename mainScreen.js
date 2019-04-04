@@ -489,7 +489,11 @@ class Main extends Phaser.Scene {
             damageDealer.currentTile.cubePosition.y ==
             damageTaker.currentTile.cubePosition.y &&
             damageDealer.currentTile.cubePosition.x <
-            damageTaker.currentTile.cubePosition.x
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.x + 
+            damageDealer.weapons.weaponRange[0] + 1 >
+            damageTaker.currentTile.cubePosition.x 
+            
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -499,6 +503,9 @@ class Main extends Phaser.Scene {
             damageDealer.currentTile.cubePosition.z ==
             damageTaker.currentTile.cubePosition.z &&
             damageDealer.currentTile.cubePosition.x <
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.x + 
+            damageDealer.weapons.weaponRange[0] + 1 >
             damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
@@ -509,6 +516,9 @@ class Main extends Phaser.Scene {
             damageDealer.currentTile.cubePosition.x ==
             damageTaker.currentTile.cubePosition.x &&
             damageDealer.currentTile.cubePosition.y >
+            damageTaker.currentTile.cubePosition.y &&
+            damageDealer.currentTile.cubePosition.y + 
+            damageDealer.weapons.weaponRange[0] + 1 <
             damageTaker.currentTile.cubePosition.y
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
@@ -519,6 +529,9 @@ class Main extends Phaser.Scene {
             damageDealer.currentTile.cubePosition.y ==
             damageTaker.currentTile.cubePosition.y &&
             damageDealer.currentTile.cubePosition.x >
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.x + 
+            damageDealer.weapons.weaponRange[0] + 1 <
             damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
@@ -529,6 +542,9 @@ class Main extends Phaser.Scene {
             damageDealer.currentTile.cubePosition.z ==
             damageTaker.currentTile.cubePosition.z &&
             damageDealer.currentTile.cubePosition.x >
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.x + 
+            damageDealer.weapons.weaponRange[0] + 1 <
             damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
@@ -539,6 +555,9 @@ class Main extends Phaser.Scene {
             damageDealer.currentTile.cubePosition.x ==
             damageTaker.currentTile.cubePosition.x &&
             damageDealer.currentTile.cubePosition.y <
+            damageTaker.currentTile.cubePosition.y &&
+            damageDealer.currentTile.cubePosition.y + 
+            damageDealer.weapons.weaponRange[0] + 1 >
             damageTaker.currentTile.cubePosition.y
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
