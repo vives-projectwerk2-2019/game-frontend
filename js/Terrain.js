@@ -17,11 +17,10 @@ var tankTileEnum  = {
 
 class TankTerrain {
 	//looks for the tile type of the next tile based on coords
-	getNextTileType(newCubeLocation)
+	getNextTileType(newCubeLocation, jsonMap)
 	{
 		let nextTile = tankTileEnum.GRASS;
-            	let map = JSON.parse( localStorage.getItem("map") );
-		nextTile = map[newCubeLocation.x][newCubeLocation.z];
+		nextTile = jsonMap[newCubeLocation.x][newCubeLocation.y];
 
 		return nextTile;
 	}

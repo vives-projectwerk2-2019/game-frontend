@@ -73,8 +73,13 @@ class HexMover {
         z: this.currentTile.cubePosition.z - 1
       };
     }
-    let newPosition = this.map.cubeToOddr(newCubeLocation);
-    this.setPosition(newPosition.x, newPosition.y);
+    let nextState = new TankTerrain;
+    var nextTile = nextState.getNextTileType(this.map.cubeToOddr(newCubeLocation), this.map.jsonMap);
+    var tankPath = nextState.setTankPathState(nextTile);
+    if(tankPath == tankPathEnum.UNBLOCKED) {
+	    let newPosition = this.map.cubeToOddr(newCubeLocation);
+	    this.setPosition(newPosition.x, newPosition.y);
+    }
   }
 
   backward() {
@@ -123,8 +128,14 @@ class HexMover {
         z: this.currentTile.cubePosition.z + 1
       };
     }
-    let newPosition = this.map.cubeToOddr(newCubeLocation);
-    this.setPosition(newPosition.x, newPosition.y);
+
+    let nextState = new TankTerrain;
+    var nextTile = nextState.getNextTileType(this.map.cubeToOddr(newCubeLocation), this.map.jsonMap);
+    var tankPath = nextState.setTankPathState(nextTile);
+    if(tankPath == tankPathEnum.UNBLOCKED) {
+	    let newPosition = this.map.cubeToOddr(newCubeLocation);
+	    this.setPosition(newPosition.x, newPosition.y);
+    }
   }
 
   turnLeft() {
