@@ -2,8 +2,19 @@ let i = 0;
 addonUses = [0, 0, 0];
 
 class Tank extends HexMover {
-  constructor(texture, scene, map, x, y, size, username, addons, dev_id) {
-    super(texture, scene, map, x, y, size, username, addons, dev_id);
+  constructor(
+    username,
+    texture,
+    x,
+    y,
+    addons,
+    rotation,
+    scene,
+    map,
+    size,
+    dev_id
+  ) {
+    super(username, texture, x, y, addons, rotation, scene, map, size, dev_id);
   }
   printHealth() {
     console.log(this.health);

@@ -1,14 +1,25 @@
 /*jshint esversion: 6 */
 
 class HexMover {
-  constructor(texture, scene, map, x, y, size, username, dev_id) {
+  constructor(
+    username,
+    texture,
+    x,
+    y,
+    addons,
+    rotation,
+    scene,
+    map,
+    size,
+    dev_id
+  ) {
     this.map = map;
     this.currentTile = this.map.getTile({ x: x, y: y });
     this.sprite = scene.add
       .sprite(this.currentTile.body.x, this.currentTile.body.y, texture)
       .setDisplaySize(size, size);
     this.currentPosition = this.updateCurrentPosition();
-    this.currentRotation = 1;
+    this.currentRotation = rotation;
     this.updateCurrentRotation();
     this.username = username;
     this.weapons = {

@@ -46,13 +46,25 @@ class Main extends Phaser.Scene {
   }
   createTankSprite(data) {
     let dataInput = data;
-    let username = dataInput.players.name;
-    let color = dataInput.players.tank.color;
-    let x = dataInput.players.tank.position.x;
-    let y = dataInput.players.tank.position.y;
-    let addons = dataInput.players.tank.addons;
-    let rotation = dataInput.players.tank.rotation;
-    username = new Tank(username, color, x, y, addons, rotation);
+    let username = dataInput.name;
+    let color = dataInput.tank.color;
+    let x = dataInput.tank.position.x;
+    let y = dataInput.tank.position.y;
+    let addons = dataInput.tank.addons;
+    let rotation = dataInput.tank.rotation;
+    console.log(dataInput);
+
+    username = new Tank(
+      username,
+      color,
+      x,
+      y,
+      addons,
+      rotation,
+      this,
+      this.map,
+      45
+    );
   }
 
   create() {
@@ -120,5 +132,13 @@ class Main extends Phaser.Scene {
   //Empty onEvent for Length
   onEvent() {
     console.log("Timer has ended");
+  }
+  setTankPosition(receivedMessage) {
+    var dataInput = receivedMessage;
+    this.receivedMessage.name.setPosition(
+      dataInput.tank.position.x,
+      dataInput.tank.position.y,
+      dataInput.tank.rotation
+    );
   }
 }

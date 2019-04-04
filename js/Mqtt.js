@@ -12,25 +12,33 @@ class Mqtt {
         console.log("onConnectionLost:" + responseObject.errorMessage);
       }
     };
-    //console.log(this);
+
     this.client.onMessageArrived = function(message) {
       let receivedMessage = JSON.parse(message.payloadString);
-
-      Object.keys(receivedMessage.players).forEach(player => {
-        if (!arrayPlayers[player]) {
-          arrayPlayers[player] = mqtt.scene.createTankSprite(receivedMessage);
-        }
-      });
-
       console.log(receivedMessage);
-      mqtt.scene.setTankPosition(receivedMessage);
+
+      for (let i = 0; i < receivedMessage.players.length; i++) {
+        let username = receivedMessage.players[i].name;
+        if (!arrayPlayers.includes(username)) {
+          mqtt.scene.createTankSprite(receivedMessage.players[i]);
+        } else {
+          console.log(receivedMessage.players[i]);
+          mqtt.scene.setTankPosition(receivedMessage.players[i]);
+        }
+      }
+
+      // Object.keys(receivedMessage.players).forEach(player => {
+      //   if (!arrayPlayers[player]) {
+      //     arrayPlayers[player] = mqtt.scene.createTankSprite(player);
+      //   }
+      // });
     };
     // connect the client
     this.client.connect({
       onSuccess: function() {
         // Once a connection has been made, make a subscription and send a message.
         console.log("onConnect");
-        mqtt.client.subscribe("game2/replicated");
+        mqtt.client.subscribe("game3/replicated");
         let message = new Paho.MQTT.Message("Hello");
         message.destinationName = "World";
         mqtt.client.send(message);
