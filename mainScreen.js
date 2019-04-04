@@ -66,12 +66,17 @@ class Main extends Phaser.Scene {
 
       //Timer
       console.log(this);
+<<<<<<< HEAD
       text = this.add
         .text(600, 32, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" })
         .setOrigin(0.5, 0.5);
       finalCountDown = this.add
         .text(600, 350, "", { fontSize: 72, font: "Arial", fill: "#D10000" })
         .setOrigin(0.5, 0.5);
+=======
+      text = this.add.text(100, 37, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" }).setOrigin(0.5, 0.5);
+      finalCountDown = this.add.text(600, 350, "", { fontSize: 120, font: "Arial", fill: "#C90707" }).setOrigin(0.5, 0.5);
+>>>>>>> 74e6d7569778d0f4c7f09bb226596e3706175c22
       timedEvent = this.time.delayedCall(15000, scene.onEvent, [], this);
 
       text.setStroke("#000000", 8);
@@ -82,6 +87,13 @@ class Main extends Phaser.Scene {
       graphics = this.add.graphics();
       graphics.fillRectShape(rect);
       graphics.fillStyle(0x000000);
+<<<<<<< HEAD
+=======
+      rectOutside = new Phaser.Geom.Rectangle(200, 37, 500, 20);
+      graphics = this.add.graphics();
+      graphics.fillRectShape(rectOutside);
+      graphics.fillStyle(0x000000);
+>>>>>>> 74e6d7569778d0f4c7f09bb226596e3706175c22
     });
 
     //explosion
@@ -98,6 +110,7 @@ class Main extends Phaser.Scene {
 
   update(delta) {
     //Timer update
+<<<<<<< HEAD
     timeRemaining =
       15 -
       timedEvent
@@ -107,6 +120,12 @@ class Main extends Phaser.Scene {
     text.setText("Round ends in " + timeRemaining);
     if (timeRemaining <= 5) {
       finalCountDown.setText(timeRemaining);
+=======
+    timeRemaining = 15000 - timedEvent.getElapsed().toString().substr(0, 5);
+    text.setText("Time left: ");
+    if (timeRemaining <= 5000) {
+      finalCountDown.setText(15 - timedEvent.getElapsedSeconds().toString().substr(0, 2))
+>>>>>>> 74e6d7569778d0f4c7f09bb226596e3706175c22
       if (timeRemaining == 0) {
         finalCountDown.setText(" ");
       }
@@ -114,11 +133,398 @@ class Main extends Phaser.Scene {
 
     //Progress bar for timer
     graphics.clear();
+<<<<<<< HEAD
     graphics.fillStyle(0xffffff, 0.7);
     graphics.fillRect(375, 40, 30 * timeRemaining, 18);
+=======
+    graphics.fillStyle(0x000000, 1);
+    graphics.fillRect(175, 29, (window.innerWidth / 18) * 15, 18);
+    graphics.fillStyle(0xFFFFFF, 1);
+    graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
+>>>>>>> 74e6d7569778d0f4c7f09bb226596e3706175c22
   }
   //Empty onEvent for Length
   onEvent() {
     console.log("Timer has ended");
   }
+<<<<<<< HEAD
+=======
+
+  setupFullScreen(object) {
+    var fullscreenFunc = null; //function for fullscreen
+
+    document.querySelector("#play").addEventListener("click", function () {
+      if (fullscreenFunc !== null) fullscreenFunc();
+    });
+
+    object.setInteractive();
+
+    object.on(
+      "pointerover",
+      function () {
+        var canvas = this.sys.game.canvas;
+        var fullscreen = this.sys.game.device.fullscreen;
+        fullscreenFunc = function () {
+          canvas[fullscreen.request]();
+        };
+      },
+      this
+    );
+  }
+
+  setupKeyBinds() {
+    let receivedMessage = {
+      Player: {
+        username: "yeet",
+        movement: "forward",
+        dev_id: "",
+        action: 0,
+        joined: true
+      },
+      Controller: {
+        addons: ["laser", "nanobots", "structuralStrengthening"],
+        dev_id: ""
+      }
+    };
+    this.dataInput = receivedMessage;
+    this.key_Z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+    this.key_Q = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+    this.key_S = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+
+    //activation key explosion
+    this.input.keyboard.on(
+      "keyup_P",
+      function (event) {
+        this.add.sprite(300, 300, "explosion").play("explode");
+      },
+      this
+    );
+    //test damage tanks
+    this.input.keyboard.on(
+      "keyup_E",
+      function (event) {
+        this.dealDamage(this.tankblack, "gatling gun", allTanks);
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_R",
+      function (event) {
+        let tankName = this.dataInput.Player.username + tankValues;
+        this.tankName = new Tank(
+          this.selectTankColor(),
+          this,
+          this.map,
+          this.spawnTileX(),
+          this.spawnTileY(),
+          45,
+          tankName
+        );
+        tankValues++;
+
+        allTanks.push(this.tankName);
+        //console.log(allTanks);
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_T",
+      function (event) {
+        this.tankblack.setAddons(this.dataInput);
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_Y",
+      function (event) {
+        i = 1;
+        this.addon(i);
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_U",
+      function (event) {
+        i = 2;
+        this.addon(i);
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_I",
+      function (event) {
+        i = 3;
+        this.addon(i);
+      },
+      this
+    );
+    //controls tankblue
+    this.input.keyboard.on(
+      "keyup_Z",
+      function (event) {
+        this.tankblack.forward();
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_S",
+      function (event) {
+        this.tankblack.backward();
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_Q",
+      function (event) {
+        this.tankblack.turnLeft();
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_D",
+      function (event) {
+        this.tankblack.turnRight();
+      },
+      this
+    );
+    // controls tankblue
+    this.input.keyboard.on(
+      "keyup_O",
+      function (event) {
+        if (this.tankblue.isAlive) {
+          this.tankblue.forward();
+        }
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_L",
+      function (event) {
+        if (this.tankblue.isAlive) {
+          this.tankblue.backward();
+        }
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_K",
+      function (event) {
+        if (this.tankblue.isAlive) {
+          this.tankblue.turnLeft();
+        }
+      },
+      this
+    );
+    this.input.keyboard.on(
+      "keyup_M",
+      function (event) {
+        if (this.tankblue.isAlive) {
+          this.tankblue.turnRight();
+        }
+      },
+      this
+    );
+  }
+
+  addon(i) {
+    this.i = i;
+    this.addonList = this.tankblack.addons;
+    var firedWeapon = "";
+    firedWeapon = this.tankblack.useAddon(this.addonList[i], i);
+    //console.log(firedWeapon);
+    if (firedWeapon != null) {
+      this.dealDamage(this.tankblack, firedWeapon, allTanks);
+    }
+    this.tankblack.addonUses[i]++;
+  }
+  moveTank(receivedMessage) {
+    var dataInput = receivedMessage;
+
+    //console.log(this);
+    switch (dataInput.Player.movement) {
+      case "left":
+        //console.log("move left");
+        this.tankblack.turnLeft();
+        break;
+      case "right":
+        //console.log("move right");
+        this.tankblack.turnRight();
+        break;
+      case "forward":
+        //console.log("move forward");
+        this.tankblack.forward();
+        break;
+      case "backward":
+        //console.log("move backward");
+        this.tankblack.backward();
+        break;
+      default:
+        //console.log("idle");
+        break;
+    }
+  }
+  tankAction(receivedMessage) {
+    var dataInput = receivedMessage;
+
+    switch (dataInput.Player.action) {
+      case "A":
+        this.dealDamage(this.tankblack, "gatling gun", allTanks);
+        break;
+      case "B":
+        i = 1;
+        this.addonList = this.dataInput.Controller.addons;
+        this.tankblack.useAddon(this.addonList[i], i);
+        this.tankblack.addonUses[i]++;
+        break;
+      case "X":
+        i = 2;
+        this.addonList = this.dataInput.Controller.addons;
+        this.tankblack.useAddon(this.addonList[i], i);
+        this.tankblack.addonUses[i]++;
+        break;
+      case "Y":
+        i = 3;
+        this.addonList = this.dataInput.Controller.addons;
+        this.tankblack.useAddon(this.addonList[i], i);
+        this.tankblack.addonUses[i]++;
+        break;
+      default:
+        //console.log("no key pressed");
+        break;
+    }
+  }
+  dealDamage(damageDealer, firedWeapon, allTanks) {
+    this.firedWeapon = firedWeapon;
+    this.allTanks = allTanks;
+
+    for (let index = 0; index < allTanks.length; index++) {
+      var damageTaker = allTanks[index];
+      switch (damageDealer.currentRotation) {
+        case 1:
+          if (
+            damageDealer.currentTile.cubePosition.y ==
+            damageTaker.currentTile.cubePosition.y &&
+            damageDealer.currentTile.cubePosition.x <
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.x +
+            damageDealer.weapons.weaponRange[0] + 1 >
+            damageTaker.currentTile.cubePosition.x
+
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+        case 2:
+          if (
+            damageDealer.currentTile.cubePosition.z ==
+            damageTaker.currentTile.cubePosition.z &&
+            damageDealer.currentTile.cubePosition.x <
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.x +
+            damageDealer.weapons.weaponRange[0] + 1 >
+            damageTaker.currentTile.cubePosition.x
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+        case 3:
+          if (
+            damageDealer.currentTile.cubePosition.x ==
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.y >
+            damageTaker.currentTile.cubePosition.y &&
+            damageDealer.currentTile.cubePosition.y +
+            damageDealer.weapons.weaponRange[0] + 1 <
+            damageTaker.currentTile.cubePosition.y
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+        case 4:
+          if (
+            damageDealer.currentTile.cubePosition.y ==
+            damageTaker.currentTile.cubePosition.y &&
+            damageDealer.currentTile.cubePosition.x >
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.x +
+            damageDealer.weapons.weaponRange[0] + 1 <
+            damageTaker.currentTile.cubePosition.x
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+        case 5:
+          if (
+            damageDealer.currentTile.cubePosition.z ==
+            damageTaker.currentTile.cubePosition.z &&
+            damageDealer.currentTile.cubePosition.x >
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.x +
+            damageDealer.weapons.weaponRange[0] + 1 <
+            damageTaker.currentTile.cubePosition.x
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+        case 6:
+          if (
+            damageDealer.currentTile.cubePosition.x ==
+            damageTaker.currentTile.cubePosition.x &&
+            damageDealer.currentTile.cubePosition.y <
+            damageTaker.currentTile.cubePosition.y &&
+            damageDealer.currentTile.cubePosition.y +
+            damageDealer.weapons.weaponRange[0] + 1 >
+            damageTaker.currentTile.cubePosition.y
+          ) {
+            this.takeDamage(damageDealer, firedWeapon, damageTaker);
+          }
+          break;
+
+        default:
+          console.log(
+            "unknown rotation value: " + damageDealer.currentRotation
+          );
+          break;
+      }
+    }
+  }
+  takeDamage(damageDealer, firedWeapon, damageTaker) {
+    var weapon = firedWeapon;
+    this.damageTaker = damageTaker;
+
+    for (let i = 0; i < damageDealer.weapons.weaponName.length; i++) {
+      console.log(damageDealer.addonUses[0]);
+      if (
+        weapon == damageDealer.weapons.weaponName[i] &&
+        damageDealer.addonUses[i] < 1
+      ) {
+        console.log("yeeet");
+
+        damageTaker.health =
+          damageTaker.health - damageDealer.weapons.weaponDamage[i];
+        if (damageDealer.weapons.weaponName[i] != "gatling gun") {
+          damageDealer.addonUses[i]++;
+        }
+      }
+      if (damageTaker.health <= 0) {
+        console.log(damageTaker.username + " tank died");
+
+        if (damageTaker.isAlive) {
+          this.add
+            .sprite(
+              damageTaker.currentTile.position.x,
+              damageTaker.currentTile.position.y,
+              "explosion"
+            )
+            .play("explode");
+        }
+        damageTaker.sprite.setTexture("destroyedTank");
+        damageTaker.isAlive = false;
+        damageTaker = null;
+      }
+    }
+  }
+>>>>>>> 74e6d7569778d0f4c7f09bb226596e3706175c22
 }
