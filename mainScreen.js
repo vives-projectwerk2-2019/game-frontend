@@ -281,14 +281,6 @@ class Main extends Phaser.Scene {
     this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
 
-    //activation key explosion
-    this.input.keyboard.on(
-      "keyup_P",
-      function (event) {
-        this.add.sprite(300, 300, "explosion").play("explode");
-      },
-      this
-    );
     //test damage tanks
     this.input.keyboard.on(
       "keyup_E",
