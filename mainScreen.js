@@ -170,6 +170,10 @@ class Main extends Phaser.Scene {
       graphics = this.add.graphics();
       graphics.fillRectShape(rect);
       graphics.fillStyle(0x000000);
+      rectOutside = new Phaser.Geom.Rectangle(200, 37, 500, 20);
+      graphics = this.add.graphics();
+      graphics.fillRectShape(rectOutside);
+      graphics.fillStyle(0x000000);
     });
 
     //explosion
@@ -200,12 +204,10 @@ class Main extends Phaser.Scene {
 
     //Progress bar for timer
     graphics.clear();
+    graphics.fillStyle(0x000000, 1);
+    graphics.fillRect(175, 29, (window.innerWidth / 18) * 15, 18);
     graphics.fillStyle(0xFFFFFF, 1);
     graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
-    graphics.fillStyle(0x000000, 1);
-    graphics.fillRect(175, 29, (window.innerWidth / 18000), 18);
-    // graphics.lineStyle(2, 0x000000, 1);
-    // graphics.strokeRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
   }
   //Empty onEvent for Length
   onEvent() {
