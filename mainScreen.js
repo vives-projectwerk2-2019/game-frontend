@@ -14,8 +14,15 @@ var colors = [
   "tankyellow"
 ];
 var allTanks = [null];
+
+//Timer
 var text;
+var finalCountDown;
 var timedEvent;
+var timeRemaning;
+var rect;
+var graphics;
+
 class Main extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
@@ -180,11 +187,16 @@ class Main extends Phaser.Scene {
       //scoreboard
 
       //Timer
-      //console.log(this);
-      text = this.add
-        .text(600, 32, "", { font: "16px Arial", fill: "#000000" })
-        .setOrigin(0.5, 0.5);
-      timedEvent = this.time.delayedCall(3000, scene.onEvent, [], this);
+      console.log(this);
+      text = this.add.text(600, 32, "", { font: "24px Arial", fill: "#000000" }).setOrigin(0.5, 0.5);
+      finalCountDown = this.add.text(600, 350, "", { font: "72px Arial", fill: "#D10000" }).setOrigin(0.5, 0.5);
+      timedEvent = this.time.delayedCall(15000, scene.onEvent, [], this);
+
+      //Progress bar for timer
+      rect = new Phaser.Geom.Rectangle(375, 40, 500, 20);
+      graphics = this.add.graphics();
+      graphics.fillRectShape(rect);
+      graphics.fillStyle(0x000000)
     });
 
     //explosion
@@ -203,15 +215,19 @@ class Main extends Phaser.Scene {
     if (this.key_1.isDown) {
       this.scene.start("Editor");
     }
-    text.setText(
-      "Event.progress: " +
-        timedEvent
-          .getProgress()
-          .toString()
-          .substr(0, 4)
-    );
-  }
+    //Timer update
+    timeRemaning = 15 - timedEvent.getElapsedSeconds().toString().substr(0, 2);
+    text.setText("Round ends in " + timeRemaning);
+    if (timeRemaning <= 5) {
+      finalCountDown.setText(timeRemaning)
+    }
 
+    //Progress bar for timer
+    graphics.clear()
+    graphics.fillStyle(0x000000, 0.7)
+    graphics.fillRect(375, 40, 30 * timeRemaning, 18);
+  }
+  //Empty onEvent for Length
   onEvent() {
     console.log("Timer has ended");
   }
@@ -219,7 +235,7 @@ class Main extends Phaser.Scene {
   setupFullScreen(object) {
     var fullscreenFunc = null; //function for fullscreen
 
-    document.querySelector("#play").addEventListener("click", function() {
+    document.querySelector("#play").addEventListener("click", function () {
       if (fullscreenFunc !== null) fullscreenFunc();
     });
 
@@ -227,10 +243,10 @@ class Main extends Phaser.Scene {
 
     object.on(
       "pointerover",
-      function() {
+      function () {
         var canvas = this.sys.game.canvas;
         var fullscreen = this.sys.game.device.fullscreen;
-        fullscreenFunc = function() {
+        fullscreenFunc = function () {
           canvas[fullscreen.request]();
         };
       },
@@ -262,7 +278,7 @@ class Main extends Phaser.Scene {
     //activation key explosion
     this.input.keyboard.on(
       "keyup_P",
-      function(event) {
+      function (event) {
         this.add.sprite(300, 300, "explosion").play("explode");
       },
       this
@@ -270,14 +286,14 @@ class Main extends Phaser.Scene {
     //test damage tanks
     this.input.keyboard.on(
       "keyup_E",
-      function(event) {
+      function (event) {
         this.dealDamage(this.tankblack, "gatling gun", allTanks);
       },
       this
     );
     this.input.keyboard.on(
       "keyup_R",
-      function(event) {
+      function (event) {
         let tankName = this.dataInput.Player.username + tankValues;
         this.tankName = new Tank(
           this.selectTankColor(),
@@ -297,14 +313,14 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_T",
-      function(event) {
+      function (event) {
         this.tankblack.setAddons(this.dataInput);
       },
       this
     );
     this.input.keyboard.on(
       "keyup_Y",
-      function(event) {
+      function (event) {
         i = 1;
         this.addon(i);
       },
@@ -312,7 +328,7 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_U",
-      function(event) {
+      function (event) {
         i = 2;
         this.addon(i);
       },
@@ -320,7 +336,7 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_I",
-      function(event) {
+      function (event) {
         i = 3;
         this.addon(i);
       },
@@ -329,28 +345,28 @@ class Main extends Phaser.Scene {
     //controls tankblue
     this.input.keyboard.on(
       "keyup_Z",
-      function(event) {
+      function (event) {
         this.tankblack.forward();
       },
       this
     );
     this.input.keyboard.on(
       "keyup_S",
-      function(event) {
+      function (event) {
         this.tankblack.backward();
       },
       this
     );
     this.input.keyboard.on(
       "keyup_Q",
-      function(event) {
+      function (event) {
         this.tankblack.turnLeft();
       },
       this
     );
     this.input.keyboard.on(
       "keyup_D",
-      function(event) {
+      function (event) {
         this.tankblack.turnRight();
       },
       this
@@ -358,7 +374,7 @@ class Main extends Phaser.Scene {
     // controls tankblue
     this.input.keyboard.on(
       "keyup_O",
-      function(event) {
+      function (event) {
         if (this.tankblue.isAlive) {
           this.tankblue.forward();
         }
@@ -367,7 +383,7 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_L",
-      function(event) {
+      function (event) {
         if (this.tankblue.isAlive) {
           this.tankblue.backward();
         }
@@ -376,7 +392,7 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_K",
-      function(event) {
+      function (event) {
         if (this.tankblue.isAlive) {
           this.tankblue.turnLeft();
         }
@@ -385,7 +401,7 @@ class Main extends Phaser.Scene {
     );
     this.input.keyboard.on(
       "keyup_M",
-      function(event) {
+      function (event) {
         if (this.tankblue.isAlive) {
           this.tankblue.turnRight();
         }
@@ -471,9 +487,9 @@ class Main extends Phaser.Scene {
         case 1:
           if (
             damageDealer.currentTile.cubePosition.y ==
-              damageTaker.currentTile.cubePosition.y &&
+            damageTaker.currentTile.cubePosition.y &&
             damageDealer.currentTile.cubePosition.x <
-              damageTaker.currentTile.cubePosition.x
+            damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -481,9 +497,9 @@ class Main extends Phaser.Scene {
         case 2:
           if (
             damageDealer.currentTile.cubePosition.z ==
-              damageTaker.currentTile.cubePosition.z &&
+            damageTaker.currentTile.cubePosition.z &&
             damageDealer.currentTile.cubePosition.x <
-              damageTaker.currentTile.cubePosition.x
+            damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -491,9 +507,9 @@ class Main extends Phaser.Scene {
         case 3:
           if (
             damageDealer.currentTile.cubePosition.x ==
-              damageTaker.currentTile.cubePosition.x &&
+            damageTaker.currentTile.cubePosition.x &&
             damageDealer.currentTile.cubePosition.y >
-              damageTaker.currentTile.cubePosition.y
+            damageTaker.currentTile.cubePosition.y
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -501,9 +517,9 @@ class Main extends Phaser.Scene {
         case 4:
           if (
             damageDealer.currentTile.cubePosition.y ==
-              damageTaker.currentTile.cubePosition.y &&
+            damageTaker.currentTile.cubePosition.y &&
             damageDealer.currentTile.cubePosition.x >
-              damageTaker.currentTile.cubePosition.x
+            damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -511,9 +527,9 @@ class Main extends Phaser.Scene {
         case 5:
           if (
             damageDealer.currentTile.cubePosition.z ==
-              damageTaker.currentTile.cubePosition.z &&
+            damageTaker.currentTile.cubePosition.z &&
             damageDealer.currentTile.cubePosition.x >
-              damageTaker.currentTile.cubePosition.x
+            damageTaker.currentTile.cubePosition.x
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -521,9 +537,9 @@ class Main extends Phaser.Scene {
         case 6:
           if (
             damageDealer.currentTile.cubePosition.x ==
-              damageTaker.currentTile.cubePosition.x &&
+            damageTaker.currentTile.cubePosition.x &&
             damageDealer.currentTile.cubePosition.y <
-              damageTaker.currentTile.cubePosition.y
+            damageTaker.currentTile.cubePosition.y
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
