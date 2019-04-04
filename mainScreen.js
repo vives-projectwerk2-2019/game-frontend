@@ -188,7 +188,7 @@ class Main extends Phaser.Scene {
 
       //Timer
       console.log(this);
-      text = this.add.text(600, 32, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" }).setOrigin(0.5, 0.5);
+      text = this.add.text(100, 37, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" }).setOrigin(0.5, 0.5);
       finalCountDown = this.add.text(600, 350, "", { fontSize: 72, font: "Arial", fill: "#D10000" }).setOrigin(0.5, 0.5);
       timedEvent = this.time.delayedCall(15000, scene.onEvent, [], this);
 
@@ -196,7 +196,7 @@ class Main extends Phaser.Scene {
       finalCountDown.setStroke('#000000', 8)
 
       //Progress bar for timer
-      rect = new Phaser.Geom.Rectangle(375, 40, 500, 20);
+      rect = new Phaser.Geom.Rectangle(200, 37, 500, 20);
       graphics = this.add.graphics();
       graphics.fillRectShape(rect);
       graphics.fillStyle(0x000000)
@@ -220,7 +220,7 @@ class Main extends Phaser.Scene {
     }
     //Timer update
     timeRemaining = 15 - timedEvent.getElapsedSeconds().toString().substr(0, 2);
-    text.setText("Round ends in " + timeRemaining);
+    text.setText("Time left: ");
     if (timeRemaining <= 5) {
       finalCountDown.setText(timeRemaining)
       if (timeRemaining == 0) {
@@ -231,7 +231,7 @@ class Main extends Phaser.Scene {
     //Progress bar for timer
     graphics.clear()
     graphics.fillStyle(0xFFFFFF, 0.7)
-    graphics.fillRect(375, 40, 30 * timeRemaining, 18);
+    graphics.fillRect(175, 29, (window.innerWidth / 25) * timeRemaining, 18);
   }
   //Empty onEvent for Length
   onEvent() {
@@ -281,14 +281,6 @@ class Main extends Phaser.Scene {
     this.key_D = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
     this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
 
-    //activation key explosion
-    this.input.keyboard.on(
-      "keyup_P",
-      function (event) {
-        this.add.sprite(300, 300, "explosion").play("explode");
-      },
-      this
-    );
     //test damage tanks
     this.input.keyboard.on(
       "keyup_E",
@@ -496,10 +488,10 @@ class Main extends Phaser.Scene {
             damageTaker.currentTile.cubePosition.y &&
             damageDealer.currentTile.cubePosition.x <
             damageTaker.currentTile.cubePosition.x &&
-            damageDealer.currentTile.cubePosition.x + 
+            damageDealer.currentTile.cubePosition.x +
             damageDealer.weapons.weaponRange[0] + 1 >
-            damageTaker.currentTile.cubePosition.x 
-            
+            damageTaker.currentTile.cubePosition.x
+
           ) {
             this.takeDamage(damageDealer, firedWeapon, damageTaker);
           }
@@ -510,7 +502,7 @@ class Main extends Phaser.Scene {
             damageTaker.currentTile.cubePosition.z &&
             damageDealer.currentTile.cubePosition.x <
             damageTaker.currentTile.cubePosition.x &&
-            damageDealer.currentTile.cubePosition.x + 
+            damageDealer.currentTile.cubePosition.x +
             damageDealer.weapons.weaponRange[0] + 1 >
             damageTaker.currentTile.cubePosition.x
           ) {
@@ -523,7 +515,7 @@ class Main extends Phaser.Scene {
             damageTaker.currentTile.cubePosition.x &&
             damageDealer.currentTile.cubePosition.y >
             damageTaker.currentTile.cubePosition.y &&
-            damageDealer.currentTile.cubePosition.y + 
+            damageDealer.currentTile.cubePosition.y +
             damageDealer.weapons.weaponRange[0] + 1 <
             damageTaker.currentTile.cubePosition.y
           ) {
@@ -536,7 +528,7 @@ class Main extends Phaser.Scene {
             damageTaker.currentTile.cubePosition.y &&
             damageDealer.currentTile.cubePosition.x >
             damageTaker.currentTile.cubePosition.x &&
-            damageDealer.currentTile.cubePosition.x + 
+            damageDealer.currentTile.cubePosition.x +
             damageDealer.weapons.weaponRange[0] + 1 <
             damageTaker.currentTile.cubePosition.x
           ) {
@@ -549,7 +541,7 @@ class Main extends Phaser.Scene {
             damageTaker.currentTile.cubePosition.z &&
             damageDealer.currentTile.cubePosition.x >
             damageTaker.currentTile.cubePosition.x &&
-            damageDealer.currentTile.cubePosition.x + 
+            damageDealer.currentTile.cubePosition.x +
             damageDealer.weapons.weaponRange[0] + 1 <
             damageTaker.currentTile.cubePosition.x
           ) {
@@ -562,7 +554,7 @@ class Main extends Phaser.Scene {
             damageTaker.currentTile.cubePosition.x &&
             damageDealer.currentTile.cubePosition.y <
             damageTaker.currentTile.cubePosition.y &&
-            damageDealer.currentTile.cubePosition.y + 
+            damageDealer.currentTile.cubePosition.y +
             damageDealer.weapons.weaponRange[0] + 1 >
             damageTaker.currentTile.cubePosition.y
           ) {
@@ -613,5 +605,15 @@ class Main extends Phaser.Scene {
         damageTaker = null;
       }
     }
+  }
+  setTankPosition(receivedMessage) {
+    var dataInput = receivedMessage;
+    // this.tankblack.x = dataInput.players[0].tank.position.x;
+    // this.tankblack.y = dataInput.players[0].tank.position.y;
+    this.tankblack.setPosition(
+      dataInput.players[0].tank.position.x,
+      dataInput.players[0].tank.position.y,
+      dataInput.players[0].tank.rotation
+    );
   }
 }
