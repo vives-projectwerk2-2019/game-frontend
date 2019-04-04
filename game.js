@@ -1,7 +1,7 @@
 var config = {
-    type:Phaser.AUTO,
-    width : window.innerWidth,
-    height : window.innerHeight,
+    type: Phaser.AUTO,
+    width: window.innerWidth,
+    height: window.innerHeight,
     parent: 'play',
     physics: {
         default: 'arcade',
@@ -10,7 +10,7 @@ var config = {
             gravity: { y: 100 }
         }
     },
-    scene: [ startScreen, Editor, loadScreen, Main ]
+    scene: [startScreen, Editor, loadScreen, Main]
 };
 
 var game = new Phaser.Game(config);
