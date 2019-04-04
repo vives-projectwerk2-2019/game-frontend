@@ -109,16 +109,6 @@ class Main extends Phaser.Scene {
       frameHeight: 64,
       endFrame: 9
     });
-    this.load.spritesheet("eastbullet", "assets/animations/eastbullet.png", {
-      frameWidth: 32,
-      frameHeight: 32,
-      endFrame: 4
-    });
-    this.load.spritesheet("westbullet", "assets/animations/westbullet.png", {
-      frameWidth: 32,
-      frameHeight: 32,
-      endFrame: 4
-    });
     // this.load.spritesheet(
     //   "northeastbullet",
     //   "assets/animations/northeastbullet.png",
