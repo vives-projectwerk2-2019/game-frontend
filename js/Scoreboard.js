@@ -1,21 +1,19 @@
-// //     {
-// //         return;
-// //     }
-// //     Instantiate(explosion, transform.position, transform.rotation);
-// //     if (other.tag == "Player")
-// //     {
-// //         Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-// //     }
-// //     gameController.AddScore (scoreValue);
-// //     Destroy(other.gameObject);
-// //     Destroy(gameObject);
-// // }
-// // }
-// for (var index = 0; index < array.length; index++) {
-//     if(addTankHealth()){
-//     var element = addTankHealth[index];
-//     }
-// }
+ 
+    Instantiate(explosion, transform.position, transform.rotation);
+    if (other.tag == "Player")
+    {
+        Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+    }
+    gameController.AddScore (scoreValue);
+    Destroy(other.gameObject);
+    Destroy(gameObject);
+    
+for (var index = 0; index < array.length; index++) {
+    if(addTankHealth()){
+    var element = addTankHealth[index];
+    }
+}
+
 function tableCreate() {
     var body = document.getElementsByTagName('body')[0];
     var tbl = document.createElement('table');
