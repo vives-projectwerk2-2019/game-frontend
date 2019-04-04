@@ -113,14 +113,14 @@ class Main extends Phaser.Scene {
 
   init() {
     var canvas = this.sys.game.canvas;
-    // var fullscreen = this.sys.game.device.fullscreen;
+    var fullscreen = this.sys.game.device.fullscreen;
 
-    // if (!fullscreen.available)
-    // {
-    //     return;
-    // }
+    if (!fullscreen.available)
+    {
+        return;
+    }
 
-    // canvas[fullscreen.request]();
+    canvas[fullscreen.request]();
   }
 
   create() {
@@ -160,7 +160,7 @@ class Main extends Phaser.Scene {
       console.log(this);
       text = this.add.text(100, 37, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" }).setOrigin(0.5, 0.5);
       finalCountDown = this.add.text(600, 350, "", { fontSize: 120, font: "Arial", fill: "#C90707" }).setOrigin(0.5, 0.5);
-      timedEvent = this.time.delayedCall(15000, scene.onEvent, [], this);
+      timedEvent = this.time.delayedCall(15000000, scene.onEvent, [], this);
 
       text.setStroke('#000000', 8)
       finalCountDown.setStroke('#000000', 8)
@@ -189,12 +189,13 @@ class Main extends Phaser.Scene {
       this.scene.start("Editor");
     }
     //Timer update
-    timeRemaining = 15 - timedEvent.getElapsedSeconds().toString().substr(0, 2);
+    timeRemaining = 15000 - timedEvent.getElapsed().toString().substr(0, 5);
     text.setText("Time left: ");
-    if (timeRemaining <= 5) {
-      finalCountDown.setText(timeRemaining)
-      if (timeRemaining == 0) {
+    if (timeRemaining <= 5000) {
+      finalCountDown.setText(timeRemaining/1000)
+      if (timeRemaining = 0) {
         finalCountDown.setText(" ");
+        graphics.clear();
       }
     }
 
@@ -202,9 +203,9 @@ class Main extends Phaser.Scene {
     graphics.clear();
     graphics.fillStyle(0xFFFFFF, 0.7);
     // graphics.strokeRectShape(rect);
-    graphics.fillRect(175, 29, (window.innerWidth / 18) * timeRemaining, 18);
+    graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
     graphics.lineStyle(2, 0x000000, 1);
-    graphics.strokeRect(175, 29, (window.innerWidth / 18) * timeRemaining, 18);
+    graphics.strokeRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
   }
   //Empty onEvent for Length
   onEvent() {
