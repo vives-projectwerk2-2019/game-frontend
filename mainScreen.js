@@ -109,26 +109,6 @@ class Main extends Phaser.Scene {
       frameHeight: 64,
       endFrame: 9
     });
-    // this.load.spritesheet(
-    //   "northeastbullet",
-    //   "assets/animations/northeastbullet.png",
-    //   { frameWidth: 32, frameHeight: 32, endFrame: 4 }
-    // );
-    this.load.spritesheet(
-      "northwestbullet",
-      "assets/animations/northwestbullet.png",
-      { frameWidth: 32, frameHeight: 32, endFrame: 4 }
-    );
-    this.load.spritesheet(
-      "southeastbullet",
-      "assets/animations/southeastbullet.png",
-      { frameWidth: 32, frameHeight: 32, endFrame: 4 }
-    );
-    this.load.spritesheet(
-      "southwestbullet",
-      "assets/animations/southwestbullet.png",
-      { frameWidth: 32, frameHeight: 32, endFrame: 4 }
-    );
   }
 
   init() {
