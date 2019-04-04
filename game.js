@@ -3,13 +3,7 @@ var config = {
     width: window.innerWidth,
     height: window.innerHeight + 270,
     parent: 'play',
-    physics: {
-        default: 'arcade',
-        arcade: {
-            debug: true,
-            gravity: { y: 100 }
-        }
-    },
+    debug: true,
     scene: [startScreen, Editor, loadScreen, Main]
 };
 
