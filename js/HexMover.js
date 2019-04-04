@@ -15,7 +15,7 @@ class HexMover {
       // base weapon always equiped
       weaponName: ["gatling gun"],
       weaponDamage: [4],
-      weaponRange: [5]
+      weaponRange: [20]
     };
     this.addons = ["gatling gun"];
     this.addonUses = [0, 0, 0, 0];
