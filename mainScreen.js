@@ -113,14 +113,14 @@ class Main extends Phaser.Scene {
 
   init() {
     var canvas = this.sys.game.canvas;
-    var fullscreen = this.sys.game.device.fullscreen;
+    // var fullscreen = this.sys.game.device.fullscreen;
 
-    if (!fullscreen.available)
-    {
-        return;
-    }
+    // if (!fullscreen.available)
+    // {
+    //     return;
+    // }
 
-    canvas[fullscreen.request]();
+    // canvas[fullscreen.request]();
   }
 
   create() {
