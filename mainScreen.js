@@ -82,7 +82,7 @@ class Main extends Phaser.Scene {
         .text(100, 37, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" })
         .setOrigin(0.5, 0.5);
       finalCountDown = this.add
-        .text(600, 350, "", { fontSize: 72, font: "Arial", fill: "#D10000" })
+        .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
         .setOrigin(0.5, 0.5);
       timedEvent = this.time.delayedCall(15000, scene.onEvent, [], this);
 
@@ -121,19 +121,24 @@ class Main extends Phaser.Scene {
         .toString()
         .substr(0, 5);
     text.setText("Time left: ");
-    if (timeRemaining <= 5000) {
-      finalCountDown.setText(15 - timedEvent.getElapsedSeconds().toString().substr(0, 2));
-      if (timeRemaining == 0) {
-        finalCountDown.setText(" ");
-      }
-    }
-
-    //Progress bar for timer
     graphics.clear();
     graphics.fillStyle(0x000000, 1);
     graphics.fillRect(175, 29, (window.innerWidth / 18) * 15, 18);
-    graphics.fillStyle(0xffffff, 1);
+    graphics.fillStyle(0x008000, 1);
     graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
+    if (timeRemaining < 10000) {
+      graphics.fillStyle(0xFF8C00, 1);
+      graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
+      if (timeRemaining < 5000) {
+        graphics.fillStyle(0xFF0000, 1);
+        graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
+        finalCountDown.setText(15 - timedEvent.getElapsedSeconds().toString().substr(0, 2));
+        if (timeRemaining == 0) {
+          finalCountDown.setText(" ");
+        }
+      }
+    }
+
   }
   //Empty onEvent for Length
   onEvent() {
