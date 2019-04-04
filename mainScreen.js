@@ -614,4 +614,14 @@ class Main extends Phaser.Scene {
       }
     }
   }
+  setTankPosition(receivedMessage) {
+    var dataInput = receivedMessage;
+    // this.tankblack.x = dataInput.players[0].tank.position.x;
+    // this.tankblack.y = dataInput.players[0].tank.position.y;
+    this.tankblack.setPosition(
+      dataInput.players[0].tank.position.x,
+      dataInput.players[0].tank.position.y,
+      dataInput.players[0].tank.rotation
+    );
+  }
 }

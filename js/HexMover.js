@@ -73,12 +73,15 @@ class HexMover {
         z: this.currentTile.cubePosition.z - 1
       };
     }
-    let nextState = new TankTerrain;
-    var nextTile = nextState.getNextTileType(this.map.cubeToOddr(newCubeLocation), this.map.jsonMap);
+    let nextState = new TankTerrain();
+    var nextTile = nextState.getNextTileType(
+      this.map.cubeToOddr(newCubeLocation),
+      this.map.jsonMap
+    );
     var tankPath = nextState.setTankPathState(nextTile);
-    if(tankPath == tankPathEnum.UNBLOCKED) {
-	    let newPosition = this.map.cubeToOddr(newCubeLocation);
-	    this.setPosition(newPosition.x, newPosition.y);
+    if (tankPath == tankPathEnum.UNBLOCKED) {
+      let newPosition = this.map.cubeToOddr(newCubeLocation);
+      this.setPosition(newPosition.x, newPosition.y);
     }
   }
 
@@ -129,12 +132,15 @@ class HexMover {
       };
     }
 
-    let nextState = new TankTerrain;
-    var nextTile = nextState.getNextTileType(this.map.cubeToOddr(newCubeLocation), this.map.jsonMap);
+    let nextState = new TankTerrain();
+    var nextTile = nextState.getNextTileType(
+      this.map.cubeToOddr(newCubeLocation),
+      this.map.jsonMap
+    );
     var tankPath = nextState.setTankPathState(nextTile);
-    if(tankPath == tankPathEnum.UNBLOCKED) {
-	    let newPosition = this.map.cubeToOddr(newCubeLocation);
-	    this.setPosition(newPosition.x, newPosition.y);
+    if (tankPath == tankPathEnum.UNBLOCKED) {
+      let newPosition = this.map.cubeToOddr(newCubeLocation);
+      this.setPosition(newPosition.x, newPosition.y);
     }
   }
 
@@ -158,12 +164,14 @@ class HexMover {
     console.log(this.currentRotation);
   }
 
-  setPosition(x, y) {
+  setPosition(x, y, rotation) {
     if (this.map.getTile({ x: x, y: y })) {
       this.currentTile = this.map.getTile({ x: x, y: y });
       this.sprite.x = this.currentTile.body.x;
       this.sprite.y = this.currentTile.body.y;
       this.currentPosition = this.updateCurrentPosition();
+      this.currentRotation = rotation;
+      this.updateCurrentRotation();
     }
   }
 
