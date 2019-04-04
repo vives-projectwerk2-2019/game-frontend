@@ -79,7 +79,7 @@ class Main extends Phaser.Scene {
       //Timer
       console.log(this);
       text = this.add
-        .text(600, 32, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" })
+        .text(100, 37, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" })
         .setOrigin(0.5, 0.5);
       finalCountDown = this.add
         .text(600, 350, "", { fontSize: 72, font: "Arial", fill: "#D10000" })
@@ -90,9 +90,13 @@ class Main extends Phaser.Scene {
       finalCountDown.setStroke("#000000", 8);
 
       //Progress bar for timer
-      rect = new Phaser.Geom.Rectangle(375, 40, 500, 20);
+      rect = new Phaser.Geom.Rectangle(200, 37, 500, 20);
       graphics = this.add.graphics();
       graphics.fillRectShape(rect);
+      graphics.fillStyle(0x000000);
+      rectOutside = new Phaser.Geom.Rectangle(200, 37, 500, 20);
+      graphics = this.add.graphics();
+      graphics.fillRectShape(rectOutside);
       graphics.fillStyle(0x000000);
     });
 
@@ -111,14 +115,14 @@ class Main extends Phaser.Scene {
   update(delta) {
     //Timer update
     timeRemaining =
-      15 -
+      15000 -
       timedEvent
-        .getElapsedSeconds()
+        .getElapsed()
         .toString()
-        .substr(0, 2);
-    text.setText("Round ends in " + timeRemaining);
-    if (timeRemaining <= 5) {
-      finalCountDown.setText(timeRemaining);
+        .substr(0, 5);
+    text.setText("Time left: ");
+    if (timeRemaining <= 5000) {
+      finalCountDown.setText(15 - timedEvent.getElapsedSeconds().toString().substr(0, 2));
       if (timeRemaining == 0) {
         finalCountDown.setText(" ");
       }
@@ -126,8 +130,10 @@ class Main extends Phaser.Scene {
 
     //Progress bar for timer
     graphics.clear();
-    graphics.fillStyle(0xffffff, 0.7);
-    graphics.fillRect(375, 40, 30 * timeRemaining, 18);
+    graphics.fillStyle(0x000000, 1);
+    graphics.fillRect(175, 29, (window.innerWidth / 18) * 15, 18);
+    graphics.fillStyle(0xffffff, 1);
+    graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
   }
   //Empty onEvent for Length
   onEvent() {
