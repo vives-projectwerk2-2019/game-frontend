@@ -195,7 +195,6 @@ class Main extends Phaser.Scene {
       finalCountDown.setText(timeRemaining)
       if (timeRemaining == 0) {
         finalCountDown.setText(" ");
-        graphics.lineStyle(0, 0, 0);
       }
     }
 
