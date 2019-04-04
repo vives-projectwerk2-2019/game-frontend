@@ -101,7 +101,7 @@ class Main extends Phaser.Scene {
     this.load.image("tankyellow", "assets/tanks/tankyellow.png");
     this.load.image("background", "assets/tanks/background.jpg");
     this.load.image("destroyedTank", "assets/tanks/destroyedTank.png");
-    this.map = new HexMap(this, 60, 40, 35, "MapConfiguration.json");
+    this.map = new HexMap(this, 60, 40, 100, "MapConfiguration.json");
 
     //Animations
     this.load.spritesheet("explosion", "assets/animations/explosion.png", {
