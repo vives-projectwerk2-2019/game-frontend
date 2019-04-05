@@ -84,7 +84,7 @@ class HexMover {
         z: this.currentTile.cubePosition.z - 1
       };
     }
-    let nextState = new TankTerrain();
+    let nextState = new Terrain();
     var nextTile = nextState.getNextTileType(
       this.map.cubeToOddr(newCubeLocation),
       this.map.jsonMap
@@ -143,7 +143,7 @@ class HexMover {
       };
     }
 
-    let nextState = new TankTerrain();
+    let nextState = new Terrain();
     var nextTile = nextState.getNextTileType(
       this.map.cubeToOddr(newCubeLocation),
       this.map.jsonMap
