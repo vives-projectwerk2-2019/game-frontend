@@ -24,7 +24,7 @@ Het terrein waarop het spel gespeeld wordt is onderverdeeld in hexagon’s. In d
 ## 4. Tanks
 
 Iedere speler heeft een eigen tank met een van deze kleuren.
-![Tanks](./img/Tanks_colour.png)
+![Tanks](./img/Tanks_colours.png)
 
 ## 5. Wapens
 
