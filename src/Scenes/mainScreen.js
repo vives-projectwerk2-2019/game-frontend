@@ -245,14 +245,6 @@ class Main extends Phaser.Scene {
 
       //Progress bar for timer
       this.newProgressBar = new ProgressBar(this, 200, 37, 500, 20, 0xff0000);
-      // rect = new Phaser.Geom.Rectangle(200, 37, 500, 20);
-      // graphics = this.add.graphics();
-      // graphics.fillRectShape(rect);
-      // graphics.fillStyle(0x000000);
-      // rectOutside = new Phaser.Geom.Rectangle(200, 37, 500, 20);
-      // graphics = this.add.graphics();
-      // graphics.fillRectShape(rectOutside);
-      // graphics.fillStyle(0x000000);
     });
 
     //explosion
@@ -277,27 +269,7 @@ class Main extends Phaser.Scene {
         .substr(0, 5);
     this.newProgressBar.setProgress( 0.015 * timeRemaining);
     text.setText("Time left: ");
-    // graphics.clear();
-    // graphics.fillStyle(0x000000, 1);
-    // graphics.fillRect(175, 29, (window.innerWidth / 18) * 15, 18);
-    // graphics.fillStyle(0x008000, 1);
-    // graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
-    // if (timeRemaining < 10000) {
-    //   graphics.fillStyle(0xff8c00, 1);
-    //   graphics.fillRect(
-    //     175,
-    //     29,
-    //     (window.innerWidth / 18000) * timeRemaining,
-    //     18
-    //   );
       if (timeRemaining < 5000) {
-    //     graphics.fillStyle(0xff0000, 1);
-    //     graphics.fillRect(
-    //       175,
-    //       29,
-    //       (window.innerWidth / 18000) * timeRemaining,
-    //       18
-    //     );
         finalCountDown.setText(
           15 -
             timedEvent
@@ -309,7 +281,6 @@ class Main extends Phaser.Scene {
           finalCountDown.setText(" ");
         }
       }
-    // }
   }
   //Empty onEvent for Length
   onEvent() {
