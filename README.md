@@ -23,19 +23,8 @@ Het terrein waarop het spel gespeeld wordt is onderverdeeld in hexagon’s. In d
 
 ## 4. Tanks
 
-In het begin kan iedere speler de kleur van zijn tank kiezen en zijn special.
-![Tanks](./img/Tank_colour.png)
-
-    • Nature tank:
-        o Deze tank kan op normale grond 2 vakjes vooruit.
-    • Aquatank:
-        o Deze tank kan door het water rijden.
-    • Firetank:
-        o Deze tank kan door vuur rijden zonder dmg te pakken.
-    • The tank:
-        o Deze tank heeft standaard een armor van 25.
-    • Montistank:
-        o Deze tank kan door bergen rijden.
+Iedere speler heeft een eigen tank met een van deze kleuren.
+![Tanks](./img/Tanks_colour.png)
 
 ## 5. Wapens
 
@@ -76,19 +65,17 @@ In het begin kan iedere speler de kleur van zijn tank kiezen en zijn special.
 
 ## 7. Hoe starten ?
 
-* Log in op github ga naar BUG dan naar game-frontend.
-* Klik op clone kopieer dan de SSH link.
-* Ga naar een bestand in je laptop/pc open powershell en doe git clone en de SSH link.
-* Open dan game-frontend met Visual Studio Code.
-* Druk op ctrl+ù en type dan: php -S localhost:8000 .
+1. Log in op github ga naar BUG dan naar game-frontend.
+2. Klik op clone kopieer dan de SSH link.
+3. Ga naar een bestand in je laptop/pc open powershell en doe git clone en de SSH link.
+4. Open dan game-frontend met Visual Studio Code.
+5. Druk op ctrl+ù en type dan: php -S localhost:8000 .
 
 * Docker
-* Open docker quickstart terminal
-* go to directory where the file "docker-compose.yml" is located
-* then use command: 'docker-compose up' to start the game on the ip addres you received from docker on port 8080.
 
-* open docker
-* docker compose up
+1. Open docker quickstart terminal
+2. go to directory where the file "docker-compose.yml" is located
+3. then use command: 'docker-compose up' to start the game on the ip addres you received from docker on port 8080.
 
 ## 8. Gameplay
 
