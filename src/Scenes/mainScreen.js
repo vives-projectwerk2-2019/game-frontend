@@ -6,9 +6,9 @@ var timeRemaining;
 var rect;
 var graphics;
 let tankObjects = [];
-class Main extends Phaser.Scene {
+class mainScreen extends Phaser.Scene {
   constructor() {
-    super({ key: "main" });
+    super({ key: "mainScreen" });
   }
 
   preload() {
