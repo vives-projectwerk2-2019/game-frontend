@@ -75,58 +75,18 @@ class Main extends Phaser.Scene {
 
       scene.mqtt = new Mqtt(scene);
       //scoreboard
-
-      graphics = this.add.graphics();
-
-      graphics.lineStyle(4, 0x000000, 1);
-
-      graphics.strokeRect(1210, 60, 300, 89);
-      graphics.strokeRect(1210, 149, 300, 89);
-      graphics.strokeRect(1210, 238, 300, 89);
-      graphics.strokeRect(1210, 327, 300, 89);
-      graphics.strokeRect(1210, 416, 300, 89);
-      graphics.strokeRect(1210, 505, 300, 89);
-      graphics.strokeRect(1210, 594, 300, 89);
-      graphics.strokeRect(1210, 683, 300, 89);
-      graphics.strokeRect(1210, 772, 300, 89);
-
-      this.add.image(1250, 193, 'tankblue').setScale(0.07);
-      this.add.image(1250, 282, 'tankblack').setScale(0.07);
-      this.add.image(1250, 371, 'tankcyan').setScale(0.07);
-      this.add.image(1250, 460, 'tankgreen').setScale(0.07);
-      this.add.image(1250, 549, 'tankgrey').setScale(0.07);
-      this.add.image(1250, 638, 'tankpurple').setScale(0.07);
-      this.add.image(1250, 727, 'tankred').setScale(0.07);
-      this.add.image(1250, 816, 'tankyellow').setScale(0.07);
-
-      scene.add.text(1250, 80, "Scoreboard", { fontFamily: 'Arial', fontSize: 38, color: '#000000' });
-
-      scene.add.text(1350, 160, "blue tank", { fontFamily: 'Arial', fontWeight: 'bold', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 249, "black tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 338, "cyan tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 427, "green tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 516, "grey tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 605, "purple tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 694, "red tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 783, "yellow tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-
-      scene.add.text(1300, 185, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 274, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 363, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 452, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 541, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 630, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 719, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 808, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-
-      scene.add.text(1300, 210, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 299, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 388, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 477, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 566, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 655, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 744, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 833, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
+      this.player = new PlayerOverviewPanel(this, 1200, 50, null);
+      //this.somePlayer = new PlayerPanel(this, 1200, 100, null, 'jurne', 'tankblue');
+      
+      this.player.addPlayer('jurne', 'tankblue');
+      this.player.addPlayer('fred', 'tankgreen');
+      this.player.addPlayer('jop', 'tankred');
+      this.player.addPlayer('jurne', 'tankblack');
+      this.player.addPlayer('fred', 'tankcyan');
+      this.player.addPlayer('jop', 'tankgrey');
+      this.player.addPlayer('jurne', 'tankpurple');
+      this.player.addPlayer('fred', 'tankyellow');
+      
 
       //Timer
       console.log(this);
