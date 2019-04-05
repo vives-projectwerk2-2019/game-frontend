@@ -5,7 +5,7 @@ var timedEvent;
 var timeRemaining;
 var rect;
 var graphics;
-
+let tankObjects = [];
 class Main extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
@@ -52,7 +52,7 @@ class Main extends Phaser.Scene {
     let y = dataInput.tank.position.y;
     let addons = dataInput.tank.addons;
     let rotation = dataInput.tank.rotation;
-    console.log(dataInput);
+    // console.log(dataInput);
 
     username = new Tank(
       username,
@@ -65,6 +65,7 @@ class Main extends Phaser.Scene {
       this.map,
       45
     );
+    tankObjects.push(username);
   }
 
   create() {
@@ -90,46 +91,147 @@ class Main extends Phaser.Scene {
       graphics.strokeRect(1210, 683, 300, 89);
       graphics.strokeRect(1210, 772, 300, 89);
 
-      this.add.image(1250, 193, 'tankblue').setScale(0.07);
-      this.add.image(1250, 282, 'tankblack').setScale(0.07);
-      this.add.image(1250, 371, 'tankcyan').setScale(0.07);
-      this.add.image(1250, 460, 'tankgreen').setScale(0.07);
-      this.add.image(1250, 549, 'tankgrey').setScale(0.07);
-      this.add.image(1250, 638, 'tankpurple').setScale(0.07);
-      this.add.image(1250, 727, 'tankred').setScale(0.07);
-      this.add.image(1250, 816, 'tankyellow').setScale(0.07);
+      this.add.image(1250, 193, "tankblue").setScale(0.07);
+      this.add.image(1250, 282, "tankblack").setScale(0.07);
+      this.add.image(1250, 371, "tankcyan").setScale(0.07);
+      this.add.image(1250, 460, "tankgreen").setScale(0.07);
+      this.add.image(1250, 549, "tankgrey").setScale(0.07);
+      this.add.image(1250, 638, "tankpurple").setScale(0.07);
+      this.add.image(1250, 727, "tankred").setScale(0.07);
+      this.add.image(1250, 816, "tankyellow").setScale(0.07);
 
-      scene.add.text(1250, 80, "Scoreboard", { fontFamily: 'Arial', fontSize: 38, color: '#000000' });
+      scene.add.text(1250, 80, "Scoreboard", {
+        fontFamily: "Arial",
+        fontSize: 38,
+        color: "#000000"
+      });
 
-      scene.add.text(1350, 160, "blue tank", { fontFamily: 'Arial', fontWeight: 'bold', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 249, "black tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 338, "cyan tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 427, "green tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 516, "grey tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 605, "purple tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 694, "red tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1350, 783, "yellow tank", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
+      scene.add.text(1350, 160, "blue tank", {
+        fontFamily: "Arial",
+        fontWeight: "bold",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1350, 249, "black tank", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1350, 338, "cyan tank", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1350, 427, "green tank", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1350, 516, "grey tank", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1350, 605, "purple tank", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1350, 694, "red tank", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1350, 783, "yellow tank", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
 
-      scene.add.text(1300, 185, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 274, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 363, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 452, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 541, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 630, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 719, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 808, "health:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
+      scene.add.text(1300, 185, "health:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 274, "health:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 363, "health:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 452, "health:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 541, "health:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 630, "health:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 719, "health:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 808, "health:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
 
-      scene.add.text(1300, 210, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 299, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 388, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 477, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 566, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 655, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 744, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
-      scene.add.text(1300, 833, "shield:", { fontFamily: 'Arial', fontSize: 16, color: '#000000' });
+      scene.add.text(1300, 210, "shield:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 299, "shield:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 388, "shield:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 477, "shield:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 566, "shield:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 655, "shield:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 744, "shield:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
+      scene.add.text(1300, 833, "shield:", {
+        fontFamily: "Arial",
+        fontSize: 16,
+        color: "#000000"
+      });
 
       //Timer
-      console.log(this);
+      // console.log(this);
       text = this.add
         .text(100, 37, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" })
         .setOrigin(0.5, 0.5);
@@ -179,18 +281,33 @@ class Main extends Phaser.Scene {
     graphics.fillStyle(0x008000, 1);
     graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
     if (timeRemaining < 10000) {
-      graphics.fillStyle(0xFF8C00, 1);
-      graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
+      graphics.fillStyle(0xff8c00, 1);
+      graphics.fillRect(
+        175,
+        29,
+        (window.innerWidth / 18000) * timeRemaining,
+        18
+      );
       if (timeRemaining < 5000) {
-        graphics.fillStyle(0xFF0000, 1);
-        graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
-        finalCountDown.setText(15 - timedEvent.getElapsedSeconds().toString().substr(0, 2));
+        graphics.fillStyle(0xff0000, 1);
+        graphics.fillRect(
+          175,
+          29,
+          (window.innerWidth / 18000) * timeRemaining,
+          18
+        );
+        finalCountDown.setText(
+          15 -
+            timedEvent
+              .getElapsedSeconds()
+              .toString()
+              .substr(0, 2)
+        );
         if (timeRemaining == 0) {
           finalCountDown.setText(" ");
         }
       }
     }
-
   }
   //Empty onEvent for Length
   onEvent() {
@@ -198,10 +315,17 @@ class Main extends Phaser.Scene {
   }
   setTankPosition(receivedMessage) {
     var dataInput = receivedMessage;
-    this.receivedMessage.name.setPosition(
-      dataInput.tank.position.x,
-      dataInput.tank.position.y,
-      dataInput.tank.rotation
-    );
+    //console.log(dataInput.name);
+
+    for (let i = 0; i < tankObjects.length; i++) {
+      const element = tankObjects[i];
+      if (element.username == dataInput.name) {
+        element.setPosition(
+          dataInput.tank.position.x,
+          dataInput.tank.position.y,
+          dataInput.tank.rotation
+        );
+      }
+    }
   }
 }
