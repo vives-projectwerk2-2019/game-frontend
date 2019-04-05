@@ -1,7 +1,7 @@
 
-class Editor extends Phaser.Scene {
+class editorScreen extends Phaser.Scene {
     constructor() {
-        super({key:"Editor"});
+        super({key:"editorScreen"});
     }
 
     preload() {
