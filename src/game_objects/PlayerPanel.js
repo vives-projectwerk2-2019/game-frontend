@@ -4,7 +4,7 @@ class PlayerPanel extends Phaser.GameObjects.Container {
         scene.add.existing(this);
 
         let nameLabel = scene.add.text(5, 5, playerName,
-          { fontSize: 48, font: 'Arial', fill: '#ff0000'}).setOrigin(0, 0);
+            { fontSize: 300, font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
 
         this.add(nameLabel);    // Remove from scene and add to container
         
