@@ -15,14 +15,14 @@ var tankTileEnum  = {
 	OTHER_TANK: 5,
 };
 
-class TankTerrain {
+class Terrain {
 	tankBlocksPath(newTankPos, otherTanks)
 	{
-	var isblocked = false;
-	otherTanks.forEach(function(element) {
-		if(newTankPos.x == element.currentPosition.x)
-			if(newTankPos.y == element.currentPosition.y) 
-				isblocked = true;
+		var isblocked = false;
+		otherTanks.forEach(function(element) {
+			if(newTankPos.x == element.currentPosition.x)
+				if(newTankPos.y == element.currentPosition.y) 
+					isblocked = true;
 		});
 
 		return isblocked;
