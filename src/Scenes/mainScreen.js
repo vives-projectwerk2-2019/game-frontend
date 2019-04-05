@@ -2,6 +2,7 @@
 var text;
 var finalCountDown;
 var timedEvent;
+var timerLength = 15000; // (in ms)
 var timeRemaining;
 var rect;
 var graphics;
@@ -90,19 +91,15 @@ class mainScreen extends Phaser.Scene {
       
       //Timer
       // console.log(this);
-      text = this.add
-        .text(100, 37, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" })
-        .setOrigin(0.5, 0.5);
       finalCountDown = this.add
         .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
         .setOrigin(0.5, 0.5);
-      timedEvent = this.time.delayedCall(15000, scene.onEvent, [], this);
+      timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
 
-      text.setStroke("#000000", 8);
       finalCountDown.setStroke("#000000", 8);
 
       //Progress bar for timer
-      this.newProgressBar = new ProgressBar(this, 200, 37, 500, 20, 0xff0000);
+      this.newProgressBar = new ProgressBar(this, 20, 20, 500, 20, 0x008000);
     });
 
     //explosion
@@ -120,16 +117,18 @@ class mainScreen extends Phaser.Scene {
   update(delta) {
     //Timer update
     timeRemaining =
-      15000 -
+      timerLength -
       timedEvent
         .getElapsed()
         .toString()
         .substr(0, 5);
     this.newProgressBar.setProgress( 0.015 * timeRemaining);
-    text.setText("Time left: ");
-      if (timeRemaining < 5000) {
+    if (timeRemaining < 0.66 * timerLength) {
+      this.newProgressBar.setColor(0xff8c00);
+      if (timeRemaining < 0.33 * timerLength) {
+        this.newProgressBar.setColor(0xFF0000);
         finalCountDown.setText(
-          15 -
+          timerLength/1000 -
             timedEvent
               .getElapsedSeconds()
               .toString()
@@ -139,6 +138,8 @@ class mainScreen extends Phaser.Scene {
           finalCountDown.setText(" ");
         }
       }
+    }
+      
   }
   //Empty onEvent for Length
   onEvent() {

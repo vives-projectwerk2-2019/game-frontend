@@ -11,6 +11,10 @@ class ProgressBar extends Phaser.GameObjects.Rectangle {
         this.progressPercentage = percentage;
     }
 
+    setColor(color) {
+        this.fillColor = color;
+    }
+
     preUpdate(time, delta) {
         let actualWidth = this.progressPercentage * this.initialWidth / 100;
         this.setSize(actualWidth, this.height);
