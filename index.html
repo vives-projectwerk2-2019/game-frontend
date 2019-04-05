@@ -3,26 +3,26 @@
 
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
-  <script src="js/Mqtt.js"></script>
+  <script src="src/Mqtt/Mqtt.js"></script>
   <!-- phaser scripts -->
-  <script src="phaser.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.14.0/phaser.min.js"></script>
   <!-- scenes -->
-  <script src="startScreen.js"></script>
   <script src="js/game_objects/PlayerPanel.js"></script>
   <script src="js/game_objects/PlayerOverviewPanel.js"></script>
-  <script src="startScreen.js"></script>
-  <script src="mainScreen.js"></script>
-  <script src="PlayerPanel.js"></script>
-  <script src="loadScreen.js"></script>
-  <script src="editorScreen.js"></script>
+  <script src="src/Scenes/startScreen.js"></script>
+  <script src="src/Scenes/mainScreen.js"></script>
+  <script src="src/Scenes/loadScreen.js"></script>
+  <script src="src/Scenes/editorScreen.js"></script>
   <!-- game classes -->
-  <script src="js/HexMover.js"></script>
-  <script src="js/Tank.js"></script>
-  <script src="js/HexMap.js"></script>
-  <script src="js/Tile.js"></script>
-  <script src="js/Terrain.js"></script>
-  <script src="game.js"></script>
+  <script src="src/HexMap/HexMover.js"></script>
+  <script src="src/Tank/Tank.js"></script>
+  <script src="src/HexMap/HexMap.js"></script>
+  <script src="src/Tiles/Tile.js"></script>
+  <script src="src/Terrain/Terrain.js"></script>
+  <script src="src/Game/game.js"></script>
+
 <body>
   <div id="play"></div>
 </body>
+
 </html>

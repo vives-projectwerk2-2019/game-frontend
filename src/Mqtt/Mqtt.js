@@ -20,9 +20,10 @@ class Mqtt {
       for (let i = 0; i < receivedMessage.players.length; i++) {
         let username = receivedMessage.players[i].name;
         if (!arrayPlayers.includes(username)) {
+          arrayPlayers.push(username);
           mqtt.scene.createTankSprite(receivedMessage.players[i]);
         } else {
-          console.log(receivedMessage.players[i]);
+          //console.log(receivedMessage.players[i]);
           mqtt.scene.setTankPosition(receivedMessage.players[i]);
         }
       }

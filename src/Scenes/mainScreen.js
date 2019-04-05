@@ -5,7 +5,7 @@ var timedEvent;
 var timeRemaining;
 var rect;
 var graphics;
-
+let tankObjects = [];
 class Main extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
@@ -52,7 +52,7 @@ class Main extends Phaser.Scene {
     let y = dataInput.tank.position.y;
     let addons = dataInput.tank.addons;
     let rotation = dataInput.tank.rotation;
-    console.log(dataInput);
+    // console.log(dataInput);
 
     username = new Tank(
       username,
@@ -65,6 +65,7 @@ class Main extends Phaser.Scene {
       this.map,
       45
     );
+    tankObjects.push(username);
   }
 
   create() {
@@ -75,9 +76,8 @@ class Main extends Phaser.Scene {
 
       scene.mqtt = new Mqtt(scene);
       //scoreboard
+
       this.player = new PlayerOverviewPanel(this, 1200, 50, null);
-      //this.somePlayer = new PlayerPanel(this, 1200, 100, null, 'jurne', 'tankblue');
-      
       this.player.addPlayer('jurne', 'tankblue');
       this.player.addPlayer('fred', 'tankgreen');
       this.player.addPlayer('jop', 'tankred');
@@ -86,10 +86,10 @@ class Main extends Phaser.Scene {
       this.player.addPlayer('jop', 'tankgrey');
       this.player.addPlayer('jurne', 'tankpurple');
       this.player.addPlayer('fred', 'tankyellow');
-      
 
+      
       //Timer
-      console.log(this);
+      // console.log(this);
       text = this.add
         .text(100, 37, "", { fontSize: 24, font: "Arial", fill: "#FFFFFF" })
         .setOrigin(0.5, 0.5);
@@ -139,18 +139,33 @@ class Main extends Phaser.Scene {
     graphics.fillStyle(0x008000, 1);
     graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
     if (timeRemaining < 10000) {
-      graphics.fillStyle(0xFF8C00, 1);
-      graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
+      graphics.fillStyle(0xff8c00, 1);
+      graphics.fillRect(
+        175,
+        29,
+        (window.innerWidth / 18000) * timeRemaining,
+        18
+      );
       if (timeRemaining < 5000) {
-        graphics.fillStyle(0xFF0000, 1);
-        graphics.fillRect(175, 29, (window.innerWidth / 18000) * timeRemaining, 18);
-        finalCountDown.setText(15 - timedEvent.getElapsedSeconds().toString().substr(0, 2));
+        graphics.fillStyle(0xff0000, 1);
+        graphics.fillRect(
+          175,
+          29,
+          (window.innerWidth / 18000) * timeRemaining,
+          18
+        );
+        finalCountDown.setText(
+          15 -
+            timedEvent
+              .getElapsedSeconds()
+              .toString()
+              .substr(0, 2)
+        );
         if (timeRemaining == 0) {
           finalCountDown.setText(" ");
         }
       }
     }
-
   }
   //Empty onEvent for Length
   onEvent() {
@@ -158,10 +173,17 @@ class Main extends Phaser.Scene {
   }
   setTankPosition(receivedMessage) {
     var dataInput = receivedMessage;
-    this.receivedMessage.name.setPosition(
-      dataInput.tank.position.x,
-      dataInput.tank.position.y,
-      dataInput.tank.rotation
-    );
+    //console.log(dataInput.name);
+
+    for (let i = 0; i < tankObjects.length; i++) {
+      const element = tankObjects[i];
+      if (element.username == dataInput.name) {
+        element.setPosition(
+          dataInput.tank.position.x,
+          dataInput.tank.position.y,
+          dataInput.tank.rotation
+        );
+      }
+    }
   }
 }
