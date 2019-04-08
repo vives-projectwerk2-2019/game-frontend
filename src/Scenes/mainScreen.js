@@ -81,11 +81,13 @@ class mainScreen extends Phaser.Scene {
       this.player.addPlayer('jurne', 'tankblue');
       this.player.addPlayer('fred', 'tankgreen');
       this.player.addPlayer('jop', 'tankred');
-      this.player.addPlayer('jurne', 'tankblack');
-      this.player.addPlayer('fred', 'tankcyan');
-      this.player.addPlayer('jop', 'tankgrey');
-      this.player.addPlayer('jurne', 'tankpurple');
-      this.player.addPlayer('fred', 'tankyellow');
+      this.player.addPlayer('test0', 'tankblack');
+      this.player.addPlayer('test1', 'tankcyan', 5);
+      this.player.addPlayer('test2', 'tankgrey', 6);
+      this.player.addPlayer('test3', 'tankpurple', 7);
+      this.player.addPlayer('test4', 'tankyellow', 8);
+
+      //this.player.addData('jurne', '10', '20');
 
       
       //Timer
