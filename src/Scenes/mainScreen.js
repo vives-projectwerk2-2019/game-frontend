@@ -73,45 +73,53 @@ class mainScreen extends Phaser.Scene {
     this.background = this.add.image(1200 / 2, 800 / 2, "background");
     let scene = this;
     this.map.loaded.then(() => {
-      scene.map.generateMap();
+        scene.map.generateMap();
 
-      scene.mqtt = new Mqtt(scene);
-      //scoreboard
+        scene.mqtt = new Mqtt(scene);
+        //scoreboard
 
-      this.player = new PlayerOverviewPanel(this, 1200, 50, null);
-      this.player.addPlayer('jurne', 'tankblue');
-      this.player.addPlayer('fred', 'tankgreen');
-      this.player.addPlayer('jop', 'tankred');
-      this.player.addPlayer('test0', 'tankblack');
-      this.player.addPlayer('test1', 'tankcyan', 5);
-      this.player.addPlayer('test2', 'tankgrey', 6);
-      this.player.addPlayer('test3', 'tankpurple', 7);
-      this.player.addPlayer('test4', 'tankyellow', 8);
+        this.player = new PlayerOverviewPanel(this, 1200, 50, null);
+        this.player.addPlayer('jurne', 'tankblue');
+        this.player.addPlayer('fred', 'tankgreen');
+        this.player.addPlayer('jop', 'tankred');
+        this.player.addPlayer('test0', 'tankblack');
+        this.player.addPlayer('test1', 'tankcyan');
+        this.player.addPlayer('test2', 'tankgrey');
+        this.player.addPlayer('test3', 'tankpurple');
+        this.player.addPlayer('test4', 'tankyellow');
 
-      //this.player.addData('jurne', '10', '20');
+        for (let i = 0; i < 8; i++) {
+            let y = i * 50 + 30;
+            this.player.addData('200', '300', 50, y);
+        }
+        
+        for (let i = 0; i < 8; i++) {
+            let y = i * 50 + 30;
+            this.player.addData('20', '30', 50, y);
+        }
 
       
-      //Timer
-      // console.log(this);
-      finalCountDown = this.add
-        .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
-        .setOrigin(0.5, 0.5);
-      timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
+        //Timer
+        // console.log(this);
+        finalCountDown = this.add
+            .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
+            .setOrigin(0.5, 0.5);
+        timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
 
-      finalCountDown.setStroke("#000000", 8);
+        finalCountDown.setStroke("#000000", 8);
 
-      //Progress bar for timer
-      this.newProgressBar = new ProgressBar(this, 20, 20, 500, 20, 0x008000);
+        //Progress bar for timer
+        this.newProgressBar = new ProgressBar(this, 20, 20, 500, 20, 0x008000);
     });
 
     //explosion
     var explosion = {
-      key: "explode",
-      frames: this.anims.generateFrameNumbers("explosion", {
-        frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-      }),
-      frameRate: 5,
-      repeat: 0
+        key: "explode",
+        frames: this.anims.generateFrameNumbers("explosion", {
+            frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        }),
+        frameRate: 5,
+        repeat: 0
     };
     this.anims.create(explosion);
   }

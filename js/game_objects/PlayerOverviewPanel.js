@@ -9,7 +9,7 @@ class PlayerOverviewPanel extends Phaser.GameObjects.Container {
         // let title = scene.add.text(5, 5, "Players:",
         // { font: 'Arial', fill: '#ff0000' }).setOrigin(0, 0);
         // title.setFontSize(48);
-    this.add(title);    // Remove from scene and add to container
+        //this.add(title);    // Remove from scene and add to container
 
     this.numberOfTanks = 0;
   }
@@ -20,13 +20,8 @@ class PlayerOverviewPanel extends Phaser.GameObjects.Container {
       this.numberOfTanks++;
     }
 
-    addData(id, health, shield) {
-        let healthtext = scene.add.text(5, 5, health,
-            { fontSize: 48, font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
-        this.add(healthtext);
-        let shieldtext = scene.add.text(5, 5, shield,
-            { fontSize: 300, font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
-        this.add(shieldtext);
+    addData(health, shield, x, y) {
+        this.add(new HealthPanel(this.scene, x, y, null, health, shield));
   
     }
 
