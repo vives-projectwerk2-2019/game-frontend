@@ -1,5 +1,6 @@
 /*jshint esversion: 6 */
 arrayPlayers = [];
+hasdied = [0];
 class Mqtt {
   constructor(scene) {
     this.scene = scene;
@@ -19,20 +20,19 @@ class Mqtt {
 
       for (let i = 0; i < receivedMessage.players.length; i++) {
         let username = receivedMessage.players[i].name;
+        let player = receivedMessage.players[i];
         if (!arrayPlayers.includes(username)) {
           arrayPlayers.push(username);
-          mqtt.scene.createTankSprite(receivedMessage.players[i]);
+          mqtt.scene.createTankSprite(player);
         } else {
           //console.log(receivedMessage.players[i]);
-          mqtt.scene.setTankPosition(receivedMessage.players[i]);
+          mqtt.scene.setTankPosition(player);
+        }
+        if (player.tank.health <= 0 && !hasdied[i]) {
+          mqtt.scene.destroyTank(username);
+          hasdied[i] = 1;
         }
       }
-
-      // Object.keys(receivedMessage.players).forEach(player => {
-      //   if (!arrayPlayers[player]) {
-      //     arrayPlayers[player] = mqtt.scene.createTankSprite(player);
-      //   }
-      // });
     };
     // connect the client
     this.client.connect({

@@ -6,7 +6,7 @@ var timerLength = 15000; // (in ms)
 var timeRemaining;
 var rect;
 var graphics;
-let tankObjects = [];
+let allTanks = [];
 class mainScreen extends Phaser.Scene {
   constructor() {
     super({ key: "mainScreen" });
@@ -66,60 +66,81 @@ class mainScreen extends Phaser.Scene {
       this.map,
       45
     );
-    tankObjects.push(username);
+    allTanks.push(username);
+  }
+  getCurrentTank(username) {
+    this.username = username;
+    for (let index = 0; index < allTanks.length; index++) {
+      const element = allTanks[index];
+      if (username == element.username) {
+        return element;
+      }
+    }
+  }
+  destroyTank(username) {
+    this.username = username;
+    let tank = this.getCurrentTank(username);
+    this.add
+      .sprite(
+        tank.currentTile.position.x,
+        tank.currentTile.position.y,
+        "explosion"
+      )
+      .play("explode");
+
+    tank.sprite.setTexture("destroyedTank");
   }
 
   create() {
     this.background = this.add.image(1200 / 2, 800 / 2, "background");
     let scene = this;
     this.map.loaded.then(() => {
-        scene.map.generateMap();
+      scene.map.generateMap();
 
-        scene.mqtt = new Mqtt(scene);
-        //scoreboard
+      scene.mqtt = new Mqtt(scene);
+      //scoreboard
 
-        this.player = new PlayerOverviewPanel(this, 1200, 50, null);
-        this.player.addPlayer('jurne', 'tankblue');
-        this.player.addPlayer('fred', 'tankgreen');
-        this.player.addPlayer('jop', 'tankred');
-        this.player.addPlayer('test0', 'tankblack');
-        this.player.addPlayer('test1', 'tankcyan');
-        this.player.addPlayer('test2', 'tankgrey');
-        this.player.addPlayer('test3', 'tankpurple');
-        this.player.addPlayer('test4', 'tankyellow');
+      this.player = new PlayerOverviewPanel(this, 1200, 50, null);
+      this.player.addPlayer("jurne", "tankblue");
+      this.player.addPlayer("fred", "tankgreen");
+      this.player.addPlayer("jop", "tankred");
+      this.player.addPlayer("test0", "tankblack");
+      this.player.addPlayer("test1", "tankcyan");
+      this.player.addPlayer("test2", "tankgrey");
+      this.player.addPlayer("test3", "tankpurple");
+      this.player.addPlayer("test4", "tankyellow");
 
-        for (let i = 0; i < 8; i++) {
-            let y = i * 50 + 30;
-            this.player.addData('200', '300', 50, y);
-        }
-        
-        for (let i = 0; i < 8; i++) {
-            let y = i * 50 + 30;
-            this.player.addData('20', '30', 50, y);
-        }
+      for (let i = 0; i < 8; i++) {
+        let y = i * 50 + 30;
+        this.player.addData("200", "300", 50, y);
+      }
 
-      
-        //Timer
-        // console.log(this);
-        finalCountDown = this.add
-            .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
-            .setOrigin(0.5, 0.5);
-        timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
+      for (let i = 0; i < 8; i++) {
+        let y = i * 50 + 30;
+        this.player.addData("20", "30", 50, y);
+      }
 
-        finalCountDown.setStroke("#000000", 8);
+      //Timer
+      // console.log(this);
+      finalCountDown = this.add
+        .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
+        .setOrigin(0.5, 0.5);
+      timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
 
-        //Progress bar for timer
-        this.newProgressBar = new ProgressBar(this, 20, 20, 500, 20, 0x008000);
+      finalCountDown.setStroke("#000000", 8);
+
+      //Progress bar for timer
+      this.newProgressBar = new ProgressBar(this, 20, 20, 500, 20, 0x008000);
     });
 
     //explosion
     var explosion = {
-        key: "explode",
-        frames: this.anims.generateFrameNumbers("explosion", {
-            frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        }),
-        frameRate: 5,
-        repeat: 0
+      key: "explode",
+      frames: this.anims.generateFrameNumbers("explosion", {
+        frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      }),
+      frameRate: 5,
+      repeat: 0
     };
     this.anims.create(explosion);
   }
@@ -132,13 +153,13 @@ class mainScreen extends Phaser.Scene {
         .getElapsed()
         .toString()
         .substr(0, 5);
-    this.newProgressBar.setProgress( 0.015 * timeRemaining);
+    this.newProgressBar.setProgress(0.015 * timeRemaining);
     if (timeRemaining < 0.66 * timerLength) {
       this.newProgressBar.setColor(0xff8c00);
       if (timeRemaining < 0.33 * timerLength) {
-        this.newProgressBar.setColor(0xFF0000);
+        this.newProgressBar.setColor(0xff0000);
         finalCountDown.setText(
-          timerLength/1000 -
+          timerLength / 1000 -
             timedEvent
               .getElapsedSeconds()
               .toString()
@@ -149,7 +170,6 @@ class mainScreen extends Phaser.Scene {
         }
       }
     }
-      
   }
   //Empty onEvent for Length
   onEvent() {
@@ -159,8 +179,8 @@ class mainScreen extends Phaser.Scene {
     var dataInput = receivedMessage;
     //console.log(dataInput.name);
 
-    for (let i = 0; i < tankObjects.length; i++) {
-      const element = tankObjects[i];
+    for (let i = 0; i < allTanks.length; i++) {
+      const element = allTanks[i];
       if (element.username == dataInput.name) {
         element.setPosition(
           dataInput.tank.position.x,
