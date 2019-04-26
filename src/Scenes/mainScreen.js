@@ -171,10 +171,12 @@ class mainScreen extends Phaser.Scene {
       }
     }
   }
+  
   //Empty onEvent for Length
   onEvent() {
     console.log("Timer has ended");
   }
+
   setTankPosition(receivedMessage) {
     var dataInput = receivedMessage;
     //console.log(dataInput.name);
