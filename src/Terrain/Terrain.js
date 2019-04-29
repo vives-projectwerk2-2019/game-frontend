@@ -49,3 +49,5 @@ class Terrain {
 	}
 	
 };
+
+export default Terrain;

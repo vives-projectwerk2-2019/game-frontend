@@ -1,3 +1,5 @@
+import Tile from "../Tiles/Tile";
+
 /*jshint esversion: 6 */
 
 class HexMap {
@@ -127,3 +129,5 @@ class HexMap {
     return map;
   }
 }
+
+export default HexMap;

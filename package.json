@@ -18,6 +18,11 @@
   },
   "homepage": "https://github.com/vives-projectwerk2-2019/game-frontend#readme",
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-loader": "^8.0.5",
+    "paho-mqtt": "^1.1.0",
+    "phaser": "^3.16.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1"
   }

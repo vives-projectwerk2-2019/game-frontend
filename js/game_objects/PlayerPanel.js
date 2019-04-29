@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 class PlayerPanel extends Phaser.GameObjects.Container {
     constructor(scene, x, y, children, playerName, assetKey) {
         super(scene, x, y, children);
@@ -23,3 +25,5 @@ class PlayerPanel extends Phaser.GameObjects.Container {
 
     // preUpdate(time, delta) {}
 }
+
+export default PlayerPanel;

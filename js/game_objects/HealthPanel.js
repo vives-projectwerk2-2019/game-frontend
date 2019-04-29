@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 class HealthPanel extends Phaser.GameObjects.Container {
     constructor(scene, x, y, children, healthvalue, shieldvalue) {
         super(scene, x, y, children);
@@ -35,3 +37,5 @@ class HealthPanel extends Phaser.GameObjects.Container {
 
     // preUpdate(time, delta) {}
 }
+
+export default HealthPanel;

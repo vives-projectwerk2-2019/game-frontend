@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 class loadScreen extends Phaser.Scene{
     constructor(){
         super({key:"loadScreen"});
@@ -96,3 +98,5 @@ class loadScreen extends Phaser.Scene{
         }
     }*/
 }
+
+export default loadScreen;
