@@ -1,11 +1,19 @@
 import { Client, Message } from "paho-mqtt"
 
+const mqtt_settings = {
+  host: process.env.MQTT_BROKER_HOST,
+  port: Number(process.env.MQTT_BROKER_PORT),
+  path: process.env.MQTT_BROKER_PATH,
+  useSSL: (process.env.MQTT_BROKER_USE_SSL == "true")
+};
+
 /*jshint esversion: 6 */
 class Mqtt {
   constructor(scene) {
     this.scene = scene;
     let mqtt = this;
-    this.client = new Client("mqtt.labict.be", 1884, "");
+    console.log(mqtt_settings);
+    this.client = new Client(mqtt_settings.host, mqtt_settings.port, mqtt_settings.path, "hell");
 
     this.arrayPlayers = [];
     this.hasdied = [0];
@@ -39,6 +47,7 @@ class Mqtt {
     };
     // connect the client
     this.client.connect({
+      useSSL: mqtt_settings.useSSL,
       onSuccess: function() {
         // Once a connection has been made, make a subscription and send a message.
         console.log("onConnect");

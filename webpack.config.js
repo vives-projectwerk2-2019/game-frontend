@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   // entry: "./app.js",
@@ -24,5 +25,8 @@ module.exports = {
   stats: {
       colors: true
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
+  plugins: [
+    new Dotenv()
+  ]
 }
