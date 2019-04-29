@@ -8,17 +8,23 @@ Clone project and install dependencies with
 npm install
 ```
 
+You can create a `.env` file that contains the configuration for the application to run. (see `.env.example` for an example configuration)
+
 ## Running development setup
 
 ```shell
 npm run dev
 ```
 
+This will start a server on [http://localhost:3000](http://localhost:3000), and will watch JavaScript files for changes and will recompile them when changed.
+
 ## Building production sources
 
 ```shell
 npm run build-prod
 ```
+
+This will only build the JavaScript files into the `/dist` directory. The compiled files will be optimized for production environments.
 
 ## 1. Uitleg
 
