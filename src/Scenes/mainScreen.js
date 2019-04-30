@@ -171,9 +171,6 @@ class mainScreen extends Phaser.Scene {
         this.player.addPlayer('test4', 'tankyellow', '123408', idsaver);
         this.data.addData('200', '300', 50, '123408', idsaver);
 
-        /*this.data.setHealth(100);
-        this.data.setShield(100);*/
-
         //Timer
         // console.log(this);
         finalCountDown = this.add
