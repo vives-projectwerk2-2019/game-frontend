@@ -1,5 +1,31 @@
 # Game
 
+## Setup
+
+Clone project and install dependencies with 
+
+```shell
+npm install
+```
+
+You can create a `.env` file that contains the configuration for the application to run. (see `.env.example` for an example configuration)
+
+## Running development setup
+
+```shell
+npm run dev
+```
+
+This will start a server on [http://localhost:3000](http://localhost:3000), and will watch JavaScript files for changes and will recompile them when changed.
+
+## Building production sources
+
+```shell
+npm run build-prod
+```
+
+This will only build the JavaScript files into the `/dist` directory. The compiled files will be optimized for production environments.
+
 ## 1. Uitleg
 
 We maken een spel met gebruik van phaser. Het spel gaat een oorlogsspel zijn waarbij iedere speler (max 8) een eigen tank bestuurt. De bedoeling dan om je tegenstanders uit te schakelen. Op deze tank kan je uitbreiden speciale eigenschappen. Deze eigenschappen kan je kiezen door op je controller dongles in te pluggen. Zo zijn er specificaties die je kan kiezen namelijk de soort tank, je wapen, je armor en de boost die je tank heeft. Het voordeel hiervan is dat je zelf je tank kan samenstellen uit en hele soort mogelijkheden. Maar naast de dongles voor je de eigenschappen van je tank heb je ook een dongle met je eigen gegevens. Dit is gemakkelijk want dan kan je overal spelen met je eigen account zonder dat het lang duurt totdat je met je eigen account ingelogd bent.

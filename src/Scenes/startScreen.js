@@ -1,10 +1,12 @@
+import Phaser from "phaser";
+
 class startScreen extends Phaser.Scene {
     constructor() {
         super({ key: "startScreen" });
     }
 
     preload() { //where assets are loaded
-        this.load.image('background', 'assets/background.jpg');
+        this.load.image('background', '/assets/background.jpg');
     }
 
     create() {
@@ -23,3 +25,5 @@ class startScreen extends Phaser.Scene {
         }
     }
 }
+
+export default startScreen;

@@ -10,3 +10,5 @@ class Tile {
         this.body.setTexture(texture);
     }
 }
+
+export default Tile;
