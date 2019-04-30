@@ -9,7 +9,7 @@ class HealthOverviewPanel extends Phaser.GameObjects.Container {
     }
     
     addData(health, shield, x, id, idsaver) {
-        let newY = (this.numberOfTanks > 0 ? this.last.y + 50 : 30);
+        let newY = (this.numberOfTanks > 0 ? this.last.y + 50 : 20);
         this.numberOfTanks ++ ;
         //this.add(new HealthPanel(this.scene, x, newY, null, idsaver[0], health, shield));
         
