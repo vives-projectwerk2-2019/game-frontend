@@ -186,13 +186,6 @@ class mainScreen extends Phaser.Scene {
         .setOrigin(0.5, 0.5);
       timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
 
-      //Timer
-      // console.log(this);
-      finalCountDown = this.add
-        .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
-        .setOrigin(0.5, 0.5);
-      timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
-
       finalCountDown.setStroke("#000000", 8);
 
       //Progress bar for timer
