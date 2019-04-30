@@ -273,7 +273,6 @@ class mainScreen extends Phaser.Scene {
       this
     );
   }
-<<<<<<< HEAD
   resetAllTanks() {
     for (let i = 0; i < allTanks.length; i++) {
       const element = allTanks[i];
@@ -281,9 +280,6 @@ class mainScreen extends Phaser.Scene {
     }
     allTanks[null];
   }
-=======
-
->>>>>>> a0fcc01684b2063d88387f75997d95408f09959d
 }
 
 export default mainScreen;
