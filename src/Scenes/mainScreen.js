@@ -153,9 +153,6 @@ class mainScreen extends Phaser.Scene {
         this.data.addData('200', '300', 50, '123408', idsaver);
         i++;
 
-        //this.updateee = new HealthPanel(this, 1200, 50, null, 123407, 50, 30);
-        //this.updateee.update();
-        
         //Timer
         // console.log(this);
         finalCountDown = this.add
