@@ -27,7 +27,12 @@ class mainScreen extends Phaser.Scene {
     this.map = new HexMap(this, 60, 40, 100, "MapConfiguration.json");
 
     //Animations
-    this.load.spritesheet("explosion", "assets/animations/explosion.png", {
+    // this.load.spritesheet("explosion", "assets/animations/explosion.png", {
+    //   frameWidth: 64,
+    //   frameHeight: 64,
+    //   endFrame: 9
+    // });
+    this.load.spritesheet("flames", "assets/animations/flames.png", {
       frameWidth: 64,
       frameHeight: 64,
       endFrame: 9
@@ -91,6 +96,18 @@ class mainScreen extends Phaser.Scene {
     tank.sprite.setTexture("destroyedTank");
   }
 
+  playAnimation(name) {
+    // this.name = "Flammenwerpfer";
+    this.name = name;
+    if (this.name == "Flammenwerpfer") {
+      this.add.sprite(400, 400, "flames").play("flames");
+    }
+    if (this.name == "laser") {
+      // DO THINGS
+      // ...
+    }
+  }
+
   create() {
     this.background = this.add.image(1200 / 2, 800 / 2, "background");
     let scene = this;
@@ -109,6 +126,7 @@ class mainScreen extends Phaser.Scene {
       this.player.addPlayer("test2", "tankgrey");
       this.player.addPlayer("test3", "tankpurple");
       this.player.addPlayer("test4", "tankyellow");
+      this.setupKeyBinds();
 
       for (let i = 0; i < 8; i++) {
         let y = i * 50 + 30;
@@ -143,6 +161,17 @@ class mainScreen extends Phaser.Scene {
       repeat: 0
     };
     this.anims.create(explosion);
+
+    //Flames
+    var flames = {
+      key: "flames",
+      frames: this.anims.generateFrameNumbers("flames", {
+        frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+      }),
+      frameRate: 5,
+      repeat: 0
+    };
+    this.anims.create(flames);
   }
 
   update(delta) {
@@ -189,5 +218,17 @@ class mainScreen extends Phaser.Scene {
         );
       }
     }
+  }
+  setupKeyBinds() {
+    this.key_Z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+
+    this.input.keyboard.on(
+      "keyup_Z",
+      function(event) {
+        console.log();
+        this.playAnimation(name);
+      },
+      this
+    );
   }
 }
