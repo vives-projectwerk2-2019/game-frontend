@@ -96,13 +96,19 @@ class mainScreen extends Phaser.Scene {
     tank.sprite.setTexture("destroyedTank");
   }
 
-  playAnimation(name) {
-    // this.name = "Flammenwerpfer";
-    this.name = name;
-    if (this.name == "Flammenwerpfer") {
-      this.add.sprite(400, 400, "flames").play("flames");
-    }
-    if (this.name == "laser") {
+  playAnimation(firedweapon) {
+    this.firedweapon = firedweapon;
+    if (this.firedweapon == "Flammenwerpfer") {
+      // for (;;) {
+      this.add
+        .sprite(
+          tank.currentTile.position.x,
+          tank.currentTile.position.y,
+          "flames"
+        )
+        .play("flames");
+      // }
+    } else if (this.firedweapon == "laser") {
       // DO THINGS
       // ...
     }
@@ -200,7 +206,7 @@ class mainScreen extends Phaser.Scene {
       }
     }
   }
-  
+
   //Empty onEvent for Length
   onEvent() {
     console.log("Timer has ended");
@@ -228,7 +234,7 @@ class mainScreen extends Phaser.Scene {
       "keyup_Z",
       function(event) {
         console.log();
-        this.playAnimation(name);
+        this.playAnimation(firedweapon);
       },
       this
     );
