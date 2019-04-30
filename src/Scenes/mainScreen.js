@@ -122,36 +122,39 @@ class mainScreen extends Phaser.Scene {
         this.player = new PlayerOverviewPanel(this, 1200, 50, null);
         this.data = new HealthOverviewPanel(this, 1200, 55, null);
         this.player.addPlayer('jurne', 'tankblue', '123401', idsaver); // naam, tank, id
-        this.data.addData('200', '300', 50, '123401', idsaver);
+        this.data.addData('100', '300', 50, 0, '123401', idsaver);
         i++;
 
         this.player.addPlayer('fred', 'tankgreen', '123402', idsaver);
-        this.data.addData('200', '300', 50, '123402', idsaver);
+        this.data.addData('200', '300', 50, 0, '123402', idsaver);
         i++;
 
         this.player.addPlayer('jop', 'tankred', '123403', idsaver);
-        this.data.addData('200', '300', 50, '123403', idsaver);
+        this.data.addData('300', '300', 50, 0, '123403', idsaver);
         i++;
 
         this.player.addPlayer('test0', 'tankblack' ,'123404', idsaver);
-        this.data.addData('200', '300', 50, '123404', idsaver);
+        this.data.addData('200', '300', 50, 0, '123404', idsaver);
         i++;
 
         this.player.addPlayer('test1', 'tankcyan', '123405', idsaver);
-        this.data.addData('200', '300', 50, '123405', idsaver);
+        this.data.addData('200', '300', 50, 0, '123405', idsaver);
         i++;
 
         this.player.addPlayer('test2', 'tankgrey', '123406', idsaver);
-        this.data.addData('200', '30', 50, '123406', idsaver);
+        this.data.addData('200', '30', 50, 0, '123406', idsaver);
         i++;
 
         this.player.addPlayer('test3', 'tankpurple', '123407', idsaver);
-        this.data.addData('200', '300', 50, '123407', idsaver);
+        this.data.addData('200', '300', 50, 0, '123407', idsaver);
         i++;
 
         this.player.addPlayer('test4', 'tankyellow', '123408', idsaver);
-        this.data.addData('200', '300', 50, '123408', idsaver);
+        this.data.addData('200', '300', 50, 0, '123408', idsaver);
         i++;
+
+        /*this.data.setHealth(100);
+        this.data.setShield(100);*/
 
         //Timer
         // console.log(this);
