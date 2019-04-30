@@ -186,6 +186,22 @@ class HexMover {
     }
   }
 
+  lerpTurn(currentValue, targetValue) {
+    var currentValue = this.currentValue = 60;
+    var targetValue = this.targetValue = 120;
+
+    for (i = 0; currentValue != targetValue; i++) {
+      if (targetValue > currentValue) {
+        currentValue += lerp;
+        }
+      else if (targetValue < currentValue) {
+        currentValue -= lerp;
+      }
+    console.log(currentValue);
+    return currentValue;
+    }
+  }
+
   updateCurrentRotation() {
     this.sprite.setAngle(60 * this.currentRotation - 30);
   }
