@@ -223,7 +223,7 @@ class mainScreen extends Phaser.Scene {
       }
     }
   }
-  
+
   //Empty onEvent for Length
   onEvent() {
     console.log("Timer has ended");
@@ -256,7 +256,13 @@ class mainScreen extends Phaser.Scene {
       this
     );
   }
-
+  resetAllTanks() {
+    for (let i = 0; i < allTanks.length; i++) {
+      const element = allTanks[i];
+      element.destroy();
+    }
+    allTanks[null];
+  }
 }
 
 export default mainScreen;
