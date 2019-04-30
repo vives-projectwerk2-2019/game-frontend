@@ -1,5 +1,4 @@
-let i = 0;
-addonUses = [0, 0, 0];
+import HexMover from "../HexMap/HexMover";
 
 class Tank extends HexMover {
   constructor(
@@ -15,6 +14,7 @@ class Tank extends HexMover {
     dev_id
   ) {
     super(username, texture, x, y, addons, rotation, scene, map, size, dev_id);
+    this.addonUses = [];
   }
   printHealth() {
     console.log(this.health);
@@ -22,7 +22,7 @@ class Tank extends HexMover {
 
   setAddons(dataInput) {
     this.dataInput = dataInput;
-    for (i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
       if (dataInput.Controller.addons[i] !== null) {
         console.log(dataInput.Controller.addons[i]);
 
@@ -136,3 +136,5 @@ class Tank extends HexMover {
     }
   }
 }
+
+export default Tank;

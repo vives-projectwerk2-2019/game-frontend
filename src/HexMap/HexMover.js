@@ -1,3 +1,5 @@
+import Terrain from "../Terrain/Terrain"
+
 /*jshint esversion: 6 */
 
 class HexMover {
@@ -210,3 +212,5 @@ class HexMover {
     return this.map.cubeToOddr(this.currentTile.cubePosition);
   }
 }
+
+export default HexMover;

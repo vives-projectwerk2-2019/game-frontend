@@ -1,3 +1,10 @@
+import Phaser from "phaser";
+import HexMap from "../HexMap/HexMap";
+import Mqtt from "../Mqtt/Mqtt";
+import PlayerOverviewPanel from "../../js/game_objects/PlayerOverviewPanel";
+import ProgressBar from "../ProgressBar/ProgressBar";
+import Tank from "../Tank/Tank";
+
 //Timer
 var text;
 var finalCountDown;
@@ -256,3 +263,5 @@ class mainScreen extends Phaser.Scene {
     );
   }
 }
+
+export default mainScreen;
