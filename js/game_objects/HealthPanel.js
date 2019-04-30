@@ -39,13 +39,13 @@ class HealthPanel extends Phaser.GameObjects.Container {
         this.add(this.shieldvaluetext);    // Remove from scene and add to container
         
 
-        /*this.healthvaluetext={};
-        this.healthvaluetext[iTank] = scene.add.text(x, y, healthvalue,
+        /*var healthvaluetext=[];
+        healthvaluetext[iTank] = scene.add.text(x, y, healthvalue,
             { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
-            this.healthvaluetext[iTank].setFontSize(18);
-        this.add(this.healthvaluetext[iTank]);    // Remove from scene and add to container
+            healthvaluetext[iTank].setFontSize(18);
+        this.add(healthvaluetext[iTank]);    // Remove from scene and add to container
         y = y + 20;
-        this.shield[iTank] = scene.add.text(x, y, shieldvalue,
+        /*this.shield[iTank] = scene.add.text(x, y, shieldvalue,
             { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
             this.shield[iTank].setFontSize(18);
         this.add(this.shield[iTank]);    // Remove from scene and add to container*/
@@ -69,6 +69,7 @@ class HealthPanel extends Phaser.GameObjects.Container {
         this.shieldvaluetext.setText(this.teller);
         this.newProgressBarHealth.setProgress(100- this.teller);
         this.newProgressBarShield.setProgress(100- this.teller);
+        //healthvaluetext[1].setText(10);
         
     }
 }
