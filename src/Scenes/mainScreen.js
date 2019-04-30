@@ -98,16 +98,18 @@ class mainScreen extends Phaser.Scene {
 
   playAnimation(firedweapon) {
     this.firedweapon = firedweapon;
+    var damagedealer = "damagedealer";
+    var damagetaker = "damagetaker";
     if (this.firedweapon == "Flammenwerpfer") {
-      // for (;;) {
-      this.add
-        .sprite(
-          tank.currentTile.position.x,
-          tank.currentTile.position.y,
-          "flames"
-        )
-        .play("flames");
-      // }
+      for (;;) {
+        this.add
+          .sprite(
+            tank.currentTile.position.x,
+            tank.currentTile.position.y,
+            "flames"
+          )
+          .play("flames");
+      }
     } else if (this.firedweapon == "laser") {
       // DO THINGS
       // ...
@@ -118,53 +120,53 @@ class mainScreen extends Phaser.Scene {
     this.background = this.add.image(1200 / 2, 800 / 2, "background");
     let scene = this;
     this.map.loaded.then(() => {
-        scene.map.generateMap();
+      scene.map.generateMap();
 
-        scene.mqtt = new Mqtt(scene);
-        //scoreboard
+      scene.mqtt = new Mqtt(scene);
+      //scoreboard
 
-        var idsaver = {};
+      var idsaver = {};
 
-        this.player = new PlayerOverviewPanel(this, 1200, 50, null);
-        this.data = new HealthOverviewPanel(this, 1200, 55, null);
-        this.player.addPlayer('jurne', 'tankblue', '123401', idsaver); // naam, tank, id
-        this.data.addData('200', '300', 50, '123401', idsaver);
-        i++;
+      this.player = new PlayerOverviewPanel(this, 1200, 50, null);
+      this.data = new HealthOverviewPanel(this, 1200, 55, null);
+      this.player.addPlayer("jurne", "tankblue", "123401", idsaver); // naam, tank, id
+      this.data.addData("200", "300", 50, "123401", idsaver);
+      i++;
 
-        this.player.addPlayer('fred', 'tankgreen', '123402', idsaver);
-        this.data.addData('200', '300', 50, '123402', idsaver);
-        i++;
+      this.player.addPlayer("fred", "tankgreen", "123402", idsaver);
+      this.data.addData("200", "300", 50, "123402", idsaver);
+      i++;
 
-        this.player.addPlayer('jop', 'tankred', '123403', idsaver);
-        this.data.addData('200', '300', 50, '123403', idsaver);
-        i++;
+      this.player.addPlayer("jop", "tankred", "123403", idsaver);
+      this.data.addData("200", "300", 50, "123403", idsaver);
+      i++;
 
-        this.player.addPlayer('test0', 'tankblack' ,'123404', idsaver);
-        this.data.addData('200', '300', 50, '123404', idsaver);
-        i++;
+      this.player.addPlayer("test0", "tankblack", "123404", idsaver);
+      this.data.addData("200", "300", 50, "123404", idsaver);
+      i++;
 
-        this.player.addPlayer('test1', 'tankcyan', '123405', idsaver);
-        this.data.addData('200', '300', 50, '123405', idsaver);
-        i++;
+      this.player.addPlayer("test1", "tankcyan", "123405", idsaver);
+      this.data.addData("200", "300", 50, "123405", idsaver);
+      i++;
 
-        this.player.addPlayer('test2', 'tankgrey', '123406', idsaver);
-        this.data.addData('200', '30', 50, '123406', idsaver);
-        i++;
+      this.player.addPlayer("test2", "tankgrey", "123406", idsaver);
+      this.data.addData("200", "30", 50, "123406", idsaver);
+      i++;
 
-        this.player.addPlayer('test3', 'tankpurple', '123407', idsaver);
-        this.data.addData('200', '300', 50, '123407', idsaver);
-        i++;
+      this.player.addPlayer("test3", "tankpurple", "123407", idsaver);
+      this.data.addData("200", "300", 50, "123407", idsaver);
+      i++;
 
-        this.player.addPlayer('test4', 'tankyellow', '123408', idsaver);
-        this.data.addData('200', '300', 50, '123408', idsaver);
-        i++;
+      this.player.addPlayer("test4", "tankyellow", "123408", idsaver);
+      this.data.addData("200", "300", 50, "123408", idsaver);
+      i++;
 
-        //Timer
-        // console.log(this);
-        finalCountDown = this.add
-            .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
-            .setOrigin(0.5, 0.5);
-        timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
+      //Timer
+      // console.log(this);
+      finalCountDown = this.add
+        .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
+        .setOrigin(0.5, 0.5);
+      timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
 
       //Timer
       // console.log(this);
