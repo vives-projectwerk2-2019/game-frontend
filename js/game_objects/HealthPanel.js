@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import ProgressBar from "../../src/ProgressBar/ProgressBar";
 
 class HealthPanel extends Phaser.GameObjects.Container {
     constructor(scene, x, y, children, id, healthvalue, shieldvalue, iTank) {
