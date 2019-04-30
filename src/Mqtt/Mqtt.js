@@ -17,6 +17,9 @@ class Mqtt {
     this.client.onMessageArrived = function(message) {
       let receivedMessage = JSON.parse(message.payloadString);
       console.log(receivedMessage);
+      if (receivedMessage.commands.reset) {
+        mqtt.scene.resetAllTanks();
+      }
 
       for (let i = 0; i < receivedMessage.players.length; i++) {
         let username = receivedMessage.players[i].name;
@@ -25,7 +28,6 @@ class Mqtt {
           arrayPlayers.push(username);
           mqtt.scene.createTankSprite(player);
         } else {
-          //console.log(receivedMessage.players[i]);
           mqtt.scene.setTankPosition(player);
         }
         if (player.tank.health <= 0 && !hasdied[i]) {
