@@ -12,17 +12,14 @@ class PlayerOverviewPanel extends Phaser.GameObjects.Container {
         //this.add(title);    // Remove from scene and add to container
 
     this.numberOfTanks = 0;
-  }
-
-    addPlayer(player, assetKey, id) {
-      let newY = (this.numberOfTanks > 0 ? this.last.y + 100 : 30);
-      this.add(new PlayerPanel(this.scene, 0, newY, null, player, assetKey));
-      this.numberOfTanks++;
+   
     }
-
-    addData(health, shield, x, y) {
-        this.add(new HealthPanel(this.scene, x, y, null, health, shield));
-  
+    
+    addPlayer(player, assetKey, id, idsaver) {
+        idsaver[this.numberOfTanks] = id;
+        let newY = (this.numberOfTanks > 0 ? this.last.y + 100 : 30);
+        this.add(new PlayerPanel(this.scene, 0, newY, null, player, assetKey));   
+        this.numberOfTanks++;
     }
 
 }

@@ -78,27 +78,45 @@ class mainScreen extends Phaser.Scene {
         scene.mqtt = new Mqtt(scene);
         //scoreboard
 
+        var idsaver = {};
+
         this.player = new PlayerOverviewPanel(this, 1200, 50, null);
-        this.player.addPlayer('jurne', 'tankblue');
-        this.player.addPlayer('fred', 'tankgreen');
-        this.player.addPlayer('jop', 'tankred');
-        this.player.addPlayer('test0', 'tankblack');
-        this.player.addPlayer('test1', 'tankcyan');
-        this.player.addPlayer('test2', 'tankgrey');
-        this.player.addPlayer('test3', 'tankpurple');
-        this.player.addPlayer('test4', 'tankyellow');
+        this.data = new HealthOverviewPanel(this, 1200, 55, null);
+        this.player.addPlayer('jurne', 'tankblue', '123401', idsaver); // naam, tank, id
+        this.data.addData('200', '300', 50, '123401', idsaver);
+        i++;
 
-        for (let i = 0; i < 8; i++) {
-            let y = i * 50 + 30;
-            this.player.addData('200', '300', 50, y);
-        }
+        this.player.addPlayer('fred', 'tankgreen', '123402', idsaver);
+        this.data.addData('200', '300', 50, '123402', idsaver);
+        i++;
+
+        this.player.addPlayer('jop', 'tankred', '123403', idsaver);
+        this.data.addData('200', '300', 50, '123403', idsaver);
+        i++;
+
+        this.player.addPlayer('test0', 'tankblack' ,'123404', idsaver);
+        this.data.addData('200', '300', 50, '123404', idsaver);
+        i++;
+
+        this.player.addPlayer('test1', 'tankcyan', '123405', idsaver);
+        this.data.addData('200', '300', 50, '123405', idsaver);
+        i++;
+
+        this.player.addPlayer('test2', 'tankgrey', '123406', idsaver);
+        this.data.addData('200', '30', 50, '123406', idsaver);
+        i++;
+
+        this.player.addPlayer('test3', 'tankpurple', '123407', idsaver);
+        this.data.addData('200', '300', 50, '123407', idsaver);
+        i++;
+
+        this.player.addPlayer('test4', 'tankyellow', '123408', idsaver);
+        this.data.addData('200', '300', 50, '123408', idsaver);
+        i++;
+
+        //this.updateee = new HealthPanel(this, 1200, 50, null, 123407, 50, 30);
+        //this.updateee.update();
         
-        for (let i = 0; i < 8; i++) {
-            let y = i * 50 + 30;
-            this.player.addData('20', '30', 50, y);
-        }
-
-      
         //Timer
         // console.log(this);
         finalCountDown = this.add

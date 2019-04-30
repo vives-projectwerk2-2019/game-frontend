@@ -10,7 +10,7 @@ class PlayerPanel extends Phaser.GameObjects.Container {
 
         let image = scene.make.image({
             x: 5,
-            y: 20,
+            y: 35,
             key: assetKey,
             scale: {
                 x: 0.1,
