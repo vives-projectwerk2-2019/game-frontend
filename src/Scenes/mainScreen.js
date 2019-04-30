@@ -112,7 +112,6 @@ class mainScreen extends Phaser.Scene {
     this.background = this.add.image(1200 / 2, 800 / 2, "background");
     let scene = this;
     this.map.loaded.then(() => {
-<<<<<<< HEAD
         scene.map.generateMap();
 
         scene.mqtt = new Mqtt(scene);
@@ -163,33 +162,6 @@ class mainScreen extends Phaser.Scene {
             .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
             .setOrigin(0.5, 0.5);
         timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
-=======
-      scene.map.generateMap();
-
-      scene.mqtt = new Mqtt(scene);
-      //scoreboard
-
-      this.player = new PlayerOverviewPanel(this, 1200, 50, null);
-      this.player.addPlayer("jurne", "tankblue");
-      this.player.addPlayer("fred", "tankgreen");
-      this.player.addPlayer("jop", "tankred");
-      this.player.addPlayer("test0", "tankblack");
-      this.player.addPlayer("test1", "tankcyan");
-      this.player.addPlayer("test2", "tankgrey");
-      this.player.addPlayer("test3", "tankpurple");
-      this.player.addPlayer("test4", "tankyellow");
-      this.setupKeyBinds();
-
-      for (let i = 0; i < 8; i++) {
-        let y = i * 50 + 30;
-        this.player.addData("200", "300", 50, y);
-      }
-
-      for (let i = 0; i < 8; i++) {
-        let y = i * 50 + 30;
-        this.player.addData("20", "30", 50, y);
-      }
->>>>>>> 7e32a6352d4b10ccc3ae2ad4f506d58b6e6b2cdb
 
       //Timer
       // console.log(this);
