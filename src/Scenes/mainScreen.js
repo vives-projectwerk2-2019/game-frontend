@@ -1,3 +1,11 @@
+import Phaser from "phaser";
+import HexMap from "../HexMap/HexMap";
+import Mqtt from "../Mqtt/Mqtt";
+import PlayerOverviewPanel from "../../js/game_objects/PlayerOverviewPanel";
+import HealthOverviewPanel from "../../js/game_objects/HealthOverviewPanel";
+import ProgressBar from "../ProgressBar/ProgressBar";
+import Tank from "../Tank/Tank";
+
 //Timer
 var text;
 var finalCountDown;
@@ -141,35 +149,27 @@ class mainScreen extends Phaser.Scene {
         this.data = new HealthOverviewPanel(this, 1200, 55, null);
         this.player.addPlayer('jurne', 'tankblue', '123401', idsaver); // naam, tank, id
         this.data.addData('200', '300', 50, '123401', idsaver);
-        i++;
 
         this.player.addPlayer('fred', 'tankgreen', '123402', idsaver);
         this.data.addData('200', '300', 50, '123402', idsaver);
-        i++;
 
         this.player.addPlayer('jop', 'tankred', '123403', idsaver);
         this.data.addData('200', '300', 50, '123403', idsaver);
-        i++;
 
         this.player.addPlayer('test0', 'tankblack' ,'123404', idsaver);
         this.data.addData('200', '300', 50, '123404', idsaver);
-        i++;
 
         this.player.addPlayer('test1', 'tankcyan', '123405', idsaver);
         this.data.addData('200', '300', 50, '123405', idsaver);
-        i++;
 
         this.player.addPlayer('test2', 'tankgrey', '123406', idsaver);
         this.data.addData('200', '30', 50, '123406', idsaver);
-        i++;
 
         this.player.addPlayer('test3', 'tankpurple', '123407', idsaver);
         this.data.addData('200', '300', 50, '123407', idsaver);
-        i++;
 
         this.player.addPlayer('test4', 'tankyellow', '123408', idsaver);
         this.data.addData('200', '300', 50, '123408', idsaver);
-        i++;
 
         //Timer
         // console.log(this);
@@ -275,3 +275,5 @@ class mainScreen extends Phaser.Scene {
   }
 
 }
+
+export default mainScreen;

@@ -1,3 +1,5 @@
+import HealthPanel from "./HealthPanel";
+
 class HealthOverviewPanel extends Phaser.GameObjects.Container {
     constructor(scene, x, y, children) {
         super(scene, x, y, children);
@@ -20,7 +22,7 @@ class HealthOverviewPanel extends Phaser.GameObjects.Container {
 
         // let iTank = idsaver.find(isOdd);
         let iTank;
-        for (i = 0; i < 8; i++) {
+        for (let i = 0; i < 8; i++) {
             if (idsaver[i] == id) {
                 iTank = i;
             }
@@ -32,3 +34,5 @@ class HealthOverviewPanel extends Phaser.GameObjects.Container {
     }          
   
 }
+
+export default HealthOverviewPanel;
