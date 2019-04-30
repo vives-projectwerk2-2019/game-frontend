@@ -7,11 +7,14 @@ class HealthOverviewPanel extends Phaser.GameObjects.Container {
         this.numberOfTanks = 0;
         this.xposition = {};
         this.yposition = {};
+        this.healthpannel = new HealthPanel(this.scene, 0, 0, null);
         
     }
     
-    addData(health, shield, x, id, idsaver) {
-        let newY = (this.numberOfTanks > 0 ? this.last.y + 50 : 20);
+    addData(health, shield, x, y, id, idsaver) {
+        let newY = (this.numberOfTanks > 0 ? y + 150 : 100);
+        //let newY = y + 50 + last.y;
+        x = this.x + 90;
         this.numberOfTanks ++ ;
         //this.add(new HealthPanel(this.scene, x, newY, null, idsaver[0], health, shield));
         
@@ -29,9 +32,17 @@ class HealthOverviewPanel extends Phaser.GameObjects.Container {
         }
         this.xposition[iTank] = x;
         this.yposition[iTank] = newY;
-        this.add(new HealthPanel(this.scene, this.xposition[iTank], this.yposition[iTank], null, idsaver[iTank], health, shield, iTank));
-
-    }          
+        //this.healthpannel = new HealthPanel(this.scene, this.xposition[iTank], this.yposition[iTank], null, idsaver[iTank], health, shield, iTank);
+        //this.add(this.healthpannel);
+        this.healthpannel.setStartValues(this.xposition[iTank], this.yposition[iTank], /*idsaver[iTank],*/ health, shield, iTank)
+    }   
+    
+    /*setHealth(healthvalue){
+        this.healthpannel = healtvalue;
+    }
+    setShield(shieldvalue){
+        
+    }*/
   
 }
 
