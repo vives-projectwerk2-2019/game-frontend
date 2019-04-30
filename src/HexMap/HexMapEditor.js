@@ -1,3 +1,6 @@
+import HexMap from "./HexMap";
+import TileSelector from "../Tiles/TileSelector"
+
 /*jshint esversion: 6 */
 
 //an extended version of HexMap containing more functionality specific to editing a map
@@ -63,3 +66,5 @@ class HexMapEditor extends HexMap {
     }
 
 }
+
+export default HexMapEditor;

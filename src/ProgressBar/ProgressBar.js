@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+
 class ProgressBar extends Phaser.GameObjects.Rectangle {
     constructor(scene, x, y, width, height, fillColor) {
         super(scene, x, y, width, height, fillColor);
@@ -21,3 +23,5 @@ class ProgressBar extends Phaser.GameObjects.Rectangle {
 
     }
 }
+
+export default ProgressBar;
