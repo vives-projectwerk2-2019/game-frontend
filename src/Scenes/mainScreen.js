@@ -173,11 +173,20 @@ class mainScreen extends Phaser.Scene {
       this.player.addPlayer("test2", "tankgrey", "123406", idsaver);
       this.data.addData("200", "30", 50, "123406", idsaver);
 
+<<<<<<< HEAD
       this.player.addPlayer("test3", "tankpurple", "123407", idsaver);
       this.data.addData("200", "300", 50, "123407", idsaver);
 
       this.player.addPlayer("test4", "tankyellow", "123408", idsaver);
       this.data.addData("200", "300", 50, "123408", idsaver);
+=======
+        //Timer
+        // console.log(this);
+        finalCountDown = this.add
+            .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
+            .setOrigin(0.5, 0.5);
+        timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
+>>>>>>> 656727323a7f2305bf37bbfff8a14fe096cceb26
 
       //Timer
       // console.log(this);

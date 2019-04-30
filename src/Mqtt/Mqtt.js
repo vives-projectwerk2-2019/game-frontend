@@ -45,7 +45,6 @@ class Mqtt {
           mqtt.scene.destroyTank(username);
           this.hasdied[i] = 1;
         }
-        
       }
     };
     // connect the client

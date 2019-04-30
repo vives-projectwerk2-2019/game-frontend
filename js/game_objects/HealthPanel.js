@@ -2,19 +2,16 @@ import Phaser from "phaser";
 import ProgressBar from "../../src/ProgressBar/ProgressBar";
 
 class HealthPanel extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, children ) {
+    constructor(scene, x, y, children, id, healthvalue, shieldvalue, iTank) {
         super(scene, x, y, children);
-        this.scene.add.existing(this);
+        scene.add.existing(this);
         
-        
-    }
-    setStartValues(x, y, /*id, */healthvalue, shieldvalue, iTank){
-        let healthword = this.scene.add.text(x, y, "Health: ",
+        let healthword = scene.add.text(x, y, "Health: ",
             { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
         healthword.setFontSize(18);
         this.add(healthword);    // Remove from scene and add to container
         y = y + 40;
-        let shieldword = this.scene.add.text(x, y, "Shield: ",
+        let shieldword = scene.add.text(x, y, "Shield: ",
             { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
         shieldword.setFontSize(18);
         this.add(shieldword);    // Remove from scene and add to container
@@ -25,12 +22,12 @@ class HealthPanel extends Phaser.GameObjects.Container {
         this.add(idtext);    */
 
         y = y - 20;
-        this.teller = 0;
+        this.teller = 0.0;
         
         this.newProgressBarHealth = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
         this.add(this.newProgressBarHealth);
 
-        this.healthvaluetext = this.scene.add.text(x, y, healthvalue,
+        this.healthvaluetext = scene.add.text(x, y, healthvalue,
             { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
             this.healthvaluetext.setFontSize(18);
         this.add(this.healthvaluetext);    // Remove from scene and add to container
@@ -39,7 +36,7 @@ class HealthPanel extends Phaser.GameObjects.Container {
         this.newProgressBarShield = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
         this.add(this.newProgressBarShield);
         
-        this.shieldvaluetext = this.scene.add.text(x, y, shieldvalue,
+        this.shieldvaluetext = scene.add.text(x, y, shieldvalue,
             { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
             this.shieldvaluetext.setFontSize(18);
         this.add(this.shieldvaluetext);    // Remove from scene and add to container
@@ -58,11 +55,9 @@ class HealthPanel extends Phaser.GameObjects.Container {
 
         //health.setText("test");
     }
-
     setHealth(healthvalue){
         this.healthvalue = healthvalue;
     }
-
     setShield(shieldvalue){
         this.shieldvalue = shieldvalue;
     }
@@ -73,11 +68,11 @@ class HealthPanel extends Phaser.GameObjects.Container {
             this.teller = 0;
         }
         this.teller ++;
-        /*this.healthvaluetext.setText(100- this.teller);
-        this.shieldvaluetext.setText(100- this.teller);
+        this.healthvaluetext.setText(this.teller);
+        this.shieldvaluetext.setText(this.teller);
         this.newProgressBarHealth.setProgress(100- this.teller);
         this.newProgressBarShield.setProgress(100- this.teller);
-        //healthvaluetext[1].setText(10);*/
+        //healthvaluetext[1].setText(10);
         
     }
 }
