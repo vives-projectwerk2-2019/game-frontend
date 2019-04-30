@@ -33,7 +33,7 @@ class HealthPanel extends Phaser.GameObjects.Container {
         this.add(this.healthvaluetext);    // Remove from scene and add to container
         y = y + 20;
 
-        this.newProgressBarShield = new ProgressBar(this.scene, 50, 40, 200, 15, 0x008000);
+        this.newProgressBarShield = new ProgressBar(this.scene, 50, 20, 200, 15, 0x008000);
         this.add(this.newProgressBarShield);
 
         this.shieldvaluetext = scene.add.text(x, y, shieldvalue,
