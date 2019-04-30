@@ -28,15 +28,9 @@ class HealthPanel extends Phaser.GameObjects.Container {
             { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
             this.healthvaluetext.setFontSize(18);
         this.add(this.healthvaluetext);    // Remove from scene and add to container
-<<<<<<< HEAD
-        y = y + 20;
-
-        this.newProgressBarShield = new ProgressBar(this.scene, 50, 20, 200, 15, 0x008000);
-=======
         
         y = y + 40;
         this.newProgressBarShield = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
->>>>>>> 5b23599a99d5cabf11b57c1f173fab9ab7b73f12
         this.add(this.newProgressBarShield);
         
         this.shieldvaluetext = scene.add.text(x, y, shieldvalue,
@@ -45,13 +39,13 @@ class HealthPanel extends Phaser.GameObjects.Container {
         this.add(this.shieldvaluetext);    // Remove from scene and add to container
         
 
-        /*this.healthvaluetext={};
-        this.healthvaluetext[iTank] = scene.add.text(x, y, healthvalue,
+        /*var healthvaluetext=[];
+        healthvaluetext[iTank] = scene.add.text(x, y, healthvalue,
             { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
-            this.healthvaluetext[iTank].setFontSize(18);
-        this.add(this.healthvaluetext[iTank]);    // Remove from scene and add to container
+            healthvaluetext[iTank].setFontSize(18);
+        this.add(healthvaluetext[iTank]);    // Remove from scene and add to container
         y = y + 20;
-        this.shield[iTank] = scene.add.text(x, y, shieldvalue,
+        /*this.shield[iTank] = scene.add.text(x, y, shieldvalue,
             { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
             this.shield[iTank].setFontSize(18);
         this.add(this.shield[iTank]);    // Remove from scene and add to container*/
@@ -75,6 +69,7 @@ class HealthPanel extends Phaser.GameObjects.Container {
         this.shieldvaluetext.setText(this.teller);
         this.newProgressBarHealth.setProgress(100- this.teller);
         this.newProgressBarShield.setProgress(100- this.teller);
+        //healthvaluetext[1].setText(10);
         
     }
 }
