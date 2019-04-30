@@ -1,3 +1,7 @@
+import Phaser from "phaser";
+import PlayerPanel from "./PlayerPanel";
+import HealthPanel from "./HealthPanel";
+
 class PlayerOverviewPanel extends Phaser.GameObjects.Container {
   constructor(scene, x, y, children) {
     super(scene, x, y, children);
@@ -25,3 +29,5 @@ class PlayerOverviewPanel extends Phaser.GameObjects.Container {
     }
 
 }
+
+export default PlayerOverviewPanel;

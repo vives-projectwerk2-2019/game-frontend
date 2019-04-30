@@ -1,3 +1,5 @@
+import Phaser from "phaser";
+import HexMapEditor from "../HexMap/HexMapEditor";
 
 class editorScreen extends Phaser.Scene {
     constructor() {
@@ -42,3 +44,5 @@ class editorScreen extends Phaser.Scene {
         
     }
 }
+
+export default editorScreen;
