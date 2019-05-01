@@ -28,7 +28,15 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
-    new Dotenv()
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        MQTT_BROKER_HOST: JSON.stringify(process.env.MQTT_BROKER_HOST),
+        MQTT_BROKER_PORT: JSON.stringify(process.env.MQTT_BROKER_PORT),
+        MQTT_BROKER_PATH: JSON.stringify(process.env.MQTT_BROKER_PATH),
+        MQTT_BROKER_USE_SSL: JSON.stringify(process.env.MQTT_BROKER_USE_SSL)
+      }
+    })
   ],
   optimization: {
     // splitChunks: {
