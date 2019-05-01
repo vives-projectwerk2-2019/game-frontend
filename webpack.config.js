@@ -31,9 +31,9 @@ module.exports = {
     new Dotenv()
   ],
   optimization: {
-    splitChunks: {
-      chunks: 'all'
-    },
+    // splitChunks: {
+    //   chunks: 'all'
+    // },
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
