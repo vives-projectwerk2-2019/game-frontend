@@ -1,4 +1,5 @@
 import Game from "./Game/game";
+import './../css/style.css';
 
 let game = Game;
 
