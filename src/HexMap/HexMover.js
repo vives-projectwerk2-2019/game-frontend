@@ -32,7 +32,8 @@ class HexMover {
       weaponDamage: [4],
       weaponRange: [20]
     };
-    
+    this.scene = scene;
+
     this.addons = ["gatling gun"];
     this.addonUses = [0, 0, 0, 0];
     this.health = 20;
@@ -204,8 +205,10 @@ class HexMover {
       }
     console.log(previousRotation);
     this.currentRotation = previousRotation;
+    this.scene.setTankRotation(this.x,this.y,this.previousRotation,this.username)
     }
   }
+  
 
   updateCurrentRotation() {
     this.sprite.setAngle(60 * this.currentRotation - 30);

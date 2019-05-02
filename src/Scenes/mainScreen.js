@@ -292,6 +292,10 @@ class mainScreen extends Phaser.Scene {
       }
     }
   }
+  setTankRotation(x,y,rotation,username){
+     const element = this.getCurrentTank(username);
+     element.setPosition(x,y,rotation)
+  }
   setupKeyBinds() {
     this.key_Z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 

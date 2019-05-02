@@ -42,7 +42,8 @@ class Mqtt {
           this.arrayPlayers.push(username);
           mqtt.scene.createTankSprite(player);
         } else {
-          mqtt.scene.setTankPosition(player);
+          mqtt.scene.HexMover.lerpTurn(player);
+          
         }
         if (player.tank.health <= 0 && !this.hasdied[i]) {
           mqtt.scene.destroyTank(username);
