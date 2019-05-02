@@ -374,12 +374,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
             this.newProgressBarHealth7.setProgress(this.healtharray[7]);
             this.newProgressBarShield7.setProgress(this.shieldarray[7]);*/
     }
-    this.healthvaluetext.setText(this.teller);
-    this.shieldvaluetext.setText(this.teller);
-    this.newProgressBarHealth.setProgress(100 - this.teller);
-    this.newProgressBarShield.setProgress(100 - this.teller);
-    //healthvaluetext[1].setText(10);
-  }
 }
 
 export default HealthPanel;
