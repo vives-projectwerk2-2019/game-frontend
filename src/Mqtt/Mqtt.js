@@ -1,10 +1,10 @@
 import { Client, Message } from "paho-mqtt"
 
 const mqtt_settings = {
-  host: process.env.MQTT_BROKER_HOST,
-  port: Number(process.env.MQTT_BROKER_PORT),
-  path: process.env.MQTT_BROKER_PATH,
-  useSSL: (process.env.MQTT_BROKER_USE_SSL == "true")
+  host: process.env.MQTT_BROKER_HOST || "game.bug.labict.be",
+  port: Number(process.env.MQTT_BROKER_PORT) || 443,
+  path: process.env.MQTT_BROKER_PATH || "/broker",
+  useSSL: (process.env.MQTT_BROKER_USE_SSL == "true") || true
 };
 
 /*jshint esversion: 6 */
@@ -30,6 +30,9 @@ class Mqtt {
       console.log(receivedMessage);
       if (receivedMessage.commands.reset) {
         mqtt.scene.resetAllTanks();
+      }
+      if (receivedMessage.turn){
+        scene.onNewRoundStarted(receivedMessage.turn);
       }
 
       for (let i = 0; i < receivedMessage.players.length; i++) {

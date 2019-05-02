@@ -6,10 +6,15 @@ import mainScreen from "../Scenes/mainScreen";
 
 const config = {
     type: Phaser.AUTO,
-    width: window.innerWidth,
-    height: window.innerHeight + 270,
+    width: 1470,
+    height: 900,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     parent: 'play',
     debug: true,
+    transparent: true,
     scene: [startScreen, editorScreen, loadScreen, mainScreen]
 };
 
