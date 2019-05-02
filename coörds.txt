@@ -1,0 +1,20 @@
+direction:
+attackercoördinate >
+targetcoördinate <
+direction 1
+
+
+
+direction 1
+y == y
+X coord moet groter zijn dan attacker
+X coord moet kleiner zijn dan target
+
+direction 2
+Z == Z
+X coord moet groter zijn dan attacker
+X coord moet kleiner zijn dan target
+directon 3
+x == X
+y coord moet kleiner zin dan attacker
+y coord moet groter zijn dan defender
