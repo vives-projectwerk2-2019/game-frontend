@@ -1,4 +1,4 @@
-import Terrain from "../Terrain/Terrain"
+import Terrain from "../Terrain/Terrain";
 
 /*jshint esversion: 6 */
 
@@ -10,7 +10,6 @@ class HexMover {
     y,
     addons,
     rotation,
-    previousRotation,
     scene,
     map,
     size,
@@ -22,8 +21,8 @@ class HexMover {
       .sprite(this.currentTile.body.x, this.currentTile.body.y, texture)
       .setDisplaySize(size, size);
     this.currentPosition = this.updateCurrentPosition();
+    this.previousRotation = this.currentRotation;
     this.currentRotation = rotation;
-    this.previousRotation = previousRotation;
     this.updateCurrentRotation();
     this.username = username;
     this.weapons = {
@@ -33,7 +32,6 @@ class HexMover {
       weaponRange: [20]
     };
     this.scene = scene;
-
     this.addons = ["gatling gun"];
     this.addonUses = [0, 0, 0, 0];
     this.health = 20;
@@ -195,20 +193,22 @@ class HexMover {
   //rotation = the direction which the tank is gonna move
   //previousRotation = the direction of which the tank starts moving
   lerpTurn(previousRotation, rotation) {
-
     for (i = 0; previousRotation != rotation; i++) {
       if (rotation > previousRotation) {
         previousRotation += lerp;
-        }
-      else if (rotation < previousRotation) {
+      } else if (rotation < previousRotation) {
         previousRotation -= lerp;
       }
-    console.log(previousRotation);
-    this.currentRotation = previousRotation;
-    this.scene.setTankRotation(this.x,this.y,this.previousRotation,this.username)
+      console.log(previousRotation);
+      this.currentRotation = previousRotation;
+      this.scene.setTankRotation(
+        this.x,
+        this.y,
+        this.previousRotation,
+        this.username
+      );
     }
   }
-  
 
   updateCurrentRotation() {
     this.sprite.setAngle(60 * this.currentRotation - 30);
