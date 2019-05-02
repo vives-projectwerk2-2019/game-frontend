@@ -28,9 +28,9 @@ class Mqtt {
     this.client.onMessageArrived = function(message) {
       let receivedMessage = JSON.parse(message.payloadString);
       console.log(receivedMessage);
-      if (receivedMessage.commands.reset) {
-        mqtt.scene.resetAllTanks();
-      }
+      // if (receivedMessage.commands.reset) {
+      //   mqtt.scene.resetAllTanks();
+      // }
       if (receivedMessage.turn){
         scene.onNewRoundStarted(receivedMessage.turn);
       }
@@ -42,7 +42,8 @@ class Mqtt {
           this.arrayPlayers.push(username);
           mqtt.scene.createTankSprite(player);
         } else {
-          mqtt.scene.setTankPosition(player);
+          mqtt.scene.HexMover.lerpTurn(player);
+          
         }
         if (player.tank.health <= 0 && !this.hasdied[i]) {
           mqtt.scene.destroyTank(username);
