@@ -18,9 +18,9 @@ let allTanks = [];
 class mainScreen extends Phaser.Scene {
   constructor() {
     super({ key: "mainScreen" });
-    this.timeMultiplier = 4; //how many times 15seconds?
-    this.turnlength = 15*this.timeMultiplier;
-    this.multiplier = 15/this.timeMultiplier;
+    this.timeMultiplier = 1; //how many times 15seconds?
+    this.turnlength = 10*this.timeMultiplier;
+    this.multiplier = 10/this.timeMultiplier;
     this.timerTimeLeft = this.turnlength;
     this.turn = 0;
     this.previousDelta = 0;
