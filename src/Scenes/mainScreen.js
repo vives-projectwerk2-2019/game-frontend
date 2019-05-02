@@ -38,6 +38,21 @@ class mainScreen extends Phaser.Scene {
     this.load.image("destroyedTank", "assets/tanks/destroyedTank.png");
     this.map = new HexMap(this, 60, 40, 100, "MapConfiguration.json");
 
+    //addons
+    this.load.image("adamantium", "assets/addons/adamantium.png");
+    this.load.image("amphibious", "assets/addons/amphibious.png");
+    this.load.image("empBomb", "assets/addons/empBomb.png");
+    this.load.image("flammenwerpfer", "assets/addons/flammenwerpfer.png");
+    this.load.image("gravyShield", "assets/addons/gravyShield.png");
+    this.load.image("harrier", "assets/addons/harrier.png");
+    this.load.image("laser", "assets/addons/laser.png");
+    this.load.image("mines", "assets/addons/mines.png");
+    this.load.image("nanobots", "assets/addons/nanobots.png");
+    this.load.image("plasmagun", "assets/addons/plasmagun.png");
+    this.load.image("ram", "assets/addons/ram.png");
+    this.load.image("rocketEngine", "assets/addons/rocketEngine.png");
+    this.load.image("structuralStrengthening", "assets/addons/structuralStrengthening.png");
+
     //Animations
     // this.load.spritesheet("explosion", "assets/animations/explosion.png", {
     //   frameWidth: 64,
@@ -149,31 +164,38 @@ class mainScreen extends Phaser.Scene {
 
         var idsaver = {};
 
+        let x = 1350;
+
         this.player = new PlayerOverviewPanel(this, 1200, 50, null);
         this.data = new HealthOverviewPanel(this, 1200, 55, null);
-        this.player.addPlayer('jurne', 'tankblue', '123401', idsaver); // naam, tank, id
-        this.data.addData('200', '300', 50, '123401', idsaver);
+        this.player.addPlayer('jurne', 'tankblue', idsaver, 'adamantium', 'amphibious', 'empBomb');
+        this.data.addData('200', '300', x, 'tankblue', idsaver);
 
-        this.player.addPlayer('fred', 'tankgreen', '123402', idsaver);
-        this.data.addData('200', '300', 50, '123402', idsaver);
+        this.player.addPlayer('fred', 'tankgreen', idsaver, 'flammenwerpfer', 'gravyShield', 'harrier');
+        this.data.addData('200', '300', x, 'tankgreen', idsaver);
 
-        this.player.addPlayer('jop', 'tankred', '123403', idsaver);
-        this.data.addData('200', '300', 50, '123403', idsaver);
+        this.player.addPlayer('jop', 'tankred', idsaver, 'laser', 'mines', 'nanobots');
+        this.data.addData('200', '300', x, 'tankred', idsaver);
 
-        this.player.addPlayer('test0', 'tankblack' ,'123404', idsaver);
-        this.data.addData('200', '300', 50, '123404', idsaver);
+        this.player.addPlayer('test0', 'tankblack' , idsaver, 'plasmagun', 'ram', 'rocketEngine');
+        this.data.addData('200', '300', x, 'tankblack', idsaver);
+        
+        this.player.addPlayer('test1', 'tankcyan', idsaver, 'structuralStrengthening', 'harrier', 'mines');
+        this.data.addData('200', '300', x, 'tankcyan', idsaver);
 
-        this.player.addPlayer('test1', 'tankcyan', '123405', idsaver);
-        this.data.addData('200', '300', 50, '123405', idsaver);
+        this.player.addPlayer('test2', 'tankgrey', idsaver, 'laser', 'harrier', 'mines');
+        this.data.addData('200', '30', x, 'tankgrey', idsaver);
 
-        this.player.addPlayer('test2', 'tankgrey', '123406', idsaver);
-        this.data.addData('200', '30', 50, '123406', idsaver);
+        this.player.addPlayer('test3', 'tankpurple', idsaver, 'laser', 'harrier', 'mines');
+        this.data.addData('200', '300', x, 'tankpurple', idsaver);
 
-        this.player.addPlayer('test3', 'tankpurple', '123407', idsaver);
-        this.data.addData('200', '300', 50, '123407', idsaver);
-
-        this.player.addPlayer('test4', 'tankyellow', '123408', idsaver);
-        this.data.addData('200', '300', 50, '123408', idsaver);
+        this.player.addPlayer('test4', 'tankyellow', idsaver, 'laser', 'harrier', 'mines');
+        this.data.addData('200', '300', x, 'tankyellow', idsaver);
+        
+        this.data.setHealth(idsaver, 'tankgreen', 20, 100);
+        this.data.setHealth(idsaver, 'tankgreen', 30, 100);
+        this.data.setHealth(idsaver, 'tankblue', 10, 100);
+        //this.data.setHealth(idsaver, 'tankgreen', 20, 100);
 
         //Timer
         // console.log(this);
