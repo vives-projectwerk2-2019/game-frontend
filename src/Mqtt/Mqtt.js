@@ -1,10 +1,11 @@
 import { Client, Message } from "paho-mqtt";
 
 const mqtt_settings = {
-  host: process.env.MQTT_BROKER_HOST || "game.bug.labict.be",
-  port: Number(process.env.MQTT_BROKER_PORT) || 443,
-  path: process.env.MQTT_BROKER_PATH || "/broker",
-  useSSL: process.env.MQTT_BROKER_USE_SSL == "true" || true
+  host: process.env.MQTT_BROKER_HOST || "localhost",
+  port: Number(process.env.MQTT_BROKER_PORT) || 9001,
+  path: process.env.MQTT_BROKER_PATH || "",
+  useSSL: (process.env.MQTT_BROKER_USE_SSL == "true") || false,
+  game_topic: process.env.GAME_TOPIC || "game3"
 };
 
 /*jshint esversion: 6 */
@@ -35,6 +36,7 @@ class Mqtt {
       onSuccess: () => {
         // Once a connection has been made, make a subscription and send a message.
         console.log(`Connected with MQTT broker (${mqtt_settings.host}:${mqtt_settings.port}${mqtt_settings.path})`);
+        console.log(`Subscribing to ${mqtt_settings.game_topic}/replicated`)
         this.client.subscribe(`${mqtt_settings.game_topic}/replicated`);
         let message = new Message("Hello");
         message.destinationName = "World";
