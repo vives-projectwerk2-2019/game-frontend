@@ -215,17 +215,7 @@ class mainScreen extends Phaser.Scene {
         this.data.setHealth(idsaver, 'tankgreen', 30, 100);
         this.data.setHealth(idsaver, 'tankblue', 10, 100);
         //this.data.setHealth(idsaver, 'tankgreen', 20, 100);*/
-<<<<<<< HEAD
-
-        //Timer
-        // console.log(this);
-        finalCountDown = this.add
-            .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
-            .setOrigin(0.5, 0.5);
-        timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
-=======
->>>>>>> 96ef606a162a4b958bf696165bcb942b4516f2d4
-
+        
       //Timer
       // console.log(this);
       finalCountDown = this.add
