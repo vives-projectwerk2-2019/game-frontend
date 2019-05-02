@@ -7,31 +7,44 @@ class HealthOverviewPanel extends Phaser.GameObjects.Container {
         this.numberOfTanks = 0;
         this.xposition = {};
         this.yposition = {};
+        this.healthpannel;
+        this.newY = 0;
+        this.iTank;
+        this.healthdata = [0,0,0,0,0,0,0,0];
+        this.shielddata = [0,0,0,0,0,0,0,0];
+        this.healthpannel = new HealthPanel(this.scene, this.xposition[this.iTank], this.yposition[this.iTank], null);
+        
         
     }
     
     addData(health, shield, x, id, idsaver) {
-        let newY = (this.numberOfTanks > 0 ? this.last.y + 50 : 20);
-        this.numberOfTanks ++ ;
-        //this.add(new HealthPanel(this.scene, x, newY, null, idsaver[0], health, shield));
+        this.newY = this.newY + 100;
         
-        // function isOdd(element, index, idsaver)  
-        // {  
-        // return (element % 2 == 1);  
-        // } 
-
-        // let iTank = idsaver.find(isOdd);
-        let iTank;
+        this.numberOfTanks ++ ;
         for (let i = 0; i < 8; i++) {
             if (idsaver[i] == id) {
-                iTank = i;
+                this.iTank = i;
             }
         }
-        this.xposition[iTank] = x;
-        this.yposition[iTank] = newY;
-        this.add(new HealthPanel(this.scene, this.xposition[iTank], this.yposition[iTank], null, idsaver[iTank], health, shield, iTank));
-
-    }          
+        this.xposition[this.iTank] = x;
+        this.yposition[this.iTank] = this.newY;
+        this.healthpannel.settextplayers(this.scene, this.xposition[this.iTank], this.newY);
+        this.healthpannel.setProgressBar(this.scene, this.xposition[this.iTank], this.newY, null, idsaver[this.iTank], health, shield, this.iTank);
+        
+    }       
+    
+    setHealth(/*shield, health,*/idsaver, id, health, shield){        //123401, 30, 650, idsaver, '123401'
+        
+        for (let i = 0; i < 8; i++) {
+            if (idsaver[i] == id) {
+                this.iTank = i;
+                this.healthdata[i] = health;
+                this.shielddata[i] = shield;
+            }
+        }
+        //this.healthpannel.setProgressBar(this.scene, this.xposition[this.iTank], this.newY, null, idsaver[this.iTank], health, shield, this.iTank);*/
+        this.healthpannel.setDataValues(this.healthdata, this.shielddata);
+    }     
   
 }
 

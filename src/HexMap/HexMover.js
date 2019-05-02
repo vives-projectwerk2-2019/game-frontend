@@ -10,6 +10,7 @@ class HexMover {
     y,
     addons,
     rotation,
+    previousRotation,
     scene,
     map,
     size,
@@ -22,6 +23,7 @@ class HexMover {
       .setDisplaySize(size, size);
     this.currentPosition = this.updateCurrentPosition();
     this.currentRotation = rotation;
+    this.previousRotation = previousRotation;
     this.updateCurrentRotation();
     this.username = username;
     this.weapons = {
@@ -30,6 +32,7 @@ class HexMover {
       weaponDamage: [4],
       weaponRange: [20]
     };
+    
     this.addons = ["gatling gun"];
     this.addonUses = [0, 0, 0, 0];
     this.health = 20;
@@ -188,19 +191,19 @@ class HexMover {
     }
   }
 
-  lerpTurn(currentValue, targetValue) {
-    var currentValue = this.currentValue = 60;
-    var targetValue = this.targetValue = 120;
+  //rotation = the direction which the tank is gonna move
+  //previousRotation = the direction of which the tank starts moving
+  lerpTurn(previousRotation, rotation) {
 
-    for (i = 0; currentValue != targetValue; i++) {
-      if (targetValue > currentValue) {
-        currentValue += lerp;
+    for (i = 0; previousRotation != rotation; i++) {
+      if (rotation > previousRotation) {
+        previousRotation += lerp;
         }
-      else if (targetValue < currentValue) {
-        currentValue -= lerp;
+      else if (rotation < previousRotation) {
+        previousRotation -= lerp;
       }
-    console.log(currentValue);
-    return currentValue;
+    console.log(previousRotation);
+    this.currentRotation = previousRotation;
     }
   }
 

@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 
 class PlayerPanel extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, children, playerName, assetKey) {
+    constructor(scene, x, y, children, playerName, assetKey, addon1, addon2, addon3) {
         super(scene, x, y, children);
         scene.add.existing(this);
 
@@ -11,7 +11,7 @@ class PlayerPanel extends Phaser.GameObjects.Container {
         nameLabel.set
         this.add(nameLabel);    // Remove from scene and add to container
 
-        let image = scene.make.image({
+        let imagetank = scene.make.image({
             x: 10,
             y: 30,
             key: assetKey,
@@ -20,7 +20,37 @@ class PlayerPanel extends Phaser.GameObjects.Container {
                 y: 0.1
             }
         }).setOrigin(0, 0);
-        this.add(image);
+        this.add(imagetank);
+        let imageaddon1 = scene.make.image({
+            x: 100,
+            y: 15,
+            key: addon1,
+            scale: {
+                x: 0.08,
+                y: 0.08
+            }
+        }).setOrigin(0, 0);
+        this.add(imageaddon1);
+        let imageaddon2 = scene.make.image({
+            x: 100,
+            y: 45,
+            key: addon2,
+            scale: {
+                x: 0.08,
+                y: 0.08
+            }
+        }).setOrigin(0, 0);
+        this.add(imageaddon2);
+        let imageaddon3 = scene.make.image({
+            x: 100,
+            y: 75,
+            key: addon3,
+            scale: {
+                x: 0.08,
+                y: 0.08
+            }
+        }).setOrigin(0, 0);
+        this.add(imageaddon3);
     }
     // ...
 
