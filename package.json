@@ -8,7 +8,7 @@
     "build-dev": "webpack --mode development --watch",
     "build": "npm run build-dev",
     "serve": "static-server -p 3000",
-    "dev": "concurrently -k -p \"[{name}]\" -n \"Build,Server\" -c \"yello.bold, cyan.bold\" \"npm run build-dev\" \"npm run serve\"",
+    "dev": "concurrently -k -p \"[{name}]\" -n \"Build,Server\" -c \"yellow.bold, cyan.bold\" \"npm run build-dev\" \"npm run serve\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
