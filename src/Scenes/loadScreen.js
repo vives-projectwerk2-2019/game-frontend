@@ -77,7 +77,6 @@ class loadScreen extends Phaser.Scene{
         this.text2 = this.add.text(0,0,"Welcome to scene 2, press 1 to return to scene 1", { font:"12px Impact"});
         this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
     }
-
     update(delta) {
         if(this.key_1.isDown){
             this.scene.start("startScreen");

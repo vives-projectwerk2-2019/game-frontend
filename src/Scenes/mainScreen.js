@@ -18,7 +18,9 @@ let allTanks = [];
 class mainScreen extends Phaser.Scene {
   constructor() {
     super({ key: "mainScreen" });
-    this.turnlength = 5;
+    this.timeMultiplier = 4; //how many times 15seconds?
+    this.turnlength = 15*this.timeMultiplier;
+    this.multiplier = 15/this.timeMultiplier;
     this.timerTimeLeft = this.turnlength;
     this.turn = 0;
     this.previousDelta = 0;
@@ -51,7 +53,10 @@ class mainScreen extends Phaser.Scene {
     this.load.image("plasmagun", "assets/addons/plasmagun.png");
     this.load.image("ram", "assets/addons/ram.png");
     this.load.image("rocketEngine", "assets/addons/rocketEngine.png");
-    this.load.image("structuralStrengthening", "assets/addons/structuralStrengthening.png");
+    this.load.image(
+      "structuralStrengthening",
+      "assets/addons/structuralStrengthening.png"
+    );
 
     //Animations
     // this.load.spritesheet("explosion", "assets/animations/explosion.png", {
@@ -123,29 +128,35 @@ class mainScreen extends Phaser.Scene {
     tank.sprite.setTexture("destroyedTank");
   }
 
-  playAnimation(name) {
-    // this.name = "Flammenwerpfer";
-    this.name = name;
-    if (this.name == "Flammenwerpfer") {
-      this.add.sprite(400, 400, "flames").play("flames");
-    }
-    if (this.name == "laser") {
+  playAnimation(firedweapon) {
+    this.firedweapon = firedweapon;
+    var damagedealer = "damagedealer";
+    var damagetaker = "damagetaker";
+    if (this.firedweapon == "Flammenwerpfer") {
+      this.add
+        .sprite(
+          tank.currentTile.position.x,
+          tank.currentTile.position.y,
+          "flames"
+        )
+        .play("flames");
+    } else if (this.firedweapon == "laser") {
       // DO THINGS
       // ...
     }
   }
   // game = new Phaser.Game({
-   // type: Phaser.AUTO,
-    //width: 1000,
-    //height: 1000,
-    //scene: {
-      //  create,
-    //},
-//});
+  // type: Phaser.AUTO,
+  //width: 1000,
+  //height: 1000,
+  //scene: {
+  //  create,
+  //},
+  //});
   create() {
-        // Create a circle
+    // Create a circle
     // From: https://www.w3schools.com/tags/canvas_arc.asp
-   // const circle = document.createElement('canvas');
+    // const circle = document.createElement('canvas');
     //const ctx = circle.getContext('2d');
     //ctx.beginPath();
     //ctx.arc(100, 75, 50, 0, 2 * Math.PI);
@@ -157,12 +168,12 @@ class mainScreen extends Phaser.Scene {
     // this.background = this.add.image(1200 / 2, 800 / 2, "background");
     let scene = this;
     this.map.loaded.then(() => {
-        scene.map.generateMap();
+      scene.map.generateMap();
 
-        scene.mqtt = new Mqtt(scene);
-        //scoreboard
+      scene.mqtt = new Mqtt(scene);
+      //scoreboard
 
-        var idsaver = {};
+      var idsaver = {};
 
         let x = 1350;
 
@@ -170,7 +181,6 @@ class mainScreen extends Phaser.Scene {
         this.data = new HealthOverviewPanel(this, 1200, 55, null);
 
         /*this.setTankStats(dataInput);
-
         for(i=0; i<=dataInput.players.length; i++){
           this.player.addPlayer(tanksStats[i][0], tanksStats[i][2], idsaver, tanksStats[i][3], tanksStats[i][4], tanksStats[i][5]); // naam, tank, id
           this.data.addData(tanksStats[i][1], 'shield', x, tanksStats[i][2], idsaver);
@@ -205,6 +215,7 @@ class mainScreen extends Phaser.Scene {
         this.data.setHealth(idsaver, 'tankgreen', 30, 100);
         this.data.setHealth(idsaver, 'tankblue', 10, 100);
         //this.data.setHealth(idsaver, 'tankgreen', 20, 100);*/
+<<<<<<< HEAD
 
         //Timer
         // console.log(this);
@@ -212,11 +223,17 @@ class mainScreen extends Phaser.Scene {
             .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
             .setOrigin(0.5, 0.5);
         timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
+=======
+>>>>>>> 96ef606a162a4b958bf696165bcb942b4516f2d4
 
       //Timer
       // console.log(this);
       finalCountDown = this.add
-        .text(600, 450, "", { fontSize: 300, font: "Arial", fill: "#D10000" })
+        .text(600, 450, "", {
+          fontSize: "300px",
+          fontFamily: "Arial",
+          fill: "#D10000"
+        })
         .setOrigin(0.5, 0.5);
       timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
 
@@ -250,11 +267,10 @@ class mainScreen extends Phaser.Scene {
   }
 
   update(delta) {
-    this.timerTimeLeft = this.timerTimeLeft - ((delta - this.previousDelta) / 1000);
+    this.timerTimeLeft =
+      this.timerTimeLeft - (delta - this.previousDelta) / 1000;
     this.previousDelta = delta;
 
-
-    
     //Timer update
     timeRemaining =
       timerLength -
@@ -262,23 +278,22 @@ class mainScreen extends Phaser.Scene {
         .getElapsed()
         .toString()
         .substr(0, 5);
-    this.newProgressBar.setProgress(0.015 * timeRemaining);
-    if (timeRemaining < 0.66 * timerLength) {
-      this.newProgressBar.setColor(0xff8c00);
-      if (timeRemaining < 0.33 * timerLength) {
-        this.newProgressBar.setColor(0xff0000);
-        finalCountDown.setText(
-          timerLength / 1000 -
-            timedEvent
-              .getElapsedSeconds()
-              .toString()
-              .substr(0, 2)
-        );
-        if (timeRemaining == 0) {
-          finalCountDown.setText(" ");
+    this.newProgressBar.setProgress(this.multiplier * this.timerTimeLeft);
+      this.newProgressBar.setColor(0x008000);
+      if (this.timerTimeLeft < 0.66 * this.turnlength) {
+        this.newProgressBar.setColor(0xff8c00);
+        if (this.timerTimeLeft < 0.33 * this.turnlength) {
+          this.newProgressBar.setColor(0xff0000);
+          finalCountDown.setText(
+            this.timerTimeLeft.toString().substr(0, 4)
+          );
+          if (this.timerTimeLeft < 0.00 * this.turnlength) {
+            finalCountDown.setText(" ");
+            this.newProgressBar.setProgress(0);
+          }
         }
       }
-    }
+    
   }
 
   //Empty onEvent for Length
@@ -301,6 +316,10 @@ class mainScreen extends Phaser.Scene {
       }
     }
   }
+  setTankRotation(x,y,rotation,username){
+     const element = this.getCurrentTank(username);
+     element.setPosition(x,y,rotation)
+  }
   setupKeyBinds() {
     this.key_Z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
@@ -308,7 +327,7 @@ class mainScreen extends Phaser.Scene {
       "keyup_Z",
       function(event) {
         console.log();
-        this.playAnimation(name);
+        this.playAnimation(firedweapon);
       },
       this
     );
@@ -320,7 +339,7 @@ class mainScreen extends Phaser.Scene {
     }
     allTanks[null];
   }
-  onNewRoundStarted(turn){
+  onNewRoundStarted(turn) {
     console.log("a new turn has started");
     this.timerTimeLeft = this.turnlength;
     this.turn = turn;

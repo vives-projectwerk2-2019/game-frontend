@@ -23,7 +23,7 @@ class startScreen extends Phaser.Scene {
 
     updateClickCountText(clickCount) {
         if (!clickCount == 0) {
-            this.scene.start("mainScreen");
+            this.scene.start("loadScreen");
         }
     }
 
