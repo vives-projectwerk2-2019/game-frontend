@@ -18,6 +18,10 @@ let allTanks = [];
 class mainScreen extends Phaser.Scene {
   constructor() {
     super({ key: "mainScreen" });
+    this.turnlength = 5;
+    this.timerTimeLeft = this.turnlength;
+    this.turn = 0;
+    this.previousDelta = 0;
   }
 
   preload() {
@@ -215,6 +219,11 @@ class mainScreen extends Phaser.Scene {
   }
 
   update(delta) {
+    this.timerTimeLeft = this.timerTimeLeft - ((delta - this.previousDelta) / 1000);
+    this.previousDelta = delta;
+
+
+    
     //Timer update
     timeRemaining =
       timerLength -
@@ -279,6 +288,11 @@ class mainScreen extends Phaser.Scene {
       element.destroy();
     }
     allTanks[null];
+  }
+  onNewRoundStarted(turn){
+    console.log("a new turn has started");
+    this.timerTimeLeft = this.turnlength;
+    this.turn = turn;
   }
 }
 

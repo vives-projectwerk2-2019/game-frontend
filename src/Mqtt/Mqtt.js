@@ -31,6 +31,9 @@ class Mqtt {
       if (receivedMessage.commands.reset) {
         mqtt.scene.resetAllTanks();
       }
+      if (receivedMessage.turn){
+        scene.onNewRoundStarted(receivedMessage.turn);
+      }
 
       for (let i = 0; i < receivedMessage.players.length; i++) {
         let username = receivedMessage.players[i].name;
