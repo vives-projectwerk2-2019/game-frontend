@@ -139,7 +139,7 @@ class mainScreen extends Phaser.Scene {
     // Draw the circle using Phaser 3
     //this.textures.addCanvas('circle', circle);
     //const circleImage = this.add.image(150, 200, 'circle');
-    this.background = this.add.image(1200 / 2, 800 / 2, "background");
+    // this.background = this.add.image(1200 / 2, 800 / 2, "background");
     let scene = this;
     this.map.loaded.then(() => {
         scene.map.generateMap();
