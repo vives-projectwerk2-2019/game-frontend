@@ -13,7 +13,8 @@ class Mqtt {
     this.scene = scene;
     let mqtt = this;
     console.log(mqtt_settings);
-    this.client = new Client(mqtt_settings.host, mqtt_settings.port, mqtt_settings.path, "hell");
+    const clientId = "browser-" + Math.random().toString(36).substring(2, 15);
+    this.client = new Client(mqtt_settings.host, mqtt_settings.port, mqtt_settings.path, clientId);
 
     this.arrayPlayers = [];
     this.hasdied = [0];
