@@ -7,22 +7,11 @@ class loadScreen extends Phaser.Scene{
 
 
     preload() {
-        var canvas = this.sys.game.canvas;
-        var fullscreen = this.sys.game.device.fullscreen;
-
-        
-
-        if (!fullscreen.available)
-        {
-            return;
-        }
-
-        canvas[fullscreen.request]();   
 
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);
-        progressBox.fillRect(430, 270, 320, 50);
+        progressBox.fillRect(570, 270, 320, 50);
         
         var width = this.cameras.main.width;
         var height = this.cameras.main.height;
@@ -63,12 +52,9 @@ class loadScreen extends Phaser.Scene{
             percentText.setText(parseInt(value * 100) + '%');
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
-            progressBar.fillRect(440, 280, 300 * value, 30);
+            progressBar.fillRect(580, 280, 300 * value, 30);
         });
         
-        this.load.on('fileprogress', function (file) {
-            assetText.setText('Loading game');
-        });
 
         this.load.on('complete', function () {
             progressBar.destroy();
@@ -85,7 +71,7 @@ class loadScreen extends Phaser.Scene{
     }
 
     create() {
-        this.scene.start("main");
+        this.scene.start("mainScreen");
     }
     /*create(){
         this.text2 = this.add.text(0,0,"Welcome to scene 2, press 1 to return to scene 1", { font:"12px Impact"});

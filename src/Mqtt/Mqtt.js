@@ -56,7 +56,7 @@ class Mqtt {
       onSuccess: function() {
         // Once a connection has been made, make a subscription and send a message.
         console.log("onConnect");
-        mqtt.client.subscribe("game3/replicated");
+        mqtt.client.subscribe("game/replicated");
         let message = new Message("Hello");
         message.destinationName = "World";
         mqtt.client.send(message);

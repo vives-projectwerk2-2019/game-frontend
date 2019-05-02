@@ -168,7 +168,16 @@ class mainScreen extends Phaser.Scene {
 
         this.player = new PlayerOverviewPanel(this, 1200, 50, null);
         this.data = new HealthOverviewPanel(this, 1200, 55, null);
-        this.player.addPlayer('jurne', 'tankblue', idsaver, 'adamantium', 'amphibious', 'empBomb');
+
+        /*this.setTankStats(dataInput);
+
+        for(i=0; i<=dataInput.players.length; i++){
+          this.player.addPlayer(tanksStats[i][0], tanksStats[i][2], idsaver, tanksStats[i][3], tanksStats[i][4], tanksStats[i][5]); // naam, tank, id
+          this.data.addData(tanksStats[i][1], 'shield', x, tanksStats[i][2], idsaver);
+        }
+        
+        */
+        this.player.addPlayer('jurne', 'tankblue', idsaver, 'adamantium', 'empBomb', null);
         this.data.addData('200', '300', x, 'tankblue', idsaver);
 
         this.player.addPlayer('fred', 'tankgreen', idsaver, 'flammenwerpfer', 'gravyShield', 'harrier');
@@ -195,7 +204,7 @@ class mainScreen extends Phaser.Scene {
         this.data.setHealth(idsaver, 'tankgreen', 20, 100);
         this.data.setHealth(idsaver, 'tankgreen', 30, 100);
         this.data.setHealth(idsaver, 'tankblue', 10, 100);
-        //this.data.setHealth(idsaver, 'tankgreen', 20, 100);
+        //this.data.setHealth(idsaver, 'tankgreen', 20, 100);*/
 
         //Timer
         // console.log(this);
@@ -315,6 +324,21 @@ class mainScreen extends Phaser.Scene {
     console.log("a new turn has started");
     this.timerTimeLeft = this.turnlength;
     this.turn = turn;
+  }
+
+  setTankStats(dataInput){
+    for(let i=0; i < dataInput.players.length; i++){
+      let element = dataInput.players[i];
+      let username = element.name;
+      let health = element.health;
+      //let shield = element.shield;  moet nog komen
+      let color = element.color;
+      let addon = element.addonName;
+      let addon1 = addon[0];
+      let addon2 = addon[1];
+      let addon3 = addon[2];      
+      tanksStats.push([username, health, color, addon1, addon2, addon3]);
+    }
   }
 }
 
