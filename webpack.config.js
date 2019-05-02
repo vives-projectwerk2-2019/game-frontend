@@ -46,7 +46,8 @@ module.exports = {
         MQTT_BROKER_HOST: JSON.stringify(process.env.MQTT_BROKER_HOST),
         MQTT_BROKER_PORT: JSON.stringify(process.env.MQTT_BROKER_PORT),
         MQTT_BROKER_PATH: JSON.stringify(process.env.MQTT_BROKER_PATH),
-        MQTT_BROKER_USE_SSL: JSON.stringify(process.env.MQTT_BROKER_USE_SSL)
+        MQTT_BROKER_USE_SSL: JSON.stringify(process.env.MQTT_BROKER_USE_SSL),
+        GAME_TOPIC: JSON.stringify(process.env.GAME_TOPIC)
       }
     }),
     new Dotenv()
