@@ -10,7 +10,7 @@ import Tank from "../Tank/Tank";
 var text;
 var finalCountDown;
 var timedEvent;
-var timerLength = 15000; // (in ms)
+var timerLength = 10000; // (in ms)
 var timeRemaining;
 var rect;
 var graphics;
@@ -187,7 +187,7 @@ class mainScreen extends Phaser.Scene {
             this.arrayPlayers.push(player.name);
             this.createTankSprite(player);
           } else {
-            this.setTankPosition(message);
+            this.setTankPosition(player);
           }
           if (player.tank.health <= 0 && !this.hasdied[i]) {
             this.destroyTank(player.name);
@@ -315,17 +315,14 @@ class mainScreen extends Phaser.Scene {
     console.log("Timer has ended");
   }
 
-  setTankPosition(receivedMessage) {
-    var dataInput = receivedMessage;
-    //console.log(dataInput.name);
-
+  setTankPosition(player) {
     for (let i = 0; i < allTanks.length; i++) {
       const element = allTanks[i];
-      if (element.username == dataInput.name) {
+      if (element.username == player.name) {
         element.setPosition(
-          dataInput.tank.position.x,
-          dataInput.tank.position.y,
-          dataInput.tank.rotation
+          player.tank.position.x,
+          player.tank.position.y,
+          player.tank.rotation
         );
       }
     }
