@@ -18,7 +18,9 @@ let allTanks = [];
 class mainScreen extends Phaser.Scene {
   constructor() {
     super({ key: "mainScreen" });
-    this.turnlength = 5;
+    this.timeMultiplier = 4; //how many times 15seconds?
+    this.turnlength = 15*this.timeMultiplier;
+    this.multiplier = 15/this.timeMultiplier;
     this.timerTimeLeft = this.turnlength;
     this.turn = 0;
     this.previousDelta = 0;
@@ -266,23 +268,22 @@ class mainScreen extends Phaser.Scene {
         .getElapsed()
         .toString()
         .substr(0, 5);
-    this.newProgressBar.setProgress(0.015 * timeRemaining);
-    if (timeRemaining < 0.66 * timerLength) {
-      this.newProgressBar.setColor(0xff8c00);
-      if (timeRemaining < 0.33 * timerLength) {
-        this.newProgressBar.setColor(0xff0000);
-        finalCountDown.setText(
-          timerLength / 1000 -
-            timedEvent
-              .getElapsedSeconds()
-              .toString()
-              .substr(0, 2)
-        );
-        if (timeRemaining == 0) {
-          finalCountDown.setText(" ");
+    this.newProgressBar.setProgress(this.multiplier * this.timerTimeLeft);
+      this.newProgressBar.setColor(0x008000);
+      if (this.timerTimeLeft < 0.66 * this.turnlength) {
+        this.newProgressBar.setColor(0xff8c00);
+        if (this.timerTimeLeft < 0.33 * this.turnlength) {
+          this.newProgressBar.setColor(0xff0000);
+          finalCountDown.setText(
+            this.timerTimeLeft.toString().substr(0, 4)
+          );
+          if (this.timerTimeLeft < 0.00 * this.turnlength) {
+            finalCountDown.setText(" ");
+            this.newProgressBar.setProgress(0);
+          }
         }
       }
-    }
+    
   }
 
   //Empty onEvent for Length
