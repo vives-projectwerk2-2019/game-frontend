@@ -179,7 +179,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
     }
 
     preUpdate(time, delta) {
-        console.log("Before update!");
         if (this.iTank == 0) {
             this.healthvaluetext0.setText(this.healtharray[0]);
             this.shieldvaluetext0.setText(this.shieldarray[0]);
