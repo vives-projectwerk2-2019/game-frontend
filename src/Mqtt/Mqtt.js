@@ -28,9 +28,9 @@ class Mqtt {
     this.client.onMessageArrived = function(message) {
       let receivedMessage = JSON.parse(message.payloadString);
       console.log(receivedMessage);
-      if (receivedMessage.commands.reset) {
-        mqtt.scene.resetAllTanks();
-      }
+      // if (receivedMessage.commands.reset) {
+      //   mqtt.scene.resetAllTanks();
+      // }
       if (receivedMessage.turn){
         scene.onNewRoundStarted(receivedMessage.turn);
       }
