@@ -24,6 +24,8 @@ class mainScreen extends Phaser.Scene {
     this.timerTimeLeft = this.turnlength;
     this.turn = 0;
     this.previousDelta = 0;
+    this.arrayPlayers = [];
+    this.hasdied = [0];
   }
 
   preload() {
@@ -171,6 +173,28 @@ class mainScreen extends Phaser.Scene {
       scene.map.generateMap();
 
       scene.mqtt = new Mqtt(scene);
+      this.mqtt.onUpdate = (message) => {
+        console.log("MQTT update: ", message);
+        // if (receivedMessage.commands.reset) {
+          //   mqtt.scene.resetAllTanks();
+          // }
+        const players = message.players;
+        if (message.turn) {
+          this.onNewRoundStarted(message.turn);
+        }
+        players.forEach((player) => {
+          if (!this.arrayPlayers.includes(player.name)) {
+            this.arrayPlayers.push(player.name);
+            this.createTankSprite(player);
+          } else {
+            this.setTankPosition(message);
+          }
+          if (player.tank.health <= 0 && !this.hasdied[i]) {
+            this.destroyTank(player.name);
+            this.hasdied[i] = 1;
+          }
+        });
+      }
       //scoreboard
 
       var idsaver = {};
