@@ -9,6 +9,10 @@ import Tank from "../Tank/Tank";
 //Timer
 var finalCountDown;
 let allTanks = [];
+var idsaver = [];
+let x = 1350;
+let tanksStats = [];
+
 class mainScreen extends Phaser.Scene {
   constructor() {
     super({ key: "mainScreen" });
@@ -170,48 +174,13 @@ class mainScreen extends Phaser.Scene {
       }
       //scoreboard
 
-      var idsaver = {};
-
-        let x = 1350;
-
-        this.player = new PlayerOverviewPanel(this, 1200, 50, null);
-        this.data = new HealthOverviewPanel(this, 1200, 55, null);
-
-        /*this.setTankStats(dataInput);
-        for(i=0; i<=dataInput.players.length; i++){
-          this.player.addPlayer(tanksStats[i][0], tanksStats[i][2], idsaver, tanksStats[i][3], tanksStats[i][4], tanksStats[i][5]); // naam, tank, id
-          this.data.addData(tanksStats[i][1], 'shield', x, tanksStats[i][2], idsaver);
-        }
-        
-        */
-        this.player.addPlayer('jurne', 'tankblue', idsaver, 'adamantium', 'empBomb', null);
-        this.data.addData('200', '300', x, 'tankblue', idsaver);
-
-        this.player.addPlayer('fred', 'tankgreen', idsaver, 'flammenwerpfer', 'gravyShield', 'harrier');
-        this.data.addData('200', '300', x, 'tankgreen', idsaver);
-
-        this.player.addPlayer('jop', 'tankred', idsaver, 'laser', 'mines', 'nanobots');
-        this.data.addData('200', '300', x, 'tankred', idsaver);
-
-        this.player.addPlayer('test0', 'tankblack' , idsaver, 'plasmagun', 'ram', 'rocketEngine');
-        this.data.addData('200', '300', x, 'tankblack', idsaver);
-        
-        this.player.addPlayer('test1', 'tankcyan', idsaver, 'structuralStrengthening', 'harrier', 'mines');
-        this.data.addData('200', '300', x, 'tankcyan', idsaver);
-
-        this.player.addPlayer('test2', 'tankgrey', idsaver, 'laser', 'harrier', 'mines');
-        this.data.addData('200', '30', x, 'tankgrey', idsaver);
-
-        this.player.addPlayer('test3', 'tankpurple', idsaver, 'laser', 'harrier', 'mines');
-        this.data.addData('200', '300', x, 'tankpurple', idsaver);
-
-        this.player.addPlayer('test4', 'tankyellow', idsaver, 'laser', 'harrier', 'mines');
-        this.data.addData('200', '300', x, 'tankyellow', idsaver);
-        
-        this.data.setHealth(idsaver, 'tankgreen', 20, 100);
-        this.data.setHealth(idsaver, 'tankgreen', 30, 100);
-        this.data.setHealth(idsaver, 'tankblue', 10, 100);
-        //this.data.setHealth(idsaver, 'tankgreen', 20, 100);*/
+      this.player = new PlayerOverviewPanel(this, 1200, 50, null);
+      this.data = new HealthOverviewPanel(this, 1200, 55, null);
+      this.mqtt.setTankStatss = (message) => {
+        //console.log("settanksstats");
+        //console.log(message);
+        this.setTankStats(message);
+      }
         
       //Timer
       // console.log(this);
@@ -325,17 +294,47 @@ class mainScreen extends Phaser.Scene {
 
   setTankStats(dataInput){
     for(let i=0; i < dataInput.players.length; i++){
-      let element = dataInput.players[i];
-      let username = element.name;
-      let health = element.health;
-      //let shield = element.shield;  moet nog komen
-      let color = element.color;
-      let addon = element.addonName;
-      let addon1 = addon[0];
-      let addon2 = addon[1];
-      let addon3 = addon[2];      
-      tanksStats.push([username, health, color, addon1, addon2, addon3]);
+        let element = dataInput.players[i];
+        let username = element.name;
+        let health = element.tank.health;
+        //let shield = element.shield;  moet nog komen
+        let color = element.tank.color;
+        let addon = element.tank.addons.addonName;
+        let addon1 = addon[1];
+        let addon2 = addon[2];
+        let addon3 = addon[3];
+        
+        tanksStats[i] = ([username, health, color, addon1, addon2, addon3]);
     }
+    for(let i=0; i< dataInput.players.length; i++){
+      let controle = 0;
+      let extracontrole = 0;
+      for (let y=0; y<8; y++){
+          if(idsaver[y] == tanksStats[i][2]){
+              //console.log("update data");
+              //this.data.setHealth(idsaver, tanksStats[i][2], tanksStats[i][1], 100);
+              extracontrole = 1;
+          }
+          else {
+              //console.log("add new tank");
+              controle = 1;
+          }
+      }
+      if (controle == 1){
+          if(extracontrole == 0){
+              idsaver[i] = tanksStats[i][2];
+              console.log(idsaver[i]);
+              this.player.addPlayer(tanksStats[i][0], tanksStats[i][2], idsaver, tanksStats[i][3], tanksStats[i][4], tanksStats[i][5]);
+              this.data.addData(tanksStats[i][1], '300', x, tanksStats[i][2], idsaver);
+              this.data.setHealth(idsaver, tanksStats[i][2], tanksStats[i][1], 20);
+              //console.log("update data 1")
+          } else {
+              //console.log("update data 2");
+              this.data.setHealth(idsaver, tanksStats[i][2], tanksStats[i][1], 20);
+          }
+      }
+    }
+
   }
 }
 
