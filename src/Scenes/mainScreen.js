@@ -10,14 +10,15 @@ import Tank from "../Tank/Tank";
 var finalCountDown;
 let allTanks = [];
 var idsaver = [];
-let x = 1350;
 let tanksStats = [];
+
+let x = 1350;
 
 class mainScreen extends Phaser.Scene {
   constructor() {
     super({ key: "mainScreen" });
     this.turnlength = 5;
-    this.multiplier = 225/this.turnlength;
+    this.multiplier = 225 / this.turnlength;
     this.timerTimeLeft = this.turnlength;
     this.turn = 0;
     this.previousDelta = 0;
@@ -150,16 +151,19 @@ class mainScreen extends Phaser.Scene {
       scene.map.generateMap();
 
       scene.mqtt = new Mqtt(scene);
-      this.mqtt.onUpdate = (message) => {
+      this.mqtt.onReset(() => {
+        this.resetAllTanks();
+      });
+      this.mqtt.onUpdate = message => {
         console.log("MQTT update: ", message);
         // if (receivedMessage.commands.reset) {
-          //   mqtt.scene.resetAllTanks();
-          // }
+        //   mqtt.scene.resetAllTanks();
+        // }
         const players = message.players;
         if (message.turn) {
           this.onNewRoundStarted(message.turn);
         }
-        players.forEach((player) => {
+        players.forEach(player => {
           if (!this.arrayPlayers.includes(player.name)) {
             this.arrayPlayers.push(player.name);
             this.createTankSprite(player);
@@ -171,17 +175,17 @@ class mainScreen extends Phaser.Scene {
             this.hasdied[i] = 1;
           }
         });
-      }
+      };
       //scoreboard
 
       this.player = new PlayerOverviewPanel(this, 1200, 50, null);
       this.data = new HealthOverviewPanel(this, 1200, 55, null);
-      this.mqtt.setTankStatss = (message) => {
+      this.mqtt.setTankStatss = message => {
         //console.log("settanksstats");
         //console.log(message);
         this.setTankStats(message);
-      }
-        
+      };
+
       //Timer
       // console.log(this);
       finalCountDown = this.add
@@ -191,7 +195,7 @@ class mainScreen extends Phaser.Scene {
           fill: "#D10000"
         })
         .setOrigin(0.5, 0.5);
-      
+
       finalCountDown.setStroke("#000000", 8);
 
       //Progress bar for timer
@@ -234,16 +238,13 @@ class mainScreen extends Phaser.Scene {
       this.newProgressBar.setColor(0xff8c00);
       if (this.timerTimeLeft < 0.33 * this.turnlength) {
         this.newProgressBar.setColor(0xff0000);
-        finalCountDown.setText(
-          this.timerTimeLeft.toString().substr(0, 4)
-        );
-        if (this.timerTimeLeft < 0.00 * this.turnlength) {
+        finalCountDown.setText(this.timerTimeLeft.toString().substr(0, 4));
+        if (this.timerTimeLeft < 0.0 * this.turnlength) {
           finalCountDown.setText(" ");
           this.newProgressBar.setProgress(0);
         }
       }
     }
-    
   }
 
   //Empty onEvent for Length
@@ -263,9 +264,9 @@ class mainScreen extends Phaser.Scene {
       }
     }
   }
-  setTankRotation(x,y,rotation,username){
-     const element = this.getCurrentTank(username);
-     element.setPosition(x,y,rotation)
+  setTankRotation(x, y, rotation, username) {
+    const element = this.getCurrentTank(username);
+    element.setPosition(x, y, rotation);
   }
   setupKeyBinds() {
     this.key_Z = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
@@ -280,11 +281,13 @@ class mainScreen extends Phaser.Scene {
     );
   }
   resetAllTanks() {
-    for (let i = 0; i < allTanks.length; i++) {
-      const element = allTanks[i];
-      element.destroy();
-    }
-    allTanks[null];
+    // for (let i = 0; i < allTanks.length; i++) {
+    //   const element = allTanks[i];
+    //   element.destroy();
+    // }
+    allTanks = [];
+    idsaver = [];
+    tanksStats = [];
   }
   onNewRoundStarted(turn) {
     console.log("a new turn has started");
@@ -292,49 +295,60 @@ class mainScreen extends Phaser.Scene {
     this.turn = turn;
   }
 
-  setTankStats(dataInput){
-    for(let i=0; i < dataInput.players.length; i++){
-        let element = dataInput.players[i];
-        let username = element.name;
-        let health = element.tank.health;
-        //let shield = element.shield;  moet nog komen
-        let color = element.tank.color;
-        let addon = element.tank.addons.addonName;
-        let addon1 = addon[1];
-        let addon2 = addon[2];
-        let addon3 = addon[3];
-        
-        tanksStats[i] = ([username, health, color, addon1, addon2, addon3]);
+  setTankStats(dataInput) {
+    for (let i = 0; i < dataInput.players.length; i++) {
+      let element = dataInput.players[i];
+      let username = element.name;
+      let health = element.tank.health;
+      //let shield = element.shield;  moet nog komen
+      let color = element.tank.color;
+      let addon = element.tank.addons.addonName;
+      let addon1 = addon[1];
+      let addon2 = addon[2];
+      let addon3 = addon[3];
+
+      tanksStats[i] = [username, health, color, addon1, addon2, addon3];
     }
-    for(let i=0; i< dataInput.players.length; i++){
+    for (let i = 0; i < dataInput.players.length; i++) {
       let controle = 0;
       let extracontrole = 0;
-      for (let y=0; y<8; y++){
-          if(idsaver[y] == tanksStats[i][2]){
-              //console.log("update data");
-              //this.data.setHealth(idsaver, tanksStats[i][2], tanksStats[i][1], 100);
-              extracontrole = 1;
-          }
-          else {
-              //console.log("add new tank");
-              controle = 1;
-          }
+      for (let y = 0; y < 8; y++) {
+        if (idsaver[y] == tanksStats[i][2]) {
+          //console.log("update data");
+          //this.data.setHealth(idsaver, tanksStats[i][2], tanksStats[i][1], 100);
+          extracontrole = 1;
+        } else {
+          //console.log("add new tank");
+          controle = 1;
+        }
       }
-      if (controle == 1){
-          if(extracontrole == 0){
-              idsaver[i] = tanksStats[i][2];
-              console.log(idsaver[i]);
-              this.player.addPlayer(tanksStats[i][0], tanksStats[i][2], idsaver, tanksStats[i][3], tanksStats[i][4], tanksStats[i][5]);
-              this.data.addData(tanksStats[i][1], '300', x, tanksStats[i][2], idsaver);
-              this.data.setHealth(idsaver, tanksStats[i][2], tanksStats[i][1], 20);
-              //console.log("update data 1")
-          } else {
-              //console.log("update data 2");
-              this.data.setHealth(idsaver, tanksStats[i][2], tanksStats[i][1], 20);
-          }
+      if (controle == 1) {
+        if (extracontrole == 0) {
+          idsaver[i] = tanksStats[i][2];
+          console.log(idsaver[i]);
+          this.player.addPlayer(
+            tanksStats[i][0],
+            tanksStats[i][2],
+            idsaver,
+            tanksStats[i][3],
+            tanksStats[i][4],
+            tanksStats[i][5]
+          );
+          this.data.addData(
+            tanksStats[i][1],
+            "300",
+            x,
+            tanksStats[i][2],
+            idsaver
+          );
+          this.data.setHealth(idsaver, tanksStats[i][2], tanksStats[i][1], 20);
+          //console.log("update data 1")
+        } else {
+          //console.log("update data 2");
+          this.data.setHealth(idsaver, tanksStats[i][2], tanksStats[i][1], 20);
+        }
       }
     }
-
   }
 }
 
