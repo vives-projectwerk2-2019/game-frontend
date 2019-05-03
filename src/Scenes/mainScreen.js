@@ -292,9 +292,11 @@ class mainScreen extends Phaser.Scene {
       if (tank != null) {
         tank.sprite.setTexture("invisible");
       }
-
-      //this.player.destroy();
     }
+    this.data.healthpannel.destroy();
+    this.player.destroy();
+    this.player = new PlayerOverviewPanel(this, 1200, 50, null);
+    this.data = new HealthOverviewPanel(this, 1200, 55, null);
     allTanks = [];
     idsaver = [];
     tanksStats = [];
