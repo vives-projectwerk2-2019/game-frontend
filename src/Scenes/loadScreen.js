@@ -68,11 +68,6 @@ class loadScreen extends Phaser.Scene{
             percentText.destroy();
             assetText.destroy();
         });
-        
-        this.load.image('logo', 'assets/icon.png');
-        for (var i = 0; i < 100; i++) {
-            this.load.image('logo'+i, 'assets/icon.png');
-        }
     }
 
     create() {
