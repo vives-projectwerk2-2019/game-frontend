@@ -12,7 +12,7 @@ let allTanks = [];
 class mainScreen extends Phaser.Scene {
   constructor() {
     super({ key: "mainScreen" });
-    this.turnlength = 15;
+    this.turnlength = 10;
     this.multiplier = 225/this.turnlength;
     this.timerTimeLeft = this.turnlength;
     this.turn = 0;
@@ -259,20 +259,21 @@ class mainScreen extends Phaser.Scene {
 
     //Timer update
     this.newProgressBar.setProgress(this.multiplier * this.timerTimeLeft);
-      this.newProgressBar.setColor(0x008000);
-      if (this.timerTimeLeft < 0.66 * this.turnlength) {
-        this.newProgressBar.setColor(0xff8c00);
-        if (this.timerTimeLeft < 0.33 * this.turnlength) {
-          this.newProgressBar.setColor(0xff0000);
-          finalCountDown.setText(
-            this.timerTimeLeft.toString().substr(0, 4)
-          );
-          if (this.timerTimeLeft < 0.00 * this.turnlength) {
-            finalCountDown.setText(" ");
-            this.newProgressBar.setProgress(0);
-          }
+    this.newProgressBar.setColor(0x008000);
+    finalCountDown.setText(" ");
+    if (this.timerTimeLeft < 0.66 * this.turnlength) {
+      this.newProgressBar.setColor(0xff8c00);
+      if (this.timerTimeLeft < 0.33 * this.turnlength) {
+        this.newProgressBar.setColor(0xff0000);
+        finalCountDown.setText(
+          this.timerTimeLeft.toString().substr(0, 4)
+        );
+        if (this.timerTimeLeft < 0.00 * this.turnlength) {
+          finalCountDown.setText(" ");
+          this.newProgressBar.setProgress(0);
         }
       }
+    }
     
   }
 
