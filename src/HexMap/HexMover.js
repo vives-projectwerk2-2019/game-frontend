@@ -165,7 +165,7 @@ class HexMover {
     } else {
       this.currentRotation = 6;
     }
-    this.updateCurrentRotation();
+    //this.updateCurrentRotation();
     console.log(this.currentRotation);
   }
 
@@ -175,18 +175,24 @@ class HexMover {
     } else {
       this.currentRotation = 1;
     }
-    this.updateCurrentRotation();
+    //this.updateCurrentRotation();
     console.log(this.currentRotation);
   }
 
   setPosition(x, y, rotation) {
     if (this.map.getTile({ x: x, y: y })) {
       this.currentTile = this.map.getTile({ x: x, y: y });
-      this.sprite.x = this.currentTile.body.x;
-      this.sprite.y = this.currentTile.body.y;
       this.currentPosition = this.updateCurrentPosition();
       this.currentRotation = rotation;
-      this.updateCurrentRotation();
+      var tween = this.scene.tweens.add({
+        targets: this.sprite,
+        props: {
+            x: { value: this.currentTile.body.x, duration: 2000, ease: 'Linear' },
+            y: { value: this.currentTile.body.y, duration: 2000, ease: 'Linear' },
+            angle: { value: 60 * this.currentRotation - 30, duration: 2000, ease: 'Linear' }
+        },
+        ease: 'Sine.easeInOut'
+      });
     }
   }
 
