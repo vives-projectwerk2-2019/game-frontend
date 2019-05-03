@@ -5,7 +5,6 @@ class loadScreen extends Phaser.Scene{
         super({key:"loadScreen"});
     }
 
-
     preload() {
 
         var progressBar = this.add.graphics();
@@ -62,7 +61,6 @@ class loadScreen extends Phaser.Scene{
             progressBar.fillRect(580, 280, 300 * value, 30);
         });
         
-
         this.load.on('complete', function () {
             progressBar.destroy();
             progressBox.destroy();
@@ -78,17 +76,8 @@ class loadScreen extends Phaser.Scene{
     }
 
     create() {
-        // this.scene.start("mainScreen");
+        this.scene.start("mainScreen");
     }
-    /*create(){
-        this.text2 = this.add.text(0,0,"Welcome to scene 2, press 1 to return to scene 1", { font:"12px Impact"});
-        this.key_1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
-    }
-    update(delta) {
-        if(this.key_1.isDown){
-            this.scene.start("startScreen");
-        }
-    }*/
 }
 
 export default loadScreen;
