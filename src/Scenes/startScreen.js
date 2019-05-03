@@ -12,10 +12,9 @@ class startScreen extends Phaser.Scene {
     create() {
         this.key_2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
         this.key_3 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.input.on('pointerdown', () => this.scene.start("loadScreen"));
 
         const clickButton = this.add.text(500, 400, "Press spacebar to start the game", { font: "72px Impact" })
-        .setInteractive()
-        .on('pointerdown', () => this.scene.start("loadScreen") );
     }
 
     update(delta) {
