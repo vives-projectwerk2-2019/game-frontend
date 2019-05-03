@@ -1,19 +1,11 @@
 import { Client, Message } from "paho-mqtt";
 
 const mqtt_settings = {
-<<<<<<< HEAD
   host: process.env.MQTT_BROKER_HOST || "game.bug.labict.be",
   port: Number(process.env.MQTT_BROKER_PORT) || 443,
   path: process.env.MQTT_BROKER_PATH || "/broker",
   useSSL: (process.env.MQTT_BROKER_USE_SSL == "true") || true,
   game_topic: process.env.GAME_TOPIC || "game75"
-=======
-  host: "game.bug.labict.be",
-  port: 443,
-  path: "/broker",
-  useSSL: true,
-  game_topic: "game75"
->>>>>>> 492d71624eb227e58bd02ef7ac222fa68de1cc7f
 };
 
 /*jshint esversion: 6 */
