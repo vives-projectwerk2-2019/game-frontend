@@ -10,43 +10,50 @@ class loadScreen extends Phaser.Scene{
 
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
+        var x = this.cameras.main.centerX;
+        var y = this.cameras.main.centerY;
+        
         progressBox.fillStyle(0x222222, 0.8);
         progressBox.fillRect(570, 270, 320, 50);
         
-        var width = this.cameras.main.width;
-        var height = this.cameras.main.height;
         var loadingText = this.make.text({
-            x: width / 2,
-            y: height / 2 - 50,
+            x: x,
+            y: y,
             text: 'Loading game',
             style: {
-                font: '20px monospace',
-                fill: '#ffffff'
+                font: '72px monospace',
+                fill: '#ffffff',
+                padding: 10
             }
         });
         loadingText.setOrigin(0.5, 0.5);
+        loadingText.setShadow(10, 10, 'black', 10);
         
         var percentText = this.make.text({
-            x: width / 2,
-            y: height / 2 - 5,
+            x: x,
+            y: y - 140,
             text: '0%',
             style: {
-                font: '18px monospace',
-                fill: '#ffffff'
+                font: '72px monospace',
+                fill: '#ffffff',
+                padding: 10
             }
         });
         percentText.setOrigin(0.5, 0.5);
+        percentText.setShadow(10, 10, 'black', 10);
         
         var assetText = this.make.text({
-            x: width / 2,
-            y: height / 2 + 50,
+            x: x,
+            y: y + 100,
             text: '',
             style: {
-                font: '18px monospace',
-                fill: '#ffffff'
+                font: '72px monospace',
+                fill: '#ffffff',
+                padding: 10
             }
         });
         assetText.setOrigin(0.5, 0.5);
+        assetText.setShadow(10, 10, 'black', 10);
         
         this.load.on('progress', function (value) {
             percentText.setText(parseInt(value * 100) + '%');
@@ -71,7 +78,7 @@ class loadScreen extends Phaser.Scene{
     }
 
     create() {
-        this.scene.start("mainScreen");
+        // this.scene.start("mainScreen");
     }
     /*create(){
         this.text2 = this.add.text(0,0,"Welcome to scene 2, press 1 to return to scene 1", { font:"12px Impact"});
