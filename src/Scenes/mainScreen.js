@@ -11,7 +11,7 @@ var finalCountDown;
 let allTanks = [];
 var idsaver = [];
 let tanksStats = [];
-
+let playerArr = [];
 let x = 1350;
 
 class mainScreen extends Phaser.Scene {
@@ -91,6 +91,7 @@ class mainScreen extends Phaser.Scene {
     let addons = dataInput.tank.addons;
     let rotation = dataInput.tank.rotation;
     // console.log(dataInput);
+    playerArr.push(data);
 
     username = new Tank(
       username,
@@ -281,10 +282,14 @@ class mainScreen extends Phaser.Scene {
     );
   }
   resetAllTanks() {
-    // for (let i = 0; i < allTanks.length; i++) {
-    //   const element = allTanks[i];
-    //   element.destroy();
-    // }
+    for (let i = 0; i < playerArr.length; i++) {
+      const element = playerArr[i];
+      console.log(element);
+      // element.tank.position.x = 99;
+      // element.tank.position.y = 99;
+      // this.setTankPosition(element);
+      element.tank.position.color = "invisible";
+    }
     allTanks = [];
     idsaver = [];
     tanksStats = [];
