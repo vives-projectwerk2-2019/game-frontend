@@ -238,15 +238,8 @@ class mainScreen extends Phaser.Scene {
       this.newProgressBar.setColor(0xff8c00);
       if (Math.round(this.timerTimeLeft) < 0.33 * this.turnlength) {
         this.newProgressBar.setColor(0xff0000);
-<<<<<<< HEAD
-        finalCountDown.setText(this.timerTimeLeft.toString().substr(0, 4));
+        finalCountDown.setText(Math.round(this.timerTimeLeft));
         if (this.timerTimeLeft < 0.0 * this.turnlength) {
-=======
-        finalCountDown.setText(
-          Math.round(this.timerTimeLeft)
-        );
-        if (this.timerTimeLeft < 0.00 * this.turnlength) {
->>>>>>> 5d4f95c9b8fd8039ec4d9940e9f164d9bfd6f0db
           finalCountDown.setText(" ");
           this.newProgressBar.setProgress(0);
         }
