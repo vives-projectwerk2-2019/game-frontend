@@ -38,6 +38,7 @@ class mainScreen extends Phaser.Scene {
     this.load.image("tankyellow", "assets/tanks/tankyellow.png");
     this.load.image("background", "assets/tanks/background.jpg");
     this.load.image("destroyedTank", "assets/tanks/destroyedTank.png");
+    this.load.image("invisible", "assets/tanks/invisible.png");
     this.map = new HexMap(this, 60, 40, 100, "MapConfiguration.json");
 
     //addons
@@ -284,11 +285,8 @@ class mainScreen extends Phaser.Scene {
   resetAllTanks() {
     for (let i = 0; i < playerArr.length; i++) {
       const element = playerArr[i];
-      console.log(element);
-      // element.tank.position.x = 99;
-      // element.tank.position.y = 99;
-      // this.setTankPosition(element);
-      element.tank.position.color = "invisible";
+      console.log(element.name);
+      this.getCurrentTank(element.name).sprite.setTexture("invisible");
     }
     allTanks = [];
     idsaver = [];
