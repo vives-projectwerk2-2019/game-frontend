@@ -7,20 +7,13 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import Tank from "../Tank/Tank";
 
 //Timer
-var text;
 var finalCountDown;
-var timedEvent;
-var timerLength = 10000; // (in ms)
-var timeRemaining;
-var rect;
-var graphics;
 let allTanks = [];
 class mainScreen extends Phaser.Scene {
   constructor() {
     super({ key: "mainScreen" });
-    this.timeMultiplier = 1; //how many times 15seconds?
-    this.turnlength = 10*this.timeMultiplier;
-    this.multiplier = 10/this.timeMultiplier;
+    this.turnlength = 15;
+    this.multiplier = 225/this.turnlength;
     this.timerTimeLeft = this.turnlength;
     this.turn = 0;
     this.previousDelta = 0;
@@ -229,8 +222,7 @@ class mainScreen extends Phaser.Scene {
           fill: "#D10000"
         })
         .setOrigin(0.5, 0.5);
-      timedEvent = this.time.delayedCall(timerLength, scene.onEvent, [], this);
-
+      
       finalCountDown.setStroke("#000000", 8);
 
       //Progress bar for timer
@@ -266,12 +258,6 @@ class mainScreen extends Phaser.Scene {
     this.previousDelta = delta;
 
     //Timer update
-    timeRemaining =
-      timerLength -
-      timedEvent
-        .getElapsed()
-        .toString()
-        .substr(0, 5);
     this.newProgressBar.setProgress(this.multiplier * this.timerTimeLeft);
       this.newProgressBar.setColor(0x008000);
       if (this.timerTimeLeft < 0.66 * this.turnlength) {
