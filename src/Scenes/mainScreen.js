@@ -60,11 +60,11 @@ class mainScreen extends Phaser.Scene {
     );
 
     //Animations
-    // this.load.spritesheet("explosion", "assets/animations/explosion.png", {
-    //   frameWidth: 64,
-    //   frameHeight: 64,
-    //   endFrame: 9
-    // });
+    this.load.spritesheet("explosion", "assets/animations/explosion.png", {
+      frameWidth: 64,
+      frameHeight: 64,
+      endFrame: 9
+    });
     this.load.spritesheet("flames", "assets/animations/flames.png", {
       frameWidth: 64,
       frameHeight: 64,
@@ -165,6 +165,7 @@ class mainScreen extends Phaser.Scene {
         if (message.turn) {
           this.onNewRoundStarted(message.turn);
         }
+        let index = 0;
         players.forEach(player => {
           if (!this.arrayPlayers.includes(player.name)) {
             this.arrayPlayers.push(player.name);
@@ -172,10 +173,11 @@ class mainScreen extends Phaser.Scene {
           } else {
             this.setTankPosition(player);
           }
-          if (player.tank.health <= 0 && !this.hasdied[i]) {
+          if (player.tank.health <= 0 && !this.hasdied[index]) {
             this.destroyTank(player.name);
-            this.hasdied[i] = 1;
+            this.hasdied[index] = 1;
           }
+          index++;
         });
       };
       //scoreboard
