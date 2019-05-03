@@ -288,7 +288,12 @@ class mainScreen extends Phaser.Scene {
     for (let i = 0; i < playerArr.length; i++) {
       const element = playerArr[i];
       console.log(element.name);
-      this.getCurrentTank(element.name).sprite.setTexture("invisible");
+      let tank = this.getCurrentTank(element.name);
+      if (tank != null) {
+        tank.sprite.setTexture("invisible");
+      }
+
+      //this.player.destroy();
     }
     allTanks = [];
     idsaver = [];
