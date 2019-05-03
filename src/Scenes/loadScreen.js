@@ -30,7 +30,7 @@ class loadScreen extends Phaser.Scene{
         
         var percentText = this.make.text({
             x: x,
-            y: y - 140,
+            y: y - 80,
             text: '0%',
             style: {
                 font: '72px monospace',
