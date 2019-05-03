@@ -5,7 +5,7 @@ const mqtt_settings = {
   port: Number(process.env.MQTT_BROKER_PORT) || 443,
   path: process.env.MQTT_BROKER_PATH || "/broker",
   useSSL: process.env.MQTT_BROKER_USE_SSL == "true" || true,
-  game_topic: process.env.GAME_TOPIC || "game75"
+  game_topic: process.env.GAME_TOPIC || "game"
 };
 
 /*jshint esversion: 6 */
@@ -34,10 +34,17 @@ class Mqtt {
     this.client.onMessageArrived = message => {
       console.log("test");
       //console.log(receivedMessage);
-
+      let admin = true;
       if (message.destinationName == `${mqtt_settings.game_topic}/admin`) {
-        console.log("admin message");
-        this.resetHandler();
+        try {
+          JSON.parse(message.payloadString);
+        } catch (e) {
+          admin = false;
+        }
+        if (admin) {
+          console.log("admin message");
+          this.resetHandler();
+        }
       } else {
         this.onUpdate(JSON.parse(message.payloadString));
         this.setTankStatss(JSON.parse(message.payloadString));
