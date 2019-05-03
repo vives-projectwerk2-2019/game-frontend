@@ -3,6 +3,7 @@ import HexMap from "../HexMap/HexMap";
 import Mqtt from "../Mqtt/Mqtt";
 import PlayerOverviewPanel from "../../js/game_objects/PlayerOverviewPanel";
 import HealthOverviewPanel from "../../js/game_objects/HealthOverviewPanel";
+import StatsOverview from "../Stats/StatsOverview";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import Tank from "../Tank/Tank";
 
@@ -24,7 +25,7 @@ class mainScreen extends Phaser.Scene {
     this.timerTimeLeft = this.turnlength;
     this.turn = 0;
     this.previousDelta = 0;
-    this.arrayPlayers = [];
+    this.players = [];
     this.hasdied = [0];
   }
 
@@ -149,6 +150,7 @@ class mainScreen extends Phaser.Scene {
   }
   create() {
     let scene = this;
+    this.stats = new StatsOverview(this, 1200, 25);
     this.map.loaded.then(() => {
       scene.map.generateMap();
 
@@ -163,8 +165,8 @@ class mainScreen extends Phaser.Scene {
           this.onNewRoundStarted(message.turn);
         }
         players.forEach((player) => {
-          if (!this.arrayPlayers.includes(player.name)) {
-            this.arrayPlayers.push(player.name);
+          if (!this.players.includes(player.name)) {
+            this.players.push(player.name);
             this.createTankSprite(player);
           } else {
             this.setTankPosition(player);
@@ -174,6 +176,7 @@ class mainScreen extends Phaser.Scene {
             this.hasdied[i] = 1;
           }
         });
+        this.stats.update_tanks(this.players);
       }
       //scoreboard
 

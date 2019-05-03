@@ -42,7 +42,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
                 { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
                 this.shieldvaluetext0.setFontSize(18);
             this.add(this.shieldvaluetext0);    // Remove from scene and add to container
-            console.log("settext0");
         } else if (iTank == 1) {
             this.newProgressBarHealth1 = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
             this.add(this.newProgressBarHealth1);
@@ -60,7 +59,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
                 { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
                 this.shieldvaluetext1.setFontSize(18);
             this.add(this.shieldvaluetext1);    // Remove from scene and add to container
-            console.log("settext1");
         } else if (iTank == 2) {
             this.newProgressBarHealth2 = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
             this.add(this.newProgressBarHealth2);
@@ -78,7 +76,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
                 { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
                 this.shieldvaluetext2.setFontSize(18);
             this.add(this.shieldvaluetext2);    // Remove from scene and add to container
-            console.log("settext2");
         } else if (iTank == 3) {
             this.newProgressBarHealth3 = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
             this.add(this.newProgressBarHealth3);
@@ -96,7 +93,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
                 { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
                 this.shieldvaluetext3.setFontSize(18);
             this.add(this.shieldvaluetext3);    // Remove from scene and add to container
-            console.log("settext3");
         } else if (iTank == 4) {
             this.newProgressBarHealth4 = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
             this.add(this.newProgressBarHealth4);
@@ -114,7 +110,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
                 { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
                 this.shieldvaluetext4.setFontSize(18);
             this.add(this.shieldvaluetext4);    // Remove from scene and add to container
-            console.log("settext4");
         } else if (iTank == 5) {
             this.newProgressBarHealth5 = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
             this.add(this.newProgressBarHealth5);
@@ -132,7 +127,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
                 { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
                 this.shieldvaluetext5.setFontSize(18);
             this.add(this.shieldvaluetext5);    // Remove from scene and add to container
-            console.log("settext5");
         } else if (iTank == 6) {
             this.newProgressBarHealth6 = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
             this.add(this.newProgressBarHealth6);
@@ -150,7 +144,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
                 { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
                 this.shieldvaluetext6.setFontSize(18);
             this.add(this.shieldvaluetext6);    // Remove from scene and add to container
-            console.log("settext6");
         } else if (iTank == 7) {
             this.newProgressBarHealth7 = new ProgressBar(this.scene, x, y, 200, 15, 0x008000);
             this.add(this.newProgressBarHealth7);
@@ -168,7 +161,6 @@ class HealthPanel extends Phaser.GameObjects.Container {
                 { font: "Arial", fill: "#FF0000" }).setOrigin(0, 0);
                 this.shieldvaluetext7.setFontSize(18);
             this.add(this.shieldvaluetext7);    // Remove from scene and add to container
-            console.log("settext7");
         } 
 
         

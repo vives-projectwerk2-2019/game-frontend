@@ -6,7 +6,7 @@ import mainScreen from "../Scenes/mainScreen";
 
 const config = {
     type: Phaser.AUTO,
-    width: 1470,
+    width: 1600,
     height: 900,
     scale: {
         mode: Phaser.Scale.FIT,
